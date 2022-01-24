@@ -1,0 +1,104 @@
+<!-- 
+    목록 
+    ***= ul (unorder list) => 순서가 없는 목록 
+      ul > li 
+    = ol (order list)   => 순서가 있는 목록
+      ol > li
+    = dl (data list)    => 타이틀 / 실제 데이터 
+      dl > dt,dd
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+li:hover{
+  cursor: pointer;
+  background-color: #CCCCFF;
+}
+</style>
+</head>
+<body>
+  <h1>과정</h1>
+  <ul> <!-- 메뉴 -->
+    <li>자바</li>
+    <li>오라클</li>
+    <li>HTML5/CSS/JavaScript</li>
+    <li>JSP</li>
+    <li>Spring</li>
+  </ul>
+  <hr>
+  <h1>차세대개발</h1>
+  <ol> <!-- 온라인시험 -->
+    <li>MyBatis/JPA:Database</li>
+    <li>React/Vue</li>
+    <li>Spring-Boot</li>
+    <li>AI</li>
+  </ol>
+  <hr>
+  <h1>과정 설명</h1>
+  <dl> <!-- 맛집 상세 , 영화 상세 -->
+    <!-- 
+          <dl> 
+            <dt>제목(레벨)</dt>
+            <dd>제목에 대한 설명</dd>
+          </dl>
+     -->
+    <dt>자바</dt>
+    <dd>자바는 웹사이트에서 데이터 관리:송수신</dd>
+    <dt>오라클</dt>
+    <dd>모든 사용자가 공통으로 사용되는 데이터가 저장(데이터 저장소)</dd>
+    <dt>HTML</dt>
+    <dd>브라우저에서 화면 출력하는 언어</dd>
+    <dt>CSS</dt>
+    <dd>HTML을 디자인한다(디자인 툴)</dd>
+    <dt>JavaScript</dt>
+    <dd>브라우저에서 동적,사용자 요청</dd>
+    <dt>JSP</dt>
+    <dd>자바/오라클(JDBC),자바/HTML(JSP)</dd>
+  </dl>
+  <hr>
+  <ul style="list-style-type: none">
+    <li style="display: inline-block;width:60px">홈</li>
+    <li style="display: inline-block;width:100px">회원가입</li>
+    <li style="display: inline-block;width:80px">영화</li>
+    <li style="display: inline-block;width:100px">커뮤니티</li>
+    <li style="display: inline-block;width:120px">마이페이지</li>
+    <li style="display: inline-block;width:100px">영화추천</li>
+  </ul>
+  <hr>
+  <ul>
+    <li>
+      <b>과일</b>
+      <ol>
+       <li>사과</li>
+       <li>배</li>
+       <li>바나나</li>
+      </ol>
+    </li>
+    <li>
+      <b>동물</b>
+      <ol>
+        <li>원숭이</li>
+        <li>돼지</li>
+        <li>호랑이</li>
+      </ol>
+    </li>
+    <li>
+      <b>가전제품</b>
+      <ol>
+        <li>세탁기</li>
+        <li>냉장고</li>
+        <li>노트북</li>
+      </ol>
+    </li>
+  </ul>
+</body>
+</html>
+
+
+
+
+
+
