@@ -1,0 +1,45 @@
+<!-- 
+   이미지 맵 : 선택부분이 있는 경우에 화면 이동 
+   <area> 
+   속성 
+     = shape => 도형 => rect
+     = coords => 그림의 좌표
+         top , left , bottom , right
+     = href => 화면 이동 
+     
+   이미지와 제목 => 한번에 묶어서 출력 
+   <figure> => 카드 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <center>
+    <h1>이미지 맵 => 위치 클릭 => 화면을 이동</h1>
+    <!-- 지도 , 경로  -->
+    <img src="../image/food.jpg" usemap="#image">
+    <map name="image">
+	    <area
+	      shape="rect"
+	      coords="52,25,316,222"
+	      href="chapter_03_84_3.html"
+	    />
+    </map>
+    <br>
+    <h1>figure사용법</h1>
+    <figure>
+     <img src="../image/m1.jpg" width=150 height=250>
+     <figcaption>해적-도깨비 깃발</figcaption>
+    </figure>
+  </center>
+</body>
+</html>
+
+
+
+
+
+

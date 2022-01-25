@@ -1,0 +1,45 @@
+<!-- 
+     이미지 출력 
+     1. 태그명 => <img>
+     2. 속성 
+        src => 원격 / 내부파일 
+            https://img.cgv.co.kr/Movie/Thumbnail/Poster/000084/84949/84949_320.jpg
+            m2.jpg
+            ==> gif,jpg,jpeg,png (bmp=>자바스크립트로 조절)
+        width => 크기 조절 
+        height
+        title : 풍선도움말 
+     3. inline(System.out.print()) 속성을 가지고 있다
+        ------
+        block (System.out.println())
+        
+     4. 파일읽기 
+        => 같은 폴더 ./이미지파일명  ==> ./ 는 생략이 가능하다 (.:현재폴더)
+        => 같은 폴더 => 안에 폴더   ==> ./폴더명/이미자파일명 (./는 생략이 가능)
+        => 다른 폴더 => ../폴더명/이미지파일명  (.. : 폴더를 변경) 
+                      .. 생략이 불가능 
+        W0cmUyY_e8A
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <center>
+    <h1>영화목록</h1>
+    <a href="chapter_03_84_3.html">
+    <img src="../image/m1.jpg" width=150 height=300 title="해적-도깨비 깃발"></a>
+    <img src="../image/m2.jpg" width=150 height=300>
+    <img src="../image/m3.jpg" width=150 height=300>
+    <img src="../image/m4.jpg" width=150 height=300>
+    <img src="../image/m5.jpg" width=150 height=300>
+    <img src="../image/m6.jpg" width=150 height=300>
+    <img src="../image/m7.jpg" width=150 height=300>
+  </center>
+</body>
+</html>
+
+
+
