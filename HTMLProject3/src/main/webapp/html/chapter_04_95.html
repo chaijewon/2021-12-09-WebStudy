@@ -1,0 +1,252 @@
+<!-- 
+     page 95 
+     -------- input :입력창
+     <input> : 한줄입력 
+        <input type="설정">
+               = type의 종류 
+               1) 한줄 문자열 입력 : id,password,댓글 , 리뷰 , 제목..
+                  ***type="text"
+               2) 비밀번호 
+                  ***type="password"
+               3) 버튼의 종류 
+                  = 버튼
+                    ***type="button" : 일반 버튼 (기능) => 반드시 자바스크립트 이용 
+                    ***type="submit" : 전송버튼 (입력한 모든값을 다른 파일로 전송)
+                    type="reset" : 초기화 (입력된 값을 초기화)
+                    *기타 
+                     ---------------------
+                     <button> 
+                     <input type="image">
+                     --------------------- submit버튼과 동일한 역할 수행 
+                  = 토글버튼 
+                    type="radio" : 한개만 선택할 수 있게 만든다 
+                    type="checkbox"
+               -------------------------------------
+               4) 날짜 : 달력 => HTML5
+                    type="date"
+               5) 숫자출력 (spinner)
+                    type="number"
+               6) 슬라이더 
+                    type="slider"
+               ***7) 파일업로드 
+                    type="file"
+               ***8) 화면에 데이터를 감춘다 (비밀번호,아이디)
+                    type="hidden"
+     ***<select> : Combobox 
+                <select> <option> 데이터 </option>
+     ***<textarea> : 멀티라인 => rows(height) / cols(width)
+     
+     입력창을 다 모아서 => 전송 준비 => ***<form> 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <center>
+     <h1>입력과 관련된 태그</h1>
+     <!-- 
+          1. 한줄 입력 
+             형식) <input type="text"> 
+             속성) 
+                  = size : 크기 결정
+                  ------------
+                  = name : 자바에서 데이터를 받을때 구분자 
+                  ------------
+                  = id => 단독처리 (중복이 없는 값)
+                  = class => 여러개를 동시에 처리 (중복이 있는 값)
+                  ------------ JavaScript나 CSS에서의 구분자 
+                  
+                  <태그></태그>
+                    => 데이터 출력 
+                    <table> </table>
+                    <a></a>
+                    <b></b>
+                  <태그>
+                    => 속성이용
+                       = <img src="">
+                       = <br>
+                       = <input>
+                  
+      -->
+      이름 : <input type="text" style="width:100px;height:35px"> <!-- inline속성 -->
+      <p>
+      <!-- 
+         2. 한줄 입력 => 비밀번호 
+            형식) <input type="password">
+            속성) 
+                  = size : 크기 결정
+                  ------------
+                  = name : 자바에서 데이터를 받을때 구분자 
+                  ------------
+                  = id => 단독처리 (중복이 없는 값)
+                  = class => 여러개를 동시에 처리 (중복이 있는 값)
+                  ------------ JavaScript나 CSS에서의 구분자 
+       -->
+       비밀번호 : <input type="password" style="width:100px;height:35px">
+       <p>
+       <!-- 
+          3. 파일 찾기 
+             형식) <input type="file">
+             속성) 
+                  = size : 크기 결정
+                  ------------
+                  = name : 자바에서 데이터를 받을때 구분자 
+                  ------------
+                  = id => 단독처리 (중복이 없는 값)
+                  = class => 여러개를 동시에 처리 (중복이 있는 값)
+                  ------------ JavaScript나 CSS에서의 구분자
+        -->
+        파일 : <input type="file" size=30>
+        <p>
+        <!-- 
+           4. 달력 출력 : date
+              형식)
+                  <input type="date">
+              속성) 
+                  = size : 크기 결정
+                  ------------
+                  = name : 자바에서 데이터를 받을때 구분자 
+                  ------------
+                  = id => 단독처리 (중복이 없는 값)
+                  = class => 여러개를 동시에 처리 (중복이 있는 값)
+                  ------------ JavaScript나 CSS에서의 구분자
+                  
+         -->
+         생년월일 : <input type="date" size=25>
+         <p>
+         <!-- 
+            5. 숫자만 출력 : number
+               형식) 
+                    <input type=number>
+               속성) 
+                  = size : 크기 결정
+                  ------------
+                  = name : 자바에서 데이터를 받을때 구분자 
+                  ------------
+                  = id => 단독처리 (중복이 없는 값)
+                  = class => 여러개를 동시에 처리 (중복이 있는 값)
+                  ------------ JavaScript나 CSS에서의 구분자
+                  = min : 최소값
+                  = max : 최대값
+          -->
+          나이 : <input type=number size=20 min="20" max="60"
+                   step="2">
+          <p>
+          <!-- 
+             6. 슬라이더 
+                형식) 
+                     <input type=range>
+                속성) 
+                  = size : 크기 결정
+                  ------------
+                  = name : 자바에서 데이터를 받을때 구분자 
+                  ------------
+                  = id => 단독처리 (중복이 없는 값)
+                  = class => 여러개를 동시에 처리 (중복이 있는 값)
+                  ------------ JavaScript나 CSS에서의 구분자
+                  = min : 최소값
+                  = max : 최대값
+           -->
+           가격대 : <input type="range" size=30
+                           min="1" max="100">
+           <p>
+           <!--  기타 : type="email" type="homepage" -->
+           <!-- 
+              7. 버튼 관련
+                 일반 버튼 
+                 초기화 
+                 전송 버튼 
+                 <button>
+                 <input type=image>
+            --> 
+            일반버튼 <input type=button value="아이디중복체크">
+                   <input type=button value="우편번호찾기">
+            <p>
+            <!-- 
+                submit => 입력한 모든 데이터를 자바로 전송 
+                          자바에서는 데이터를 받아서 오라클 보낸다 
+                          오라클에서는 자바에서 보내준 데이터를 저장 
+                          화면 이동 => 회원가입을 축하..
+             -->
+            전송/초기화 <input type=submit value="회원가입">
+                     <input type=reset value="취소">
+            <p>
+            전송 <button>글쓰기</button>
+                <!-- <input type=image src="m1.jpg"> -->
+            <p>
+            <!-- 
+                  라디오 버튼 
+                  형식) 
+                       <input type=radio>
+                  속성)
+                       반드시 적용 => value , name(같은 이름으로 지정)
+                                    한개만 선택이 된다 (Group)
+             -->
+             성별 : <input type=radio name="sex" value="남자" checked>남자 
+                   <input type=radio name="sex" value="여자">여자
+             <p>
+             <!-- 
+                  체크 박스(멀티)
+                  형식) 
+                       <input type=checkbox>
+                  속성)
+                       name => 자바에서 값을 받는다 (이름이 동일해야 된다)
+                       value=> 전송값 
+                       
+              -->
+              <p>
+              취미:<input type="checkbox" value="게임">게임
+                  <input type="checkbox" value="독서">독서
+                  <input type="checkbox" value="낚시">낚시
+                  <input type="checkbox" value="등산">등산
+                  <input type="checkbox" value="여행">여행
+              <!-- 
+                   데이터 감추기 : hidden
+                   형식) <input type=hidden>
+                   속성) name , value
+               -->
+               <input type=hidden name="id" value="admin">
+               <p>
+               <!-- 
+                     select : ComboBox => 오라클(check)
+                              검색) 제목, 장르 , 주연
+                              검색) 이름 , 제목 , 내용
+                      형식) 
+                           <select>
+                             <option>제목</option>
+                             <option>내용</option>
+                             <option>이름</option>
+                           </select>  
+                -->
+                Search:   <select>
+                             <option>제목</option>
+                             <option>내용</option>
+                             <option>이름</option>
+                           </select> 
+                           <input type=text size=15>
+                           <input type=button value="검색">
+               <p>
+               <!-- 
+                     멀티라인 : <textarea>
+                     형식) 
+                          <textarea></textarea>
+                     속성) 
+                          rows : height
+                          cols : width 
+                -->
+                내용: <textarea rows="10" cols="50"></textarea>
+   </center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

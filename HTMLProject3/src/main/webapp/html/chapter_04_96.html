@@ -1,0 +1,39 @@
+<!-- 
+     83page ~ 98page 
+     form : 데이터를 모아서 사용자가 입력한 값을 전송 (자바,C#,PHP)
+     => 화면에 출력하는 태그가 아니다 
+     => 속성)
+             1. method => 데이터전송 방식 : GET / POST
+                => GET은 URL뒤에 데이터 첨부해서 전송하는 방식 
+                   https://www.10000recipe.com/recipe/list.html?order=reco&page=3000 
+                => POST방식은 내부 네트워크를 통해서 전송 (보안,전송하는 데이터가 많은 경우에 주로 사용)
+                => **생략하면 GET방식이다 
+             2. action => 데이터를 받을 파일을 지정한다 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <center>
+     <h1>로그인</h1>
+     <form method="post">
+       ID:<input type=text name="id" size=15 required="required"><br>
+       Password:<input type=password name="pwd" size=15 placeholder="비밀번호"><br>
+       <input type="submit" value="로그인">
+     </form>
+   </center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
