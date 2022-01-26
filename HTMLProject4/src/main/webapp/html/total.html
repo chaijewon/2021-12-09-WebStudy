@@ -1,0 +1,296 @@
+<!-- 
+      1) 버전 설정 
+         <!DOCTYPE html> : HTML문서의 형식  => .dtd
+           => <html>
+                |
+             ---------
+             |       |
+           <head>  <body>
+           ------  ------
+         = 문서 설정 
+           <meta> : 한글 설정 , 페이지 이동 , 모바일 크기
+           <title> : 브라우저에 타이틀바에 이름 부여 
+           <script> : 이벤트 처리 (사용자 동작=>키보드,마우스)
+           ========= javascript => 5=>6
+           ========= 라이브러리 (Jquery => Ajax)
+                              ------- 
+                              VueJS
+                              ReactJS
+                              NodeJS ==> Spring하고 같은 기능(서버사이드)
+                              ------- 채팅 ...
+           <style> : 디자인 => 미리 HTML을 만들고 나중에 디자인 
+           <link> : 외부(파일) => CSS불러올때 사용 
+         = body : 실제 브라우저에 화면 출력 
+           *** 브라우저에서 인식하는 언어 : HTML,XML (나머지는 문자열)
+               ------ ML (Markup Language)
+                      --
+                       태그와 속성으로 만들어 진다 
+                       --------- HTML은 이미 만들어져 있다(암기)
+                         *** 태그는 정의된 내용만 사용이 가능(w3c지정한 태그만 사용)
+                         *** 속성은 필요시에 사용자 정의를 사용할 수 있다 
+                       --------- XML은 사용자 정의만 가능
+                                 --- 문서 정의 (서버 설정, 클래스 설정)
+                                 --- SQL설정 => Mybatis
+                                 --- 서버 설정 => Spring
+                       1) 태그 
+                          = 태그의 종류
+                            ---------- 
+                            = 시작 태그
+                              <태그명>
+                            = 끝 태그
+                              </태그명>                            
+                            ---------- 출력할 문자가 있다 
+                            = 단독 태그  
+                            ---------- 출력할 문자가 없는 경우 (모양만 출력)
+                                       이미지 , 입력창 , 줄바꿈 , 단락 , 수평선
+                              <태그명> , <태그명/> 
+                              ----------------- 출력시에 속성
+                              
+                            = 사용법 
+                              <태그>브라우저에 출력 내용</태그>
+                              <td>Hello</td>
+                              <태그 속성="출력할 내용">
+                              <img src="이미지명">
+                            = 모든 태그는 속성 3개를 가지고 있다
+                              -----------
+                              1. id : 중복이 없는 태그구분 => #
+                              2. class : 중복이 있는 태그구분 => .
+                                 => 데이터수집 (태그의 값을 읽어 온다) 
+                                 => 구분자 찾는다 
+                              3. style : inline => 태그에서 직접 CSS
+                              ----------- CSS용 , JavaScript에서 제어 
+                                          구분자 
+                      2) W3C => ML를 표준화 기관 
+                         ---- 표준화 시킨 HTML => 태그와 속성이 지정되어 있다 
+                         = 텍스트 관련 태그
+                           ***<h1>~<h6> => 반드시 시작태그,끝태그를 작성 
+                                     => 제목을 출력 
+                                     => block (단독으로 한줄을 차지한다)
+                                     => bold가 포함 
+                           ***<br> => 줄바꿈  (\n)
+                                => 단독 태그 (끝태그를 사용하지 않는다)
+                                => <br>
+                           ***<p>  => 단락 (\n\n) => 구조화 (프로그램 => 메소드)
+                                => 단독태그 , 일반태그 
+                                   <p> , <p></p>
+                           <strong>,<b> => 글자를 강조할때 사용 
+                                        => 줄거리 => 출연진 이름 
+                                        => 강조할 부분을 지정 
+                                        => 시작 ~ 끝태그 존재 
+                                        => <strong>이름<strong>
+                                        => <b>이름</b>
+                                        => inline 속성 
+                           *** 출력형태 
+                               display: (block,inline,inline-block,table)
+                                               ------ ------------
+                                                 |         |
+                                                크기지정(X) 크기지정(width,height)
+                               HTML5 => 권장(table은 가급적이면 사용)
+                                        => display:table
+                                           ---------------
+                                            <table> 
+                                           display:table-row 
+                                           -----------------
+                                            <tr>
+                                           display:table-cell
+                                           ------------------
+                                             <td>
+                                           display:table-column
+                                           --------------------
+                                             <th>
+                                           display:table-caption
+                                           ---------------------
+                                             <caption>
+                            **<pre> => 문서 있는 그대로 출력 
+                                  => 줄거리 출력 , 댓글 출력 , 내용 출력 
+                                  => 출력내용에 지정 
+                                  => <pre>문서</pre>
+                                  *** 범위가 지정(지정된 범위에만 적용)
+                            *****<span> : 기능은 없다
+                                     여러개 모아서 CSS적용하기 위해서 만든다 
+                                     => 부메뉴 , 쿽메뉴
+                                     
+                                      div
+                            --------------------
+                            |    |    |        |
+                            p   h1(1) h1(2)  span
+                                              -----
+                                               |
+                                               h1(3)
+                            div p
+                            div h1 ==> 1,2,3
+                            div > h1 => 1,2
+                            div > p+h1 => 1
+                            div > p~h1 => 1,2
+                            div > span > h1 => 3
+                         = 목록 출력 관련 태그
+                           ***<ul> => 메뉴출력 
+                            ul => 순서가 없는 데이터 목록 출력 
+                             |
+                            li => 출력할 데이터를 출력 
+                           
+                           <ol> => 순서가 있는 데이터 목록 출력
+                            ol 
+                             |
+                            li => 여러번 사용이 가능 
+                            
+                           *****<table> => 목록을 출력시 많이 사용
+                                   => 정렬해서 출력 
+                                   => 영화 상세 , 맛집 상세 , 맛집목록..
+                            table 
+                              |
+                             tr => 여러번 사용이 가능 
+                              |
+                           --------
+                           |      |
+                          th     td  => 여러번 사용이 가능
+                            *** 반드시 tr안에 th나td의 갯수가 동일 
+                            *** 열병합(colspan) / 행병합(rowspan) 
+                         = 링크와 이미지 태그
+                           링크 *******<a> : 다른 파일이나 사이트로 이동 
+                           *** 이동 
+                               ***HTML => <a> , <form> 
+                               JS   => location.href
+                               Java => forward,sendRedirect
+                               *** 일반자바 : 알고리즘 , 로직  
+                               *** 웹자바 : 흐름 (이동) 
+                                   예) 
+                                       로그인 요청 => 어떤 화면 (메인)
+                                       회원 가입 => 어떤 화면 (메인)
+                                       장바구니 => 마이페이지 
+                           <a>범위지정</a>
+                              *** 웹 => 파일명(중복이 없기 때문에)
+                              => 속성 : href="이동할 파일명"
+                                       target="_self"
+                                       target="_blank"
+                           이미지 : 시각적 효과 (쇼핑몰)
+                                  ***<img src=""> 단독태그(닫는 태그가 없다)
+                                            |
+                                           현재 프로젝트 폴더 
+                                           => 외부 디자인 : 로고 ...
+                                           => 경로명 
+                                              같은 폴더 => 파일명
+                                              같은 폴더안 폴더 => 폴더명/파일명
+                                              --------------------------
+                                              *** 이미지는 폴더를 만들어서 저장 
+                                           외부에서 원격
+                                           => 목록 (영화목록,맛집)
+                                           => http://~~
+                                  => 투명화 => opacity(CSS)
+                                  => background , 일반 그림 출력 
+                                     background:url("파일명")
+                                     background-size: width,height
+                                                      cover: 축소/확대
+                                     *** 웹사이트 제작시 => 글꼴이 틀리면 안된다 
+                                     *** 구글 폰트 => @import()
+                                     *** <map>
+                                           <area shape="rect" coords="좌표점">
+                                            좌표점 : top , left , bottom , right
+                                         </map>
+                         = 사용자 입력과 관련 태그
+                           ***<input> :
+                                 문자 입력 : id , 이름 , 이메일 ...
+                                 type="text"
+                                 비밀번호 입력 : **
+                                 type="password"
+                                 날짜 
+                                 type="date"
+                                 숫자입력 
+                                 type="number"
+                                 슬라이더 
+                                 type="range"
+                                 button
+                                  => 자바스크립트로 처리 
+                                     type="button"
+                                  => 전송 버튼(데이터)
+                                     type="submit"
+                                     => <button>
+                                     => type="image"
+                                  => 입력내용 초기화 
+                                     type="reset"
+                                  => 한개만 선택
+                                     type="radio"
+                                  => 여러개를 동시에 선택
+                                     type="checkbox"
+                                 기타 
+                                  => type="file" : 파일 찾기 
+                                  => type="hidden"
+                           ***<select>   : combobox => 멀티 선택이 가능 
+                           ***<textarea> : 멀티라인 (여러줄 입력) 
+                                        => 댓글 , 글쓰기 , 줄거리 , 자기소개 ,회사소개 
+                         = 다른 파일로 입력된 데이터 전송 태그 
+                           *****<form> : 화면에 출력하지 않는다 
+                                    => 입력된 데이터를 모아서 지정파일로 전송 
+                                    => GET / POST
+                                       ---
+                                       URL뒤에 ?데이터전송 : 노출 (보안 취약)
+                                       => 페이지번호 전송 
+                                       => 단순한 검색어 전송 
+                                    => POST : 내부적으로 전송 
+                                              URL뒤에 출력하지 않는다 (보안)
+                                              보안 => POST (id,passwor)
+                                              데이터가 많은 경우 
+                                              --------------
+                                              1. 회원가입 
+                                              2. 게시판 글쓰기 
+                                              3. 예약 
+                                              4. 파일 업로드 
+                                    => 속성 
+                                       ---
+                                       method="GET/POST" => method속성을 생략 : GET
+                                       <form action=""> => GET
+                                                        => POST일 경우에는 반드시 적용
+                                       action="파일명" => 데이터를 받아서 처리하는 파일명 
+                                       => <form method="" action="">
+                                       *** 전송시 
+                                           <form>
+                                             사이에 있는 입력창만 적용
+                                           </form>
+                                            입력창 => 적용이 안된다 
+                         = 화면분할과 관련된 태그 
+                              
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <!-- 101 page <select> -->
+  <select><!-- inline -->
+    <option>영화명</option>
+    <option>출연진</option>
+    <option>장르</option>
+  </select><!-- radio -->
+  <p>
+  <select multiple="multiple"><!-- inline -->
+    <option>영화명</option>
+    <option>출연진</option>
+    <option>장르</option>
+  </select><!-- checkbox -->
+  <p>
+  <select>
+   <optgroup label="과정">
+     <option>자바</option>
+     <option>오라클</option>
+     <option>HTML/CSS</option>
+     <option>JSP</option>
+     <option>Spring</option>
+     <option>AWS</option>
+   </optgroup>
+   <optgroup label="프로젝트">
+     <option>JSP</option>
+     <option>Spring</option>
+     <option>최신기술</option>
+   </optgroup>
+  </select><!-- ul , ol -->
+</body>
+</html>
+
+
+
+
+
+
+
