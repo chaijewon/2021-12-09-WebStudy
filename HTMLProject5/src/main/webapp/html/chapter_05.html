@@ -1,0 +1,131 @@
+<!-- 
+     CSS 스타일 (디자인)
+     
+     1) 선택자(어떤 태그에 스타일) ==> 127page
+        --------------------
+        1. 태그명 처리 
+        2. ID명 처리 
+        3. CLASS명으로 처리 
+        
+        예)
+            선택자 {
+               속성 : 값 
+               --- 이미 지정된 상태 (존재)
+            }
+            
+            <h1>Java</h1>
+            <h1 id="a">Oracle</h1>
+              => doc.select("h1#a")
+            <h1 class="b">HTML5</h1>
+            <h1>CSS</h1>
+            <h1 class="b">JavaScript</h1>
+              => doc.select("h1.b")
+            => Oracle의 색상을 orange로 변경 
+               #a{
+                 color:orange;
+               }
+            => HTML5 , JavaScript => red로 변경 
+               .b{
+                   color:red;
+               }
+            => ID , CLASS => 태그를 구분해서 사용(구분자) 
+               => 구분자를 이용해서 태그 찾기 (선택자 , selector)
+               => ID,CLASS속성 (CSS/JavaScript)
+               
+            => 태그를 이용하는 방법 
+               h1 {
+                  속성 : 값 ;
+               }
+            => 복수형 (태그여러개를 동시에 같은 스타일) 
+               태그 , 태그 , ...
+               id명,id명...
+               class명,class명
+               {
+                  속성 : 값
+               }
+               
+               <h1>A</h1>
+               <h2>B</h2>
+               <h3>C</h3> 
+               
+               h1,h2,h3{
+                  color:blue
+               }
+            => 자손태그 
+                        div
+                -----------------
+                |    |     |    |
+                p   h1    h1   span ==> 자손
+                               -----
+                                |   ==> 후손 
+                               h1 
+                div => 자손 h1을 변경 => div > h1
+                div => span => h1을 변경 div span h1
+                                       div h1
+                                       
+                <div>
+                  <p></p>
+                  <h1></h1>
+                  <h1></h1>
+                  <span>
+                    <h1></h1>
+                  </span>
+                </div>
+            => 후손태그 
+            => 인접태그 
+               => 형제들  p~h1
+               => 인접형제 p+h1
+            => 가상선택자 
+               태그명:hover : 마우스오버  
+               태그명:focus
+               태그명:enabled
+               태그명:disabled
+               태그명:first-child
+               태그명:last-child
+               div h1:first-child
+               <div>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+                <h1></h1>
+               </div>
+               원하는 위치 찾기 => 태그명:nth-child(2n)
+                               태그명:eq(0)
+               ::before , ::after 
+           => 속성 선택자 
+              input[type="button"]
+              input[type="text"]
+              img[src*="a"] => src="" => 값에 a가가 포함되어 있다면 
+              a[href^="h"]  => href="" => h자로 시작
+              a[href$="g"]  => href="" => g자로 종료 
+              https://recipe1.ezmember.co.kr/cache/recipe/2017/08/24/15cba
+              img[src*="/recipe/"]
+          => 약간의 변경 (크기 , 글꼴 ....) 
+          => 자바스크립트 (수정) 
+               
+     지정된 스타일 
+     -----------
+     글자관련 
+     텍스트 관련
+     문자 정렬 
+     목록스타일
+     색상처리 
+     백그라운드 
+     ----------
+     박스모델 
+     여백처리 
+     레이어 
+     레이아웃  
+     
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>

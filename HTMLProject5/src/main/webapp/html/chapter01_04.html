@@ -1,0 +1,123 @@
+<!-- 
+     게시판 목록
+     게시판 글쓰기 
+     게시판 상세보기 
+     회원가입  
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <link rel="stylesheet" href="table.css"> -->
+<style type="text/css">
+#wrapper{
+  width:100%;
+  margin-top:50px; 
+}
+.row{
+  width:800px;
+  margin: 0px auto;
+}
+h1 {
+    text-align: center;
+}
+td{
+  font-size: 9pt;
+}
+a{
+   text-decoration: none;
+   color:black;
+}
+a:hover{
+   text-decoration: underline;
+   color: green;
+}
+</style>
+</head>
+<body>
+   <div id="wrapper">
+    <h1>자유게시판</h1>
+    <div class="row">
+     <table width=800 border=0>
+      <tr>
+       <td>
+        <a href="insert.html">새글</a>
+       </td>
+      </tr>
+     </table>
+     <table width=800 border=1 bordercolor=black cellspacing=0 cellpadding=0>
+      <thead><!-- 한번만 출력 : 타이틀 출력 -->
+       <tr height="35" bgcolor="#CCCCFF">
+         <th width=10%>번호</th>
+         <th width=45%>제목</th>
+         <th width=15%>이름</th>
+         <th width=20%>작성일</th>
+         <th width=10%>조회수</th>
+       </tr> 
+      </thead>
+      <tbody>
+        <!-- 
+              1. 404 : 파일이 없는 경우
+              2. 500 : 소스에러 (자바)
+              3. 403 : 접속거부 
+              4. 412 : 한글변환 코드가 틀린 경우 (UTF-8 => UFT-8) 
+              5. 400 : 데이터전송시 데이터 => 받는 데이터형이 다른 경우 
+              6. 200 : 정상 수행 => 화면 출력 
+         -->
+        <tr height="35" class="dataTr">
+         <td width=10% align=center>1</td>
+         <td width=45%><a href="detail.html">'김민재 영입설' 에버튼, 페네르바체가 원하는...</a></td>
+         <td width=15% align=center>홍길동</td>
+         <td width=20% align=center>2022-01-26</td>
+         <td width=10% align=center>100</td>
+        </tr> 
+        <tr height="35" class="dataTr">
+         <td width=10% align=center>2</td>
+         <td width=45%>&nbsp;&nbsp;<img src="re_icon.png">'김민재 영입설' 에버튼, 페네르바체가 원하는...</td>
+         <td width=15% align=center>홍길동</td>
+         <td width=20% align=center>2022-01-26</td>
+         <td width=10% align=center>100</td>
+        </tr> 
+        <tr height="35" class="dataTr">
+         <td width=10% align=center>3</td>
+         <td width=45%>&nbsp;&nbsp;&nbsp;&nbsp;<img src="re_icon.png">'김민재 영입설' 에버튼, 페네르바체가 원하는...</td>
+         <td width=15% align=center>홍길동</td>
+         <td width=20% align=center>2022-01-26</td>
+         <td width=10% align=center>100</td>
+        </tr> 
+      </tbody>
+      <tfoot>
+        <tr height="35">
+         <td colspan="2">
+          Search:
+          <select>
+           <option>이름</option>
+           <option>제목</option>
+           <option>내용</option>
+          </select>
+          <input type=text size=15>
+          <input type=button value="검색">
+         </td>
+         <td colspan="3" align="right">
+           [1][2][3][4][5] &gt; &nbsp;&nbsp; 1 page / 10 pages
+         </td>
+        </tr>
+      </tfoot>
+     </table>
+    </div>
+   </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
