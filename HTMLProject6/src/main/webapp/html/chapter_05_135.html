@@ -1,0 +1,69 @@
+<!-- 
+    1. 태그의 형식변경 
+       --- 태그를 가지고와서 변경 (선택자) 
+       = 태그명으로 처리가 가능 : 태그명이 틀린 태그명 (공통으로 적용이 있는 경우)
+       = 구분자를 이용해서 처리 : id(단독) , class(그룹)
+       = 속성선택자 
+         input => type속성이 반드시 존재 
+         a     => href
+         img   => src 
+         
+         => input[type="값"]
+            img[src*=""] , img[src^=""] , img[src$=""]
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+input[type="text"]{
+   background: #CCCCFF
+}
+input[type="password"]{
+   background: #CCFFCC
+}
+/* 이미지 전체의 크기 변경 */
+img {
+   width:150px;
+   height:220px;
+}
+img[src*="food"]{
+  border:5px solid red;
+}
+img[src$="png"]{
+  border:5px solid blue;
+}
+img[src^="m"]{
+  border:5px solid green;
+}
+</style>
+</head>
+<body>
+  <center>
+    <h1>속성선택자</h1>
+    <input type="text" size=20><br>
+    <input type="password" size=20><br>
+    <input type="file" size=20><br>
+    <input type="date" size=20><br>
+    <input type="text" size=20><br>
+    <h1>속성선택자</h1>
+    <img src="m1.jpg">
+    <img src="m2.jpg">
+    <img src="m3.jpg">
+    <img src="m4.jpg">
+    <img src="food.jpg">
+    <img src="re_icon.png">
+  </center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

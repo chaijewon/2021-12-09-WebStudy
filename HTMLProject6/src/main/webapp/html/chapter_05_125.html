@@ -1,0 +1,229 @@
+<!-- 
+     1. CSS 기초(디자인)
+        = 장점 : 속성이 제작 (라이브러리)
+                HTML을 만들고 나중에 화면 디자인이 가능 
+                => 웹프로그래머가 화면 => 퍼블리셔 => CSS 디자인 마무리
+                   --------- 간단한 CSS (약간의 변경)
+                   -> 오라클 (DML => 데이터 제어 (SELECT , INSERT,
+                             UPADTE , DELETE)
+                   -> 자바 (1~8장) => 11,12,약간의 입출력(IO)
+                   -> HTML은 태그(태그명 , 속성명)
+                   -> CSS는 약간의 변경 
+                ---------------------------------------------
+                       ==> JSP (1차프로젝트)
+                           = BACK => 자바,오라클(서버)
+                           = FRONT=> 브라우저 처리 (클라이언트=>자바스크립트)
+                       ==> 실무에서 사용하는 프로그램 
+                           Spring / Mybatis(Database)
+    2. CSS는 태그마다 디자인 설정 
+            -------
+             => 태그를 읽어와야 한다 (태그를 제어하는 프로그램)
+             => ***SELECTOR (선택자)
+             => HTML(태그+속성)
+                     ---
+             *** 태그명 , 구분자 (id,class) , 속성의 값 
+                 위치 => 같은 태그가 여러개 있는 경우 
+                     => ul(li) , ol(li) , dl(dt,dd) , table => 목록을 출력하는 태그
+                     => 가상선택자 first-child , last-child , nth-child , eq
+                        ::before , ::after
+             => CSS3은 특정 HTML의 태그를 선택해서 디자인 변경 
+                      -------------------- 
+    3. CSS사용방법 
+       1) 단일 (한개의 태그만 선택된 경우) 
+          => 태그 
+             /* CSS의 주석 */
+             태그명 {
+                /*속성:값;*/
+             }
+             예) 
+                h1(태그명) {
+                  color:red;
+                  ----- --- 스타일값
+                  스타일 속성 
+                }
+          => ID(중복이 없는 구분자)
+             #아이디명 {
+                속성 : 값 ;
+             }
+             예)
+                => 한곳만 변경 => id로 구분 
+                <h1 id="aaa">Hello CSS</h1>
+                #aaa {
+                   color:blue
+                }
+                h1#aaa{
+                   color:green
+                }
+              
+              *** id , class , name (서버값 => 자바에서 입력값을 받을 목적)
+                  ----------   ----
+                  css설정 , 자바스크립트 제어 (front용)
+                  
+                  연동)
+                       HTML <======> Java <======> Oracle (JSP)
+                       HTML <======> Oracle (X)
+                       예)
+                           HTML <======> C# <======> MS-SQL (ASP)
+          => CLASS(중복이 있는 구분자)
+             .class명{
+               속성:값
+             }
+             태그명.class명{
+               속성:값 
+             }
+          => 태그여러개 , id여러개 , class여러개 => 동시제어 (멀티 선택자)
+             예)
+                <h1>CSS</h1>
+                <h2>CSS</h2>
+                <h3>CSS</h3>  => 회색으로 비활성화 형식
+                
+                h1{
+                  color:gray
+                }
+                h2{
+                  color:gray
+                }
+                h3{
+                  color:gray
+                }
+                
+                => h1,h2,h3{
+                     color:gray
+                   }
+                   
+                => <h1 id="a">CSS</h1>
+                   <h2 id="b">CSS</h2>
+                   <h3 id="c">CSS</h3>
+                #a,#b,#c{
+                   color:gray
+                }
+                
+                => <h1 class="a">CSS</h1>
+                   <h2 class="b">CSS</h2>
+                   <h3 class="c">CSS</h3>
+                .a,.b,.c{
+                   color:gray
+                }
+          => 인접한 태그를 제어 
+             자손 , 후손 , 형제 
+             
+             <div>
+               <p></p>
+               <h1></h1>
+               <h1></h1>
+               <span>
+                 <h1></h1>
+               </span>
+             </div>
+             
+             => HTML(ML=> 트리형태) => DOM => Document
+             
+                          div (부모태그)
+                           |
+                  --------------------
+                  |     |     |      |
+                  p    h1    h1     span  ==> 자손태그 div > h1
+                                    ----
+                                     |
+                                     h1   ==> 후손태그 div h1
+                                          ==> div > span > h1
+                  => div > p+h1 : 인접 : h1
+                     div > p~h1 : h1    h1
+          => 모든 태그에 적용 : * {
+                                 속성 : 값 
+                            }
+                            ================ 글꼴 변경 
+          => 속성선택자 
+             input{
+             }
+             <input type=text size=10> => input[type="text"]
+             <input type=radio>
+             <input type=password size=10> => input[type="password"]
+             <input type=file size=10>
+             <input type=date size=10>
+             
+             = img[src*=""] => 포함 (자바:contains)
+             = img[src^=""] => 시작 (자바:startsWith)
+             = img[src$=""] => 끝 (자바:endsWith)
+          => 가상선택자
+          => 박스모델 : margin/padding
+          => 레이아웃 (템플릿) : width,height,float, z-index
+          
+        => CSS에서 제공하는 속성 
+           1) 글꼴 변경 
+              = font-size => 글자크기 (px,pt,em)
+              = font-family => 글꼴 변경 ==> @import(""),구글폰트 
+              = font-weight => BOLD 
+           2) 텍스트 변경
+              = color:글자 색상변경 
+              = text-decoration => underline , none => <a>
+              = text-transform => uppercase , lowercase
+              = white-space : 자동 줄바꿈 
+              = text-align : left , center , right
+           3) 목록 스타일 (ul,ol) => list-style-type (값이 없는 경우 : none)
+           4) 바탕변경 (background)
+           5) 크기 : width,height 
+           ------------------------------------------------------------
+           *****중요 
+           CSS 작성하는 방법 
+           --------------
+            인라인 CSS : 태그한개만 디자인
+              <img src="" style=""> 
+            내부 CSS : 한페이지에서만 적용 
+                      ------
+                      웹에서는 파일(X) , 페이지(O) 
+                     <head>
+                      <style>
+                        선택자{
+                          속성:값
+                        }
+                      </style>
+                     </head>
+                     => 오버라이딩이 가능 
+            외부 CSS : 모든 페이지에 적용할때 => 파일을 만든다 (.css)
+                     <link rel="" href="">
+ -->
+ <!--  크기 변경 : width,height -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* 중복이 많거나 수정이 낞은 경우에 주로 내부 CSS를 사용한다 */
+img{
+  width:150px;
+  height:300px;
+}
+</style>
+</head>
+<body>
+  <center>
+    <h1>이미지의 크기 변경</h1>
+    <!-- <img src="m1.jpg" style="width:150px;height: 250px">
+    <img src="m2.jpg" style="width:150px;height: 250px">
+    <img src="m3.jpg" style="width:150px;height: 250px">
+    <img src="m4.jpg" style="width:150px;height: 250px">
+    <img src="m5.jpg" style="width:150px;height: 250px">
+    <img src="m6.jpg" style="width:150px;height: 250px">
+    <img src="m7.jpg" style="width:150px;height: 250px"> -->
+    <img src="m1.jpg">
+    <img src="m2.jpg">
+    <img src="m3.jpg">
+    <img src="m4.jpg">
+    <img src="m5.jpg">
+    <img src="m6.jpg">
+    <img src="m7.jpg">
+    
+  </center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

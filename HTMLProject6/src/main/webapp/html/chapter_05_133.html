@@ -1,0 +1,43 @@
+<!-- 
+     클래스 선택자 
+     형식) 
+          <태그 class="class명">내용</태그> => 내용이 변경
+          .class명 {
+             속성:값
+          } 
+          태그.class명{
+             속성:값
+          }
+          *** class속성은 중복이 가능 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.poster{
+  width:170px;
+  height:300px;
+}
+.poster:hover{
+  opacity: 0.3;
+  cursor:pointer;
+  /*border:2px solid green;*/
+  width:250px;
+  height:350px;
+}
+</style>
+</head>
+<body>
+   <center>
+    <img src="m1.jpg" class="poster">
+    <img src="m2.jpg" class="poster">
+    <img src="m3.jpg" class="poster">
+    <img src="m4.jpg" class="poster">
+    <img src="m5.jpg">
+    <img src="m6.jpg" class="poster">
+    <img src="m7.jpg" class="poster">
+   </center>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!-- 
+      후손 / 자손 / 형제 
+      ---------------
+      
+        <div>
+          <h1></h1>
+          <h2></h2>
+          <ul>
+           <li></li>
+           <li></li>
+          </ul>
+        </div>
+        
+            => 구조화 (트리형태)
+                div
+                 |
+             -------------
+             |     |     |
+             h1    h2    ul  ==> 자손  부모태그 > 자식태그 => div>h1
+             --------------- 형제  ==> h1+h2 , h1~h2(인접태그)
+                         |
+                        ----
+                        |  |
+                       li  li ==> 후손  div li
+                       ------ 형제
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+h1{
+    background-color: rgb(0, 255, 255);
+}
+div > span > h1 {
+   background-color: #CCCCFF;
+}
+/*
+  div 아래 p태그 바로 옆에 있는 h1태그를 가지고 온다 
+  데이터수집 
+*/
+div > p+h1{
+   color:blue;
+}
+div > p~h1{
+   color:magenta;
+}
+</style>
+</head>
+<body>
+  <div>
+    <p>Hello CSS</p>
+    <!-- ----- -->
+    <h1>형제 1</h1><!-- p+h1 -->
+    <h1>형제 2</h1>
+    <!-- ----- p~h1 -->
+    <span>
+      <h1>후손 1</h1>
+    </span>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
