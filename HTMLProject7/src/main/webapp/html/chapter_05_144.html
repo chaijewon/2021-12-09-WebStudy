@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ul {
+  /*list-style-type: none;
+  background-color: blue;
+  width:600px;
+  height:30px;
+  color:white;*/
+  overflow: hidden;
+}
+ul li{
+  list-style: none;
+  float: left; 
+  padding: 15px;
+}
+ul li:first-child {
+	border-radius: 10px 0 0 10px;
+}
+ul li:last-child {
+	border-radius: 0px 10px 10px 0px;
+}
+li:nth-child(2n) {
+  background-color: #FF0003;	
+}
+li:nth-child(2n+1) {
+  background-color: #800000;	
+}
+li:hover{
+  cursor: pointer;
+  color:white;
+}
+</style>
+</head>
+<body>
+  <center>
+   <h1>:first-child , :last-child , :nth-child 응용</h1>
+   <ul>
+     <li>홈</li>
+     <li>회원가입</li>
+     <li>영화예매</li>
+     <li>맛집추천</li>
+     <li>레시피제작</li>
+     <li>커뮤니티</li>
+     <li>마이페이지</li>
+   </ul>
+  </center>
+</body>
+</html>

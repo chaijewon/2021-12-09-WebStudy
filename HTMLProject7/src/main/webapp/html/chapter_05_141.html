@@ -1,0 +1,173 @@
+<!-- 
+     CSS => 선택자 (자바스크립트,Jquery , VueJS,ReactJS)
+                  => 태그를 제어하는 프로그램 (AJAX)
+                  $('div > p+h1').click(function(){처리})
+                  Spring => JSP+Front
+     = 기본선택자 
+       태그 , id , class , 전체 
+     = 속성선택자 
+       태그명[속성명="값"]
+       태그명[속성명*="값"]
+       태그명[속성명^="값"]
+       태그명[속성명$="값"]
+     = 후손 / 자손 / 형제 
+       태그명 태그명 
+       태그명 > 태그명
+       태그명+태그명
+       태그명~태그명 
+         doc.select("CSS(선택자)") => div.title
+     = 반응 / 상태 / 구조선택자
+       ------------------------ 가상선택자 
+       반응선택자 
+         = :active => 마우스 클릭 
+         = :hover  => 마우스 오버 (*******) 
+       상태선택자 
+         = :checked => checkbox(*****)
+         = :focus   => input
+         = :enabled => button , text(****)
+         = :disabled => input(****)
+       구조선택자 
+         = :first-child
+         = :last-child
+         = :nth-child(*****)
+         
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+h1#a:active,h1#b:active,h1#c:active{
+  color:red
+}
+
+h1#a:hover,h1#b:hover,h1#c:hover{
+  color:green
+}
+
+input:enabled {
+	background-color: yellow;
+}
+input:disabled {
+	background-color: black;
+}
+input:focus {
+	background-color: white;
+}
+input[type="checkbox"]:checked{
+    box-shadow: 0 0 0 3px hotpink;
+}
+/*ul li:first-child {
+	color:red;
+	font-weight: bold;
+	
+}
+ul li:last-child {
+	color:blue;
+	font-weight: blod;
+}*/
+/*
+    2n => n=0 , n=1 , n=2 ...
+           0     2     4
+      <li>데이터 1</li> => 1
+      <li>데이터 2</li> => 2 => yellow
+      <li>데이터 3</li> => 3
+      <li>데이터 4</li> => 4 => yellow
+      <li>데이터 5</li> => 5
+      <li>데이터 6</li> => 6 => yellow
+      <li>데이터 7</li> => 7
+      
+    2n+1 => n=0 , n=1 , n=2 , n=3 
+             1     3     5     7
+             
+    3n+1 => n=0 , n=1 , n=2 , n=3
+             1     4     7     10
+*/
+ul li:nth-child(3n+1) {
+	color:yellow;
+	font-weight: blod;
+}
+table tr:first-child {
+	background-color: #999;
+	color:white;
+}
+table tr:nth-child(2n) {
+	background-color: rgb(255,255,220);
+}
+</style>
+</head>
+<body>
+    <center>
+     <h1>:active,:hover : 가상 선택자 </h1>
+     <h1 id="a">Hello CSS</h1>
+     <h1 id="b">Hello HTML5</h1>
+     <h1 id="c">JavaScript</h1>
+     <p>
+     <h1>:checked,:focus,:enabled,:disabled</h1>
+     <input type="text" size=30>
+     <br>
+     <input type="text" size=30 disabled="disabled">
+     <br>
+     <input type="checkbox" value="취미" checked>취미
+     <br>
+     <h1>:first-child,:last-child,:nth-child</h1>
+     <ul>
+      <li>데이터 1</li>
+      <li>데이터 2</li>
+      <li>데이터 3</li>
+      <li>데이터 4</li>
+      <li>데이터 5</li>
+      <li>데이터 6</li>
+      <li>데이터 7</li>
+     </ul>
+     <br>
+     <h1>table에서 nth-child 적용</h1>
+     <table width=500 border=1 bordercolor=black>
+       <tr>
+        <th>이름</th>
+        <th>국어</th>
+        <th>영어</th>
+        <th>수학</th>
+       </tr>
+       <tr>
+         <td align=center>홍길동</td>
+         <td align=center>90</td>
+         <td align=center>80</td>
+         <td align=center>90</td>
+       </tr>
+       <tr>
+         <td align=center>홍길동</td>
+         <td align=center>90</td>
+         <td align=center>80</td>
+         <td align=center>90</td>
+       </tr>
+       <tr>
+         <td align=center>홍길동</td>
+         <td align=center>90</td>
+         <td align=center>80</td>
+         <td align=center>90</td>
+       </tr>
+       <tr>
+         <td align=center>홍길동</td>
+         <td align=center>90</td>
+         <td align=center>80</td>
+         <td align=center>90</td>
+       </tr>
+       <tr>
+         <td align=center>홍길동</td>
+         <td align=center>90</td>
+         <td align=center>80</td>
+         <td align=center>90</td>
+       </tr>
+     </table>
+    </center>
+</body>
+</html>
+
+
+
+
+
+
+
