@@ -1,0 +1,266 @@
+<!-- 
+     1. HTML / CSS => JSP,Spring,VueJS,ReactJS,Ajax,Jquery
+        ----------- 웹 사이트 (브라우저 출력) => HTML , 기본 디자인(CSS)
+        최종 : 웹개발자 (Java,Oracle,HTML,CSS,JavaScript)
+                     ---------------------------------
+                                   |
+                                  JSP => HTML+Java
+                                         ---------
+                                            |
+                                          -------
+                                           HTML
+                                           Java
+                                          -------- MVC
+                                                  -----
+                                                     |
+                                                   라이브러리화
+                                                   Spring
+              취업처의 요구사항 : Spring가능자 
+              *** 1차 : SQL => 복습 
+              *** 2차 : 기술 
+              *** 3차 : 최신에 업체 기술
+                       -------------
+                       Front : Vue(Vuex),React(Redux)
+                       Back : Spring-Boot(MariaDB)
+                              AI , 장고 
+                              블록체인 
+                       서버 : 클라우드 : AWS
+             기본 : => 
+             
+      2. HTML 
+         ----- 태그 + 속성 (ML) => HTML / XML => Annotation
+                                        ====>  JSON 
+         HTML 출력 => 텍스트 , 이미지 (화면 => 링크)
+         1) 태그 
+            텍스트 
+             => <h1>~<h6> : 제목 
+             => <hr> : 라인선 
+             => <br> : 줄바꿈 
+             => <p>  : 단락 
+             => <pre> : 저장된 형태로 출력 
+             => <strong>,<b> : 강조체 
+             => <address> : 주소 (이탤릭)
+             => 출력형태 => <i> , <sub> , <sup>
+            이미지 
+             => <img> , <map>
+                          |
+                        <area> => 그림을 부분 선택
+            페이지 이동 
+             => <a> : 다른 페이지 이동  
+            목록 
+             => <ul> 
+                  |
+                 <li>
+             => <dl>
+                  |
+                -------
+                |     |
+               <dt>  <dd>
+             => <table>
+                   |
+                  <tr>
+                   |
+                <th>|<td>
+             템플릿 : 화면 분할 
+                    <div> : 블록 속성 (세로단위 분할)
+                    <span> : 인라인 (가로단위 분할)
+                    *** HTML5
+                        <header>,<nav>,<aside>,<article>,<footer>
+                        <section>
+             멀티미디어 (동영상)
+               => <video>
+               => <audio>  ==> 파일이 저장된 상태 
+               => youtube  ==> <embed> , <iframe>
+                                  |         |
+                               동영상만 출력   |
+                                          동영상 / 다른 HTML파일을 읽어서 출력 
+         2) 태그 => 속성  
+                  -----
+                   1) width,height
+                      => px(절대값) , em , %(상대값)
+                         100px           100% => 100px
+                                    ---
+                                    *1.2
+                   2) name : 자바연동(입력된 데이터값)
+                   3) id : 중복이 없는 구분자
+                   4) class : 중복이 있는 구분자 
+                   5) style :한개의 태그만 스타일 변경 (인라인 CSS)
+                                     
+                                     
+         3) 사용자 입력과 관련 태그 
+            => <input> => 디폴트 선택 , 활성화 (enabled,disabled,readonly)
+                          radio/checkbox => checked
+                 1) type속성 
+                    type="text"
+                    type="password"
+                    type="file"
+                    type="hidden"
+                    type="number"
+                    type="date"
+                    type="radio"
+                    type="checkbox"
+                    type="button"
+                    type="submit"
+                    type="image"
+                    <button>
+            => <textarea>: 여러줄 전송 : 글쓰기,댓글 
+            => <select>:한개를 선택 : CHECK ===> selected
+            => <form>: 사용자가 입력한 데이터 모아서 전송 
+               ------ action , method="GET/POST" => 1)기술면접 
+                      ------ 데이터를 받을 파일지정 
+                      URL?               
+         ----------------------- 출력형식 => 기본 디폴트 
+            CSS => 2,3(90%) => SI/SM , 4
+                   => 특이사항
+         -------------------------------------------
+         CSS : 선택자 , 속성 
+         ---- 태그를 한개씩 변경(디자인) 
+         ---- Jquery , Ajax , Vue , React => HTML의 태그를 제어하는 프로그램
+         ---- 데이터 수집 
+         1) 선택자 
+            예) Jquery 
+               -------
+               $('선택자').click(function(){}) => 태그 (DOMScript)
+            => 태그 선택자 
+               태그명 {
+                  속성 : 값 
+                  ---
+               }
+            => 구분자 선택 
+               ---------
+                ID:한개만 설정 (중복없다)
+                #ID명 {
+                  속성 : 값
+                  ---
+                }
+                CALSS:여러개 설정 (중복있다)
+                .CLASS명 {
+                  속성 :값 
+                }
+                
+                aaa {
+                  속성:값 ==> (X)
+                }
+            => 멀티 선택자 
+               태그명,태그명...{
+                  ---
+                 속성:값
+               }
+               #id명,#id명{
+                 속성:값
+               }
+               
+               .class명 , .class명..{
+                  속성:값 
+               }
+               
+               태그명 , .class명, #id명{
+                  속성:값
+               }
+            => 자손 선택자
+               태그명 > 태그명 
+                    --
+               <div>
+                 <h1></h1>
+                 <span>
+                  <h1></h1>
+                 </span>
+               <div> 
+               div > h1
+            => 후손 선택자 
+               div h1
+                 ---
+            => 가상 선택자 
+               :active , :focus , :enabled , :checked , :disabled
+               :first-child , :last-child , :nth-child(n)
+            => 속성 선택자 
+               테그명[속성명="값"]
+               ==> 정규식 
+                   * => 포함
+                   태그명[속성*="값"] 
+                   ^ => 시작
+                   태그명[속성^="값"] => email , site, 이미지 
+                   $ => 끝
+                   태그명[속성$="png|jpg|gif"] => 이미지 .png
+                   
+       CSS 속성 
+       -------
+       =>CSS단위 : px , em , %
+               ---   -------
+               절대값   상대값 
+               예) font-size:14px
+               2em => 14*2 ==> 28px
+               200% ==> 14*2=> 28px
+       =>CSS속성 
+         영역크기 (박스모델) => 159page(chapter6장) 
+           - margin : 브라우저와의 간격 , 상대좌표  
+             margin:20px 30px 20px 30px 
+                    -------------------
+                    top , right , bottom , left
+             margin:20px 
+                    => 20px 20px 20px 20px
+                            -------------- 
+             margin:20px 30px 
+                    => 20px 30px 20px 30px
+                                 ---- ----
+             margin: 20px 30px 50px 
+                    => 20px 30px 50px 30px
+                            ----      ----
+                 
+           - padding
+             
+           - border
+         글자변경 
+           - font
+           - color
+           - text
+         바탕색 
+           - background
+         위치관련 
+           - absolute
+           - relative
+           - static 
+           
+         레이어관련
+           - z-index  
+           
+         
+                                                                      
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div#wrapper {
+  width:500px;/* 100% 브라우저 전체 크기*/
+  height:500px;
+  border:2px solid red;
+  margin-top:200px;
+  margin-left:100px;
+}
+div#header{
+  width:300px;
+  height:300px;
+  border:2px dotted green;
+  margin: 0px auto;
+  margin-top: 100px;
+  padding: 100px;
+}
+</style>
+</head>
+<body>
+  <div id="wrapper">
+   <div id="header">Hello CSS</div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+

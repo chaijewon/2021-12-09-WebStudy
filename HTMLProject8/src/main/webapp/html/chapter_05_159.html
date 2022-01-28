@@ -1,0 +1,72 @@
+<!-- 
+    p159 박스속성 => 템플릿을 제작 , 위치 지정 
+    ============
+    margin 
+      margin : 4가지 속성을 동시에 처리 
+        = margin-top
+        = margin-right
+        = margin-bottom
+        = margin-left
+    padding
+      padding : 4가지 속성을 동시에 처리
+        = padding-top
+        = padding-right
+        = padding-bottom
+        = padding-left
+    border : 3가지 처리 
+        = border-width : 두께
+        = border-style : solid,dotted,dashed,double
+        = border-color : 등록된 색상 (red,white,yellow...)
+                         RGB() , 16진법 
+        ** border-radius : 50px 40px 20px 10px
+                  => 왼쪽위 오른쪽위 오른쪽 아래쪽 , 왼쪽아래쪽 
+                           50px ==> 50 50 50 50
+                           
+    width : 크기
+    height : 길이 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* div에 전체적용되는 스타일 지정*/
+div{
+  width: 200px;
+  height: 100px;
+  background-color: red;
+  display: inline-block;
+  /* inline(width,height가 변경이 없는 경우) , inline-block(width,height변경)*/
+}
+.box1 {
+  margin: 30px 50px 30px 50px;
+  background-color: blue;
+}
+.box2 {
+  margin: 30px 50px; 
+  /*      30 50 30 50*/
+  background-color: green;
+}
+.box3 {
+  margin: 30px 50px 30px;
+  background-color: yellow;
+}
+.box4 {
+  margin: 30px 50px;
+  /* 30 50 30 50 */
+  background-color: cyan;
+}
+</style>
+</head>
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+  <div class="box4"></div>
+</body>
+</html>
+
+
+
+

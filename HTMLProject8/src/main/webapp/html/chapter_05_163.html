@@ -1,0 +1,61 @@
+<!-- 
+    박스테두리 : border
+    border-collpase => 라인선 병합 (double) => table은 default => double
+    border-width => 두께
+    border-style => 일반선 , 점선 ,다시선 ,이중선 
+    border-color => 색상 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div{
+  width: 500px;
+  height: 100px;
+  background-color: yellow;
+  margin: 20px;
+}
+#a{
+    border: 2px solid black;
+}
+#b{
+    border: 2px dotted black;
+}
+#c{
+    border: 2px dashed black;
+}
+#d{
+     border-width:2px;
+     border-style: double;
+     border-color: black;
+}
+#e{
+     border-width:10px;
+     border-style: inset;
+     border-color: black;
+}
+#f{
+     border-width:10px;
+     border-style: outset;
+     border-color: black;
+}
+#g{
+     border-width:10px;
+     border-style: ridge;
+     border-color: black;
+}
+/* soild , dotted */
+</style>
+</head>
+<body>
+  <div id="a"></div>
+  <div id="b"></div>
+  <div id="c"></div>
+  <div id="d"></div>
+  <div id="e"></div>
+  <div id="f"></div>
+  <div id="g"></div>
+</body>
+</html>
