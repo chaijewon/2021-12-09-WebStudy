@@ -1,0 +1,71 @@
+@charset "UTF-8";
+/*
+    <table> ===> class="table_content"
+      <tr>  ===>
+       <th><th> ==> 
+       <td></th>==> 
+      </tr>
+    </table>
+*/
+.table_content{
+	/* 라인선 통합 */
+	border-collapse: collapse;
+	/* 테이블위에 라인선 */
+	border-top-width: 2px;
+	/* 테이블 아래에 라인선*/
+	border-bottom-width: 1px;
+	/* 라인선의 스타일 : solid , 색상 결정 */
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #333;
+	border-bottom-color: #333;
+}
+.table_content th,td{
+	margin: 0px;
+	/* margin-top:0px margin-right:0px 
+	   margin-bottom:0px margin-left:0px*/
+	padding: 0px;
+	font-size: 9pt;
+}
+/*
+             table
+               |
+             ------------
+             |     |    |
+            <tr> <tr> <tr> => table > tr
+             |
+            <th>           => table td,th
+*/
+.table_content th{
+	background-color: #999;
+	color: #FFF;
+	border-bottom-width: 1px;
+	border-bottom-color:#333;
+	height: 35px;
+}
+.table_content td{
+	border-bottom-width: 1px;
+	border-bottom-color:#333;
+	border-bottom-style: dotted;
+	height: 35px;
+}
+.table_content .tdcenter{
+   text-align: center;	
+}
+.table_content .tdleft{
+   text-align: left
+}
+.table_content .tdright{
+   text-align: right
+}
+.table_content .dataTr:hover{
+	background-color: #FC6;
+	cursor:pointer;
+}
+
+
+
+
+
+
+

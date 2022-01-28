@@ -5,6 +5,7 @@
            System.out.println() : block
            System.out.print() : inline(다른 속성 변경(X))
            System.out.printf() : inline-block (다른 속성 변경(O))
+                                 none:화면에 출력하지 않는다 
            ---------------------
            display:block
            display:inline
@@ -15,14 +16,50 @@
            block : <div> ,<h1>~<h6> , <p>,<br>,<ol>,<ul>,<dl>
                    <table>
            inline : <img> , <input> ,<select> ,<span> ,<a>
+           
+           => display의 기능 
+              display:table  <table>
+              -------------
+              display:table-row <tr>
+              display:table-cell <td>
+              display:table-column <tr>
  -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+div{
+  width:100px;
+  height: 100px;
+  background-color: red;
+  margin: 10px;
+  /*display: inline-block;*/
+}
+span{
+  width:100px;
+  height:100px;
+  background-color: blue;
+  margin: 10px;
+  /* display: inline-block; */
+  display: block;
+}
+</style>
 </head>
 <body>
-
+  <div></div>
+  <div></div><!-- block -->
+  <div></div>
+  <div></div><!-- inline -->
+  <span></span>
+  <span></span>
 </body>
 </html>
+
+
+
+
+
+
+

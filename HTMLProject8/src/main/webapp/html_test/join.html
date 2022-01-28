@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="table.css">
+<style type="text/css">
+.table_content{
+  margin-top: 30px;
+}
+</style>
+</head>
+<body>
+  <table class="table_content" width=500>
+    <caption><h3>회원가입</h3></caption>
+    <tr>
+      <td class="tdcenter" width=15%>아이디</td>
+      <td width=85%>
+        <input type=text size=15>
+        <input type=button value="중복체크">
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>비밀번호</td>
+      <td width=85%>
+        <input type=password size=15>
+        &nbsp;&nbsp;재입력:<input type=password size=15>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>이름</td>
+      <td width=85%>
+        <input type=text size=15>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>성별</td>
+      <td width=85%>
+        <input type=radio checked="checked" name="sex">남자
+        <input type=radio name="sex">여자
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>생년월일</td>
+      <td width=85%>
+        <input type=date size=25>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>우편번호</td>
+      <td width=85%>
+        <input type=text size=3 readonly>-<input type=text size=3 readonly>
+        <input type=button value="우편번호검색">
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>주소</td>
+      <td width=85%>
+        <input type=text size=55 readonly>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>상세주소</td>
+      <td width=85%>
+        <input type=text size=55>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>전화번호</td>
+      <td width=85%>
+        <select>
+          <option>02</option>
+          <option>031</option>
+          <option>032</option>
+          <option>045</option>
+          <option>061</option>
+        </select>
+        <input type=text size=10>-<input type=text size=10>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>소개</td>
+      <td width=85%>
+        <textarea rows="10" cols="55"></textarea>
+      </td>
+    </tr>
+    <tr>
+      <td class="tdcenter" width=15%>취미</td>
+      <td width=85%>
+        <input type="checkbox">운동
+        <input type="checkbox">낚시
+        <input type="checkbox">등산
+        <input type="checkbox">여행
+        <input type="checkbox">독서
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="tdcenter">
+       <button>회원가입</button>
+       <input type=button value="취소">
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+
+
+
+

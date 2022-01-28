@@ -1,0 +1,84 @@
+<!-- 
+     CSS 적용 방법 
+     1) 인라인 CSS => 태그마다 설정 
+        <div style="width:100px;height:100px;display:inline-block"></div>
+     2) 내부 CSS => 한개의 파일에만 적용 
+        <head>
+          <style>
+           div{
+                width:100px;
+                height:100px;
+           }
+          </style>
+        </head>
+     3) 외부 CSS => 프로젝트 전체 파일에 적용
+        => 파일로 만든다 (재사용) => .css
+        <head>
+          <link rel="stylesheet" href="파일명">
+                                 =============
+                                 내부 파일 (경로명/파일명)
+                                 외부 파일 (http://~~/파일명)
+        </head>
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="table.css"><!-- CSS파일 경우(외부CSS) -->
+<style type="text/css">
+#container{
+  width:1280px;
+  margin: 0px auto;
+}
+#row{
+  width:900px;
+  margin: 0px auto;
+}
+h1{
+  text-align: center
+}
+</style>
+</head>
+<body>
+  <div id="container">
+    <h1>자유게시판</h1>
+    <div id="row">
+     <table width=700>
+      <tr>
+       <td><a href="#">새글</a></td>
+      </tr>
+     </table>
+     <table class="table_content" width=700>
+       <tr>
+         <th>번호</th>
+         <th>제목</th>
+         <th>이름</th>
+         <th>작성일</th>
+         <th>조회수</th>
+       </tr>
+       <tr class="dataTr">
+         <td class="tdcenter">1</td>
+         <td>CSS 응용</td>
+         <td class="tdcenter">홍길동</td>
+         <td class="tdcenter">2022-01-28</td>
+         <td class="tdcenter">100</td>
+       </tr>
+       <tr class="dataTr">
+         <td class="tdcenter">1</td>
+         <td>CSS 응용</td>
+         <td class="tdcenter">홍길동</td>
+         <td class="tdcenter">2022-01-28</td>
+         <td class="tdcenter">100</td>
+       </tr>
+     </table>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
