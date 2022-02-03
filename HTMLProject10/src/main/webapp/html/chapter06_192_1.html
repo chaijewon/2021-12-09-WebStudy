@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+button {
+	width:100px;
+	height:81px;
+	background-color: cyan;
+}
+textarea {
+	float:left;
+}
+li.new::after{
+   content: "NEW!!";
+   width:100px;
+   height: 30px;
+   border-radius: 5px;
+   background-color: red;
+}
+li.new1::before{
+   content: "NEW!!";
+   width:100px;
+   height: 30px;
+   border-radius: 5px;
+   background-color: red;
+}
+</style>
+</head>
+<body>
+  <textarea rows="5" cols="50"></textarea>
+  <button>댓글쓰기</button>
+  <br>
+  <ul>
+   <li class="new">상품 1</li>
+   <li class="new1">상품 2</li>
+   <li>상품 3</li>
+   <li>상품 4</li>
+   <li class="new">상품 5</li>
+  </ul>
+</body>
+</html>

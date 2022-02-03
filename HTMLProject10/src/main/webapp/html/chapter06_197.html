@@ -1,0 +1,33 @@
+<!-- 
+   이전 요소에 연결해서 위치를 지정
+   : relative 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.box1{
+   float: left;
+   width: 100px;
+   background: yellow;
+   margin-right: 10px;
+   padding: 20px;
+}
+.box2{
+  position:relative;
+  left:-50px;
+  top:30px;
+  background: blue;
+  color:white;
+  float: left;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+  <div class="box1">박스1</div>
+  <div class="box2">박스2</div>
+</body>
+</html>

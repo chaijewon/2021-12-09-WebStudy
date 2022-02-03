@@ -1,0 +1,51 @@
+<!-- 
+   clear속성 -> float속성을 해제 
+   --------
+     화면을 통합 
+   ---- 템플릿 (레이아웃)
+   
+   1차 프로젝트 : HTML/CSS(수정)
+       --------------------
+       핵심: 오라클 연동 (SQL)
+            Ajax 
+            자바 
+       --------------------
+   2차 프로젝트 : Spring / MyBatis
+    
+   3차 프로젝트 : Spring-Boot / React|Vue
+   ------------------------------------
+     AWS에 배포 (우분투 : 리눅스 명령어) 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div{
+  height: 100px;
+}
+.box1{
+  float: left;
+  background-color: yellow;
+}
+.box2{
+  float: left;
+  background-color: cyan;
+}
+.box3{
+  background-color: green;
+}
+.box4{
+  clear: both;
+  background-color: magenta;
+}
+</style>
+</head>
+<body>
+  <div class="box1">박스1</div>
+  <div class="box2">박스2</div>
+  <div class="box3">박스3</div>
+  <div class="box4">박스4</div>
+</body>
+</html>

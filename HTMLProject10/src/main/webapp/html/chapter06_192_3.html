@@ -1,0 +1,40 @@
+<!-- 
+    직접 배치 : absolute => left,top,right,bottom
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div{
+   width: 150px;
+   height: 150px;
+   position: absolute;
+}
+.box1{
+  background-color: red;
+  left:10px;
+  top:10px;
+  z-index:10; /* 챗봇, 상담창 */
+}
+.box2{
+  background-color: green;
+  left:50px;
+  top:50px;
+  z-index:5;
+}
+.box3{
+  background-color: blue;
+  left:90px;
+  top:90px;
+  z-index:1;
+}
+</style>
+</head>
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+</body>
+</html>
