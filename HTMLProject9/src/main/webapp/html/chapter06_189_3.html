@@ -1,0 +1,52 @@
+<!-- 
+     속성 : block / inline 
+     목록 스타일 => <ul> 
+                   |
+                  <li>
+                  
+                  <ol>
+                   |
+                  <li>
+     1) display: block 
+     2) list-style-type 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ul.a {
+  list-style-type: none;
+}
+ul.a li{
+  display: inline;
+  /*
+      display => width,height지정 => inline-block
+  */
+}
+ol{
+    list-style-type: upper-alpha;
+    /* list-sytle-image*/
+}
+</style>
+</head>
+<body>
+  <ul class="a">
+    <li>Java</li>
+    <li>Oracle</li>
+    <li>HTML5 & CSS</li>
+    <li>JavaScript(Jquery)</li>
+    <li>JSP</li>
+  </ul>
+  <br>
+  <ol>
+    <li>Java</li>
+    <li>Oracle</li>
+    <li>HTML5 & CSS</li>
+    <li>JavaScript(Jquery)</li>
+    <li>JSP</li>
+  </ol>
+  
+</body>
+</html>

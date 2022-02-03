@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#topMenu{
+	width: 1200px;
+	height:30px;
+}
+#topMenu ul{
+	list-style-type: none;
+	margin: 0px;
+	padding:0px;
+}
+#topMenu ul li{
+	color: white;
+	background-color: #2d2d2d;
+	float: left;
+	line-height: 30px;
+	vertical-align: middle;
+	position: relative;
+}
+
+.menuLink,.submenuLink{
+	text-decoration: none;
+	display: block;
+	width: 150px;
+	font-size: 15pt;
+	font-weight: bold;
+	font-family: 맑은 고딕;
+}
+.menuLink{
+	color: white;
+}
+.topMenuLi:hover .menuLink{
+	color:red;
+	background-color: #4d4d4d;
+}
+
+.submenuLink{
+	color: #2d2d2d;
+	background-color: white;
+	border:1px solid black;
+	margin-top: -1px;
+}
+.submenu{
+	z-index: 10;
+	position: absolute;
+	height:0px;
+	overflow: hidden;
+	transition:height .2s;
+	-webkit-transition:height .2s;
+}
+.topMenuLi:hover .submenu{
+	height: 200px;
+}
+.submenuLink:hover{
+	color:red;
+	background-color: #dddddd;
+}
+
+</style>
+</head>
+<body>
+ <nav id="topMenu">
+  <ul>
+    <li class="topMenuLi">
+     <a href="#" class="menuLink">HOME</a>
+    </li>
+    <li class="topMenuLi">
+     <a href="#" class="menuLink">회원가입</a>
+    </li>
+    
+    <li class="topMenuLi">
+     <a href="#" class="menuLink">레시피</a>
+     <ul class="submenu">
+      <li><a href="#" class="submenuLink">최신순</a></li>
+      <li><a href="#" class="submenuLink">추천순</a></li>
+     </ul>
+    </li>
+    
+    <li class="topMenuLi">
+     <a href="#" class="menuLink">맛집</a>
+     <ul class="submenu">
+      <li><a href="#" class="submenuLink">맛집목록</a></li>
+      <li><a href="#" class="submenuLink">지역별맛집</a></li>
+      <li><a href="#" class="submenuLink">맛집검색</a></li>
+      <li><a href="#" class="submenuLink">맛집추천</a></li>
+     </ul>
+    </li>
+    
+    <li class="topMenuLi">
+     <a href="#" class="menuLink">커뮤니티</a>
+     <ul class="submenu">
+      <li><a href="#" class="submenuLink">자유게시판</a></li>
+      <li><a href="#" class="submenuLink">묻고답하기</a></li>
+      <li><a href="#" class="submenuLink">후기게시판</a></li>
+      <li><a href="#" class="submenuLink">자료실</a></li>
+     </ul>
+    </li>
+    
+    <li class="topMenuLi">
+     <a href="#" class="menuLink">마이페이지</a>
+    </li>
+  </ul>
+ </nav>
+</body>
+</html>

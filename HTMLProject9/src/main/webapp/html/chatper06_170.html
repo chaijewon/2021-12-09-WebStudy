@@ -1,0 +1,236 @@
+<!-- 
+   page 170 ~ 180
+   배경 속성 
+   background-color : 배경색을 지정
+     => color지정 
+        1) 지정된 색 (white , black , yellow,pink...)
+        2) 지정되지 않은 색 (#FFFFFF,#000000...) 16진법 
+           => HTML 색상표 검색 , 그림판 
+        3) rgb() 함수 이용 : rgb(255,255,255) , rgb(0,0,0)..
+        4) rgba() : 투명모드 rgba(255,255,255,0.1) 
+                                           -----
+                                           0.0~1.0
+   ***background-image : 배경 이미지 지정
+        url('경로명')
+   ***background-repeat : 배경이미지 반복 
+        반복: repeat 
+        반복(X): no-repeat
+   ***background-size : 배경이미지 크기
+        직접 지정 : width height; => px , %
+        ***cover : 전체에 맞게 이미지 축소/확대 
+   ***background : 배경을 한꺼번에 처리 
+   background-position : 이미지 위치 지정 
+   background-attachment: 고정여부 
+                          scroll
+                          fixed 
+                          
+   예)
+      border
+        -------------
+        border-width
+        border-color
+        border-style 
+        -------------
+      margin
+        -------------
+         margin-top
+         margin-right
+         margin-bottom
+         margin-left
+        -------------
+      padding 
+        -------------
+         padding-top
+         padding-right
+         padding-bottom
+         padding-left
+        -------------
+      background 
+        -------------------
+         background-image 
+         background-repeat
+         background-size
+         background-attachment
+        -------------------
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body{
+   /*  영화 목록 */
+   background-color: #222222;
+   
+}
+.t1{
+   color:white;
+}
+.t2{
+   color:rgb(255,255,255);
+}
+.t3{
+   /* 투명 모드 (0.0~1.0)*/
+   color:rgba(255,255,255,0.8);
+}
+.t4{
+   color:rgba(255,255,255,0.2);
+}
+.t5{
+   color:#FFFFFF;
+}
+div{
+  background-color: #0094FF;
+  width:50%;
+  padding: 15px; 
+  /*  top right bottom left 
+  padding:15px
+       15  15     15    15
+  */
+  border:2px solid white;
+}
+p{
+    /* 줄간격 */
+    line-height: 30px;
+}
+div.gallery1{
+  background-image: url('../image/1.png');
+  height:300px;
+  background-size: cover;
+  /* 이미지가 지정된 width,height에 맞게 첨부 */
+  background-repeat: no-repeat;
+  /* default는 반복 
+     no-repeat 반복없이 추가
+     repeat 반복 (타일)
+  */
+}
+div.gallery2{
+  background-image: url('../image/2.jpg');
+  height:300px;
+  background-size: cover;
+}
+/*
+   이미지가 작은 경우 : repeat를 이용해서 타일 형식으로 제작  
+   이미지가 큰 경우 : cover를 이용해서 화면위치에 맞게 고정 
+*/
+div.tiles{
+  width: 100%;
+  height:600px;
+  border:1px solid white;
+  margin-top: 50px;
+  background-image:url('../image/3.jpg');
+  background-repeat: no-repeat;
+}
+div.images{
+  width:50%;
+  height:600px;
+  border:2px solid white;
+  margin-top: 50px;
+  background-image: url('../image/m1.jpg');
+  /*background-size: 200px 150px;*/
+  /*background-size: 60% 40%;*/
+  /*background-size:cover;*/
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+}
+div.bg1{
+  background-image: url('../image/m1.jpg');
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-top: 150px;
+  background-size: 150px 200px;
+}
+div.bg2{
+  background-image: url('../image/m1.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-top: 150px;
+  
+}
+div.attr{
+  width:50%;
+  height:350px;
+  background-image: url('../image/m1.jpg');
+  background-repeat: no-repeat;
+  background-size:100% 100px;
+  background-attachment: scroll;
+  overflow-y: auto;/*자체 Scroll제작: 댓글처리 */
+}
+div.back{
+  width:50%;
+  height:350px;
+  background:url("../image/m1.jpg") no-repeat fixed;
+}
+</style>
+</head>
+<body>
+  <h1 class="t1">HTML5+CSS</h1>
+  <h1 class="t2">HTML5+CSS</h1>
+  <h1 class="t3">HTML5+CSS</h1>
+  <h1 class="t4">HTML5+CSS</h1>
+  <h1 class="t5">HTML5+CSS</h1>
+  <div>
+   <p>알리는 지난 2일(한국시간) 자신의 SNS에 과거 토트넘 유니폼을 입고 손흥민과 함께 찍은 사진을 올리면서 “내 형제”라며 애틋함을 드러냈다.
+
+전날(1일) 에버튼으로의 이적이 확정된 알리가 이제는 한솥밥을 먹지 못하는 ‘절친’ 손흥민을 향해 작별 인사를 남긴 것이다.</p>
+  </div>
+  <div class="gallery1">
+    
+  </div>
+  <div class="gallery2">
+    
+  </div>
+  <div class="tiles">
+  
+  </div>
+  <div class="images">
+  
+  </div>
+  <div class="bg1">
+    <h1>“가자, 보물 찾으러!”</h1>
+    <p>자칭 고려 제일검인 의적단 두목 `무치`(강하늘)와 
+바다를 평정한 해적선의 주인 `해랑`(한효주).  
+한 배에서 운명을 함께하게 된 이들이지만 
+산과 바다, 태생부터 상극으로 사사건건 부딪히며 바람 잘 날 없는 항해를 이어간다.</p>
+  </div>
+  <div class="bg2">
+    <h1>“가자, 보물 찾으러!”</h1>
+    <p>자칭 고려 제일검인 의적단 두목 `무치`(강하늘)와 
+바다를 평정한 해적선의 주인 `해랑`(한효주).  
+한 배에서 운명을 함께하게 된 이들이지만 
+산과 바다, 태생부터 상극으로 사사건건 부딪히며 바람 잘 날 없는 항해를 이어간다.</p>
+  </div>
+  <div class="attr">
+    <h1>“듄을 지배하는 자가 우주를 지배한다!”</h1>
+    <p>10191년, 아트레이데스 가문의 후계자인 폴(티모시 샬라메)은 시공을 초월한 존재이자 
+전 우주를 구원할 예지된 자의 운명을 타고났다. 
+그리고 어떤 계시처럼 매일 꿈에서 아라키스 행성에 있는 한 여인을 만난다. 
+모래언덕을 뜻하는 '듄'이라 불리는 아라키스는 물 한 방울 없는 사막이지만 
+우주에서 가장 비싼 물질인 신성한 환각제 스파이스의 유일한 생산지로 이를 차지하기 위한 전쟁이 치열하다. 
+황제의 명령으로 폴과 아트레이데스 가문은 죽음이 기다리는 아라키스로 향하는데…
+전 우주를 구원할 예지된 자의 운명을 타고났다. 
+그리고 어떤 계시처럼 매일 꿈에서 아라키스 행성에 있는 한 여인을 만난다. 
+모래언덕을 뜻하는 '듄'이라 불리는 아라키스는 물 한 방울 없는 사막이지만 
+우주에서 가장 비싼 물질인 신성한 환각제 스파이스의 유일한 생산지로 이를 차지하기 위한 전쟁이 치열하다. 
+황제의 명령으로 폴과 아트레이데스 가문은 죽음이 기다리는 아라키스로 향하는데…
+전 우주를 구원할 예지된 자의 운명을 타고났다. 
+그리고 어떤 계시처럼 매일 꿈에서 아라키스 행성에 있는 한 여인을 만난다. 
+모래언덕을 뜻하는 '듄'이라 불리는 아라키스는 물 한 방울 없는 사막이지만 
+우주에서 가장 비싼 물질인 신성한 환각제 스파이스의 유일한 생산지로 이를 차지하기 위한 전쟁이 치열하다. 
+황제의 명령으로 폴과 아트레이데스 가문은 죽음이 기다리는 아라키스로 향하는데…
+위대한 자는 부름에 응답한다, 두려움에 맞서라, 이것은 위대한 시작이다!</p>
+  </div>
+  <div class="back">
+    <h1>“듄을 지배하는 자가 우주를 지배한다!”</h1>
+    <p>10191년, 아트레이데스 가문의 후계자인 폴(티모시 샬라메)은 시공을 초월한 존재이자 
+전 우주를 구원할 예지된 자의 운명을 타고났다. 
+그리고 어떤 계시처럼 매일 꿈에서 아라키스 행성에 있는 한 여인을 만난다. 
+모래언덕을 뜻하는 '듄'이라 불리는 아라키스는 물 한 방울 없는 사막이지만 
+우주에서 가장 비싼 물질인 신성한 환각제 스파이스의 유일한 생산지로 이를 차지하기 위한 전쟁이 치열하다. 
+황제의 명령으로 폴과 아트레이데스 가문은 죽음이 기다리는 아라키스로 향하는데…
+
+위대한 자는 부름에 응답한다, 두려움에 맞서라, 이것은 위대한 시작이다!</p>
+  </div>
+</body>
+</html>

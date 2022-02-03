@@ -1,0 +1,161 @@
+<!-- 
+    텍스트 스타일 
+    ***color : 글자 색상 
+    ***text-decoration : underline(밑줄) , none 
+                      overline(위에) , line-through(취소선)
+    ***text-align : left | center | right 
+    text-transform : none | capialize | uppercase | lowercase
+    text-shadow : 가로거리 세로거리 번짐 색상 
+    ***white-space : 공백처리 
+    ***letter-spacing (자간), word-spacing: 텍스트 간격 
+    ***line-height 
+    
+    문단 스타일 , 목록 스타일 , 위치 지정 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!--  text-align => block 
+      margin을 이용해서 이동 
+-->
+<style type="text/css">
+h1{
+  color:rgb(0,255,0); /* green */
+  text-align: center;
+}
+h2{
+  color:blue;
+}
+span{
+  color:red;
+}
+a{
+    text-decoration: none;
+    color:black;
+}
+a:hover{
+   text-decoration: underline;
+   color:green;
+}
+#a {
+    text-decoration: overline;
+}
+#b {
+     text-decoration: line-through;
+}
+.c{
+     text-transform: capitalize;
+}
+.d{
+     text-transform: uppercase;
+}
+.e{
+     text-transform: lowercase;
+}
+.k {
+     color: orange;
+     text-shadow: 1px 1px;
+}
+.m {
+      text-shadow: 5px 5px 3px #f00;
+}
+.n{
+      color:#FFF;
+      text-shadow: 7px -7px 5px #000;
+}
+div{
+  background-color: #FC6;
+  width:50%;
+  height:300px;
+  padding: 20px;
+  overflow-y: scroll;
+}
+pre{
+  
+  white-space: pre-wrap;
+}
+.h2{
+  letter-spacing: 8px;
+}
+.h3{
+  letter-spacing: 10px;
+}
+.h4{
+  letter-spacing: 15px;
+}
+.div{
+  text-align: center;
+  width:30%;
+  height:100px;
+  vertical-align: middle;
+}
+.div2{
+  padding: 0px;
+}
+.i1{
+  text-indent: 15px;/*들여쓰기*/
+  line-height: 30px;
+}
+.i2{
+   text-indent: 30px;
+}
+</style>
+</head>
+<body>
+  <h1>해적: 도깨비 깃발</h1>
+  <img src="../image/m1.jpg">
+  <h2>“가자, 보물 찾으러!” </h2>
+  <p>자칭 고려 제일검인 의적단 두목 <span>`무치`(강하늘)</span>와 
+바다를 평정한 해적선의 주인 <span>`해랑`(한효주).</span></p>
+  <a href="#">예매하기</a><br>
+  <h3 id="a">OverLine</h3>
+  <h3 id="b">Line-Though</h3>
+  <h2 class="c">hello5</h2>
+  <h2 class="d">hello5</h2>
+  <h2 class="e">HTML5</h2>
+  <h1 class="k">HTML5</h1>
+  <h1 class="m">HTML5</h1>
+  <h1 class="n">HTML5</h1>
+ <div>
+  <pre>어릴 적 소꿉친구인 오리모토 리카를 교통사고로 눈앞에서 잃은 옷코츠 유타. 
+
+“약속해, 리카와 유타는 어른이 되면 결혼하기로” 
+옷코츠는 원령으로 변한 리카의 저주에 괴로워한 나머지, 자신도 죽기를 바라지만 최강의 주술사인 고죠 사토루에 의해 주술고전에 들어가게 된다. 그리고 동급생인 젠인 마키, 이누마키 토게, 판다를 만나면서 굳은 결심을 한다. 
+
+“살아도 된다는 자신감이 필요해”  
+“나는 주술고전에서 리카의 저주를 풀겠습니다”
+“약속해, 리카와 유타는 어른이 되면 결혼하기로” 
+옷코츠는 원령으로 변한 리카의 저주에 괴로워한 나머지, 자신도 죽기를 바라지만 최강의 주술사인 고죠 사토루에 의해 주술고전에 들어가게 된다. 그리고 동급생인 젠인 마키, 이누마키 토게, 판다를 만나면서 굳은 결심을 한다. 
+
+“살아도 된다는 자신감이 필요해”  
+“나는 주술고전에서 리카의 저주를 풀겠습니다” 
+“약속해, 리카와 유타는 어른이 되면 결혼하기로” 
+옷코츠는 원령으로 변한 리카의 저주에 괴로워한 나머지, 자신도 죽기를 바라지만 최강의 주술사인 고죠 사토루에 의해 주술고전에 들어가게 된다. 그리고 동급생인 젠인 마키, 이누마키 토게, 판다를 만나면서 굳은 결심을 한다. 
+
+“살아도 된다는 자신감이 필요해”  
+“나는 주술고전에서 리카의 저주를 풀겠습니다”  
+한편, 옷코츠와 친구들 앞에 과거에 일반인을 대량으로 학살해서 고전에서 추방된 최악의 주저사인 게토 스구루가 나타난다.
+
+“12월 24일, 우리는 백귀야행을 결행한다”
+주술사만의 낙원을 만들려는 게토는 비술사를 섬멸하겠다면서, 신주쿠와 교토에 천의 저주를 내리는데…과연 옷코츠는 게토를 막을 수 있을까? 그리고 리카의 저주를 풀 수 있을까?</pre>
+</div>
+<h2 class="h2">HTML5 & CSS</h2>
+<h2 class="h3">HTML5 & CSS</h2>
+<h2 class="h4">HTML5 & CSS</h2>
+<div class="div">
+  <h3>Hello HTML/CSS</h3>
+</div>
+<div class="div2">
+  <p>“12월 24일, 우리는 백귀야행을 결행한다”</p>
+  <p class="i1">“약속해, 리카와 유타는 어른이 되면 결혼하기로” 
+옷코츠는 원령으로 변한 리카의 저주에 괴로워한 나머지,</p>
+  <p class="i2">“약속해, 리카와 유타는 어른이 되면 결혼하기로” 
+옷코츠는 원령으로 변한 리카의 저주에 괴로워한 나머지,</p>
+</div>
+</body>
+</html>
+
+
+
