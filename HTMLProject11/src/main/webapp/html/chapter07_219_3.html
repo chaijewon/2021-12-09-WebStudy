@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+*{
+    margin: 0px;
+    padding: 0px;
+}
+/*
+   container : 960px
+   container-fluid : full width
+*/
+.container{
+  width:100%;
+  border:1px solid black;
+}
+header{
+  width: 100%;
+  height: 150px;
+  background: #81c784;
+}
+nav{
+  width: 100%;
+  height: 100px;
+  background: #66bb6a;
+}
+aside{
+  float: left;
+  width:15%;
+  height: 700px;
+  background: #4caf50;
+}
+section{
+  float: left;
+  width:70%;
+  height: 700px;
+  background: #43a047;
+}
+article{
+  float: left;
+  width:15%;
+  height: 700px;
+  background: #4caf50;
+}
+footer{
+  clear: both;
+  width: 100%;
+  height: 150px;
+  background: #388e3c;
+}
+/* 0~960px => 반응형웹 (화면크기에 따라서 조절)*/
+@media(max-width:960px){
+   aside{width:40%}
+   section{width: 60%}
+   article{width:100%;height: 300px}
+}
+/* 0~768*/
+@media(max-width:768px){
+   aside{width:100%;height: 300px}
+   section{width: 100%;height: 300px}
+   
+}
+/* 0~480*/
+@media(max-width:480px){
+   aside{height: 300px;}
+   section{height: 200px}
+   header{height:300px;}
+}
+</style>
+</head>
+<body>
+  <div class="container">
+   <header></header>
+   <nav></nav>
+   <aside></aside>
+   <section></section>
+   <article></article>
+   <footer></footer>
+  </div>
+</body>
+</html>

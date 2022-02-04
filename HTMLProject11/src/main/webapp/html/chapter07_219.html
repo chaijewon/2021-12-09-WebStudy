@@ -1,0 +1,242 @@
+<!-- 
+
+     HTML
+     CSS
+     ------- 화면 UI (브라우저에서 실행)
+     JavaScript
+     ----------- 브라우저안에서 동작 
+     Java 
+     ----------- 오라클연결 => 데이터를 관리 
+     Oracle
+     ----------- 데이터 저장(공유)
+     
+     JSP => MVC (Spring) : Java+HTML => 결과값 (HTML)
+     ------------------- 1차 (화면 UI + SQL)
+     
+     HTML => 태그 / 속성 
+     ----    
+       형식) => 태그명은 소문자로 사용한다 (자바스크립트는 대소문자 구분) 
+           <html>
+             <head>
+               = <title> 브라우저 제목 출력 
+               = <style> 내부 CSS => (파일 한곳에서만 사용)
+               = <script> 동작을 제어하는 프로그램 
+                          유효성 검사 , 실시간 처리(Ajax) , 애니메이션
+                                   jax = JavaScript AND XML
+                          => Ajax , VueJS , ReactJS , NodeJS
+                                    ------  -------
+                                     Vuex    Redux(Mobx,사가)
+                                     ----    -----
+                                          MVC
+                                     MVC => 데이터 관리자 
+                                            화면 출력  
+               = <link> 외부 CSS (css파일 제작후 사용) 
+                        ------- 모든파일에 적용이 가능 
+             </head>
+             <body>
+               화면에 출력하는 태그 사용 => 코딩한 순서로 출력 
+                                      -------------- static 
+                                      absolute , relative
+                                      --------   ---------
+                                      절대 좌표     상대 좌표
+                                                  앞에 있는 중심으로 좌표 
+             </body>
+           </html>
+       텍스트 (52page)
+         <br> : 줄바꿈  
+         <hr> : 수평선
+         <p>  : 단락
+         ----------------- 단독 태그 (속성없다) 
+         <strong> : 강조
+         <b> : bold 
+         <h1>~<h6>
+         ----------------- 범위 지정 (여는 태그 / 닫는 태그)
+       이미지 
+         <img src="파일명"> => 경로명 
+                              ./  ../
+                              --  ---  다른 폴더를 읽는 경우 
+                              현재 폴더(생략)
+         <map>
+          <area> => 이미지 부분으로 링크
+         </map> 
+       링크 
+         <a href="이동할 파일명"> => 파일이 없는 경우 (404)
+            ----
+            target="_self" => 현재화면에서 파일 변경  
+            target="_blank"=> 새로운 브라우저 생성 
+       목록 
+         <ul> : 메뉴 출력 
+          |
+         <li> 
+         --------------
+         <dl> : 상세보기 
+          |
+         <dt>
+         <dd>
+         
+         <table> : 목록 출력 
+            |
+           <tr>
+            |
+          ------
+          |    |
+         <th> <td>
+         
+       입력창 
+         <input>
+           = type="text"
+           = type="password"
+           = type="radio"
+           = type="checkbox"
+           = type="date"
+           = type="hidden"
+           = type="file"
+         <textarea>: 멀티라인 
+         <select> : 콤보박스 (데이터베이스 => check)
+       화면 분할 
+         가로단위(인라인) => <span>
+         세로단위(블록)   => <div>
+         -----------------------
+          <div>가 많이 사용 => 찾기가 어렵다 
+             => <header> , <nav> , <aside> , <footer> , <section>
+                <article> => 시멘텍 태그 
+             => <video> <audio> => <embed> , <iframe> => 동영상  
+     CSS  => 속성 (태그 읽기)
+          1) 태그를 읽어와서 디자인 
+             ------------
+               선택자 (selector) : 데이터 수집 
+               
+               = 태그로 찾기 (한계) 
+               = 구분자 이용 (태그마다)
+                  => ID => 한개만 스타일 변경 (중복없이)
+                     #
+                  => Class => 한번에 여러개를 동시에 처리 (중복이 가능)
+                     ===== class명은 여러개 사용이 가능 
+                           class="a b c"
+                     .
+               = 속성 
+                 input[type="button"]
+                 a[href*="값"]
+                 img[src$="png"]
+                 a[href^="https"]
+               = 자손 =>  상위태그 > 하위태그 
+               = 후손 =>  상위태그 하위태그 
+               = 형제 => p + h1  ,  p ~ h1
+               = 가상선택자 
+                 = 태그명:hover  => a:hover , tr:hover(마우스 오버)
+                 = 태그명:enabled , 태그명:disabled 
+                   => input태그 관련 
+                 = 태그명:first-child , 태그명:last-child
+                   => table에서 첫번째줄에 색상 
+                      tr:first-child{background-color:green}
+                 = 위치 지정 
+                   태그명:nth-child(n)
+                 = 태그명::after
+                 = 태그명::before
+        CSS  속성 
+         글자 관련 (텍스트 관련)
+           font-family : 글꼴 (link,@import)
+           font-size: px, em
+           font-weight : bold 
+           
+           color : 색상 (foreground)
+           text-decoration : underline 
+           text-align:left | right | center
+           vertical-align : top | bottom | middle
+           white-space : 자동 줄바꿈 (pre)
+         이미지 관련 
+         ---------
+         Background
+           -----------------------------------------
+           background-image 
+           background-size : width,height => cover
+           background-color
+           -----------------------------------------
+           background
+         border
+           --------------
+           border-width
+           border-style
+           border-color 
+           -------------
+             border
+         margin
+           브라우저 , 태그 사이 간격 조절 
+           margin-top
+           margin-right
+           margin-bottom
+           margin-left
+           --------------
+             margin : 시계방향 
+         padding
+           태그안에 간격 조절(이미지, 텍스트) 
+           padding-top
+           padding-right
+           padding-bottom
+           padding-left
+           --------------
+             padding : 시계방향
+         목록 관련 
+           list-style-type:none 
+         박스모델 
+           inline , block , inline-block 
+                            ------------ (width,height지정)
+         포지션관련 
+           static : 코딩 순서로 출력 
+           absolute : 절대값 
+            => left , top , right , bottom 
+           relative : 상대값 
+           fixed : 고정  
+            
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#container{
+  width:960px;
+  margin:0px auto; /*가운데 정렬*/
+  height: 700px;
+  border:1px solid black;
+}
+.box1{
+  width:30%;
+  height: 700px;
+  background-color: red;
+  float:left;
+}
+.box2{
+  width:40%;
+  height: 700px;
+  background-color: green;
+  float:left;
+}
+.box3{
+ width:30%;
+  height: 700px;
+  background-color: blue;
+  float:left;
+}
+</style>
+</head>
+<body>
+  <div id="container">
+   <div class="box1"></div>
+   <div class="box2"></div>
+   <div class="box3"></div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
