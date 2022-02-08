@@ -5,7 +5,7 @@ import java.util.*;
 public class FoodDAO {
   private Connection conn;
   private PreparedStatement ps;
-  private final String URL="jdbc:oracle:thin:@211.63.89.99:1521:XE";
+  private final String URL="jdbc:oracle:thin:@211.63.89.131:1521:XE";
   // 드라이버 등록 
   public FoodDAO()
   {
