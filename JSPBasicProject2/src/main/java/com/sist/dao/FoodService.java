@@ -151,20 +151,139 @@ public class FoodService {
 		   }
 		   return vo;
 	   }
+	   /*
+	    *   private int no;
+		    private int cno;
+		    private String poster;
+		    private String name;
+		    private double score;
+		    private String address;
+		    private String tel;
+		    private String type;
+		    private String price;
+		    private String time;
+		    private String menu;
+		    private String parking;
+	    */
+	   // 웹 => 사용자(선택,클릭) => 클릭한 정보(데이터) =>
+	   //                         톰캣(request)
+	   // 오라클 연결 => 데이터 출력 
+	   // JSP ==> 오라클 ==> JSP
+	   /*
+	    *    request 
+	    *    ------- <a> , <form> , javascript
+	    *    response 
+	    *    --------
+	    *      응답 
+	    *      
+	    *      JSP 
+	    *      ----
+	    *        basic 
+	    *          사용법 (동작방법) 
+	    *           자바/HTML 
+	    *           -------- 구분 
+	    *           <% %> , <%= %> , <%! %> , <%-- --%>
+	    *           -----------------------------------
+	    *             코딩이 영역을 벗어나면 HTML로 인식
+	    *             *** 브라우저에서는 자바는 일반 텍스트
+	    *           지시자 : 
+	    *               page : contentType=변환 
+	    *                      => JSP가 실행이되면 메모리에 저장 
+	    *                      => 브라우저 (HTML/XML/JSON)
+	    *                      => HTML : text/html
+	    *                      => XML  : text/xml
+	    *                      => JSON : text/plain
+	    *                      => 한글 (인코딩=> byte형식) 
+	    *                         charser=UTF-8 / EUC-KR
+	    *                      import => 자바에서 필요한 라이브러리 
+	    *                                사용자 정의 클래스를 불러올때 사용
+	    *                      errorPage => 에러가 날 경우 이동하는 페이지 
+	    *                      isErrorPage => 종류별 처리 
+	    *                        (404,403,412,400,500) => 
+	    *                            시스템에서 저장하고 있는 에러파일 전송
+	    *                      => 사용자 (한번도 사용해보지 않은 사람을 대상)
+	    *                      
+	    *               taglib : <% %>를 사용하지 않고 자바 코딩 => 태그형 
+	    *               -------------- 실무에서는 무조건 (95% => MVC)
+	    *                              자바 / HTML을 분리해서 사용 
+	    *                              ----  ----
+	    *                              Back  Front (Spring은 MVC만 존재)
+	    *                              => 화면 출력 
+	    *                                 제어문 , 변수선언 , URL이동 , 날짜 변경
+	    *               include : 조립식 프로그램 (CBD)
+	    *                         jsp한개를 컴포넌트 ==> main페이지
+	    *            내장객체 : 미리 만들어서 사용이 가능 
+	    *             ----------------
+	    *              request
+	    *              response
+	    *              session
+	    *              application
+	    *              pageContext
+	    *             ---------------- MVC,Spring에서 사용 
+	    *              out => <%= %> , ${}
+	    *              config => web.xml (Spring동작)
+	    *              exception => try{}catch()
+	    *              page => this
+	    *             
+	    *            JSP에서 제공하는 액션 태그 
+	    *              <jsp:useBean>
+	    *              <jsp:setProperty>
+	    *              <jsp:include>
+	    *              
+	    *            에러처리 
+	    *            cookie사용법 
+	    *        middle
+	    *           ----------------------
+	    *            JSTL / EL 
+	    *            servlet / MVC
+	    *            XML / Annotation
+	    *           ---------------------- 라이브러리 제작 (스프링)
+	    *            
+	    *        
+	    */
 	   // 4-4. => 맛집 상세 
 	   public FoodVO foodDetailData(int no)
 	   {
 		   FoodVO vo=new FoodVO();
 		   try
 		   {
+			   //1. 오라클 연결
+			   getConnection();
+			   //2. SQL
+			   String sql="SELECT no,cno,name,score,poster,address,"
+					     +"tel,type,price,time,parking,menu "
+					     +"FROM foodhouse "
+					     +"WHERE no=?";
+			   //3. 오라클로 SQL문장 전송
+			   ps=conn.prepareStatement(sql);
+			   //4. ?에 값을 채운다 
+			   ps.setInt(1, no); // 1은 첫번째 ?에 no값을 대입
+			   //5. 실행 요청 => 결과값을 메모리(ResultSet)에 저장 
+			   ResultSet rs=ps.executeQuery();
+			   rs.next();// 메모리의 데이터 출력 위치에 커서이동  
+			   //6. FoodVO에 값을 채운다 
+			   vo.setNo(rs.getInt(1));
+			   vo.setCno(rs.getInt(2));
+			   vo.setName(rs.getString(3));
+			   vo.setScore(rs.getDouble(4));
+			   vo.setPoster(rs.getString(5));
+			   vo.setAddress(rs.getString(6));
+			   vo.setTel(rs.getString(7));
+			   vo.setType(rs.getString(8));
+			   vo.setPrice(rs.getString(9));
+			   vo.setTime(rs.getString(10));
+			   vo.setParking(rs.getString(11));
+			   vo.setMenu(rs.getString(12));
 			   
+			   rs.close();
 		   }catch(Exception ex)
 		   {
-			   
+			   ex.printStackTrace();
 		   }
 		   finally
 		   {
-			   
+			   // 닫기
+			   disConnection();
 		   }
 		   return vo;
 	   }

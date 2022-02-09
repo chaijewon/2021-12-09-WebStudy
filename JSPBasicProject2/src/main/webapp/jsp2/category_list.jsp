@@ -42,9 +42,11 @@
        <table class="table">
          <tr>
            <td width=30% class="text-center" rowspan="4">
-            <img src="<%=fvo.getPoster() %>" width=100% class="img-rounded">
+            <a href="food_detail.jsp?no=<%=fvo.getNo()%>">
+             <img src="<%=fvo.getPoster() %>" width=100% class="img-rounded">
+            </a>
            </td>
-           <td width=70%><h1><%=fvo.getName() %>&nbsp;<span style="color:orange"><%=fvo.getScore() %></span></h1></td>
+           <td width=70%><h1><a href="food_detail.jsp?no=<%=fvo.getNo()%>"><%=fvo.getName() %></a>&nbsp;<span style="color:orange"><%=fvo.getScore() %></span></h1></td>
          </tr>
          <tr>
            <td width=70%>주소:<%=fvo.getAddress() %></td>
