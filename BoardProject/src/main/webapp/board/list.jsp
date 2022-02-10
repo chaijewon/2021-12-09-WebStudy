@@ -33,6 +33,9 @@
 h1{
     text-align: center;
 }
+.table td{
+  font-size: 9pt;
+}
 </style>
 </head>
 <body>

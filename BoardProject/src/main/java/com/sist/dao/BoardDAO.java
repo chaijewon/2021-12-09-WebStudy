@@ -147,6 +147,49 @@ public class BoardDAO {
 	   return total;
    }
    // 4-3 . 글쓰기 ==> INSERT (Primary Key)
+   public void boardInsert(BoardVO vo)
+   {
+	   try
+	   {
+		   // 1. 연결 
+		   getConnection();
+		   // 2. SQL문장 제작
+		   String sql="INSERT INTO jspBoard(no,name,subject,content,pwd) "
+				     +"VALUES((SELECT NVL(MAX(no)+1,1) FROM jspBoard),?,?,?,?)";
+		   // ?는 사용자 보내준 데이터가 첨부 => 매개변수를 이용해서 => 대입 
+		   // 3. 오라클로 SQL문장 전송 
+		   ps=conn.prepareStatement(sql);
+		   // 4. ?에 값을 채워서 실행 요청 
+		   ps.setString(1, vo.getName());
+		   ps.setString(2, vo.getSubject());
+		   ps.setString(3, vo.getContent());
+		   ps.setString(4, vo.getPwd());
+		   // 5. 실행 요청 
+		   ps.executeUpdate(); 
+		   /*
+		    *   오라클 실행 요청 
+		    *   executeQuery() : 실행된 결과값이 있는 경우 
+		    *                    SELECT
+		    *   executeUpdate() : 실행 결과값 없고 데이터가 변경될때
+		    *                    INSERT , UPDATE , DELETE
+		    *                    => 첨부 : Commit
+		    *                    자바 (JDBC) => autocommit을 사용 
+		    *                    ------------------------------
+		    *   INSERT => UPADTE ==> 동시처리 (트랜잭션)
+		    *     |
+		    *    오류  
+		    */
+	   }catch(Exception ex)
+	   {
+		   // 오류 처리
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 닫기
+		   disConnection();
+	   }
+   }
    // 4-4 . 내용보기 ==> 조회수 증가 , 실제 상세 보기 
    public BoardVO boardDetailData(int no)
    {
@@ -195,6 +238,50 @@ public class BoardDAO {
    ////////////////////// => 비밀번호 검사 
    // 4-6 . 실제 수정 ==>  UPDATE 
    // 4-7 . 삭제 ==> DELETE
+   public boolean boardDelete(int no,String pwd)
+   {
+	   // 매개변수 1,2 => 일반데이터형으로 받는다 , 3이상 => ~VO에 묶어서 처리 
+	   boolean bCheck=false;
+	   // true=> 비밀번호(O) => 삭제 
+	   // false=>비밀번호(X) => 리턴 => 비밀번호 재입력
+	   try
+	   {
+		   // 1. 연결
+		   getConnection();
+		   // 2. SQL => 데이터베이스에 저장된 비밀번호 읽기 
+		   String sql="SELECT pwd FROM jspBoard "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   // 3. 비교 (오라클에 있는 값 , 사용자가 보내준 비밀번호 비교)
+		   if(db_pwd.equals(pwd))
+		   {
+			   bCheck=true;
+			   // 실제 데이터베이스 삭제 
+			   sql="DELETE FROM jspBoard "
+				  +"WHERE no=?";
+			   ps=conn.prepareStatement(sql);
+			   ps.setInt(1, no);
+			   ps.executeUpdate();
+		   }
+		   else
+		   {
+			   bCheck=false;
+		   }
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return bCheck;
+   }
    
 }
 

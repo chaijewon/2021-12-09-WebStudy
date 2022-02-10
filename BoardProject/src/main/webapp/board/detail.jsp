@@ -56,7 +56,7 @@ h1{
        <tr>
          <td colspan="4" class="text-right">
           <a href="#" class="btn btn-xs btn-success">수정</a>
-          <a href="#" class="btn btn-xs btn-info">삭제</a>
+          <a href="delete.jsp?no=<%=vo.getNo() %>" class="btn btn-xs btn-info">삭제</a>
           <a href="list.jsp" class="btn btn-xs btn-danger">목록</a>
          </td>
        </tr>
