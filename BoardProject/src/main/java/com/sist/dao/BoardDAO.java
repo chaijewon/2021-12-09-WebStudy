@@ -235,8 +235,91 @@ public class BoardDAO {
 	   return vo;
    }
    // 4-5 . 수정 데이터 읽기 
+   public BoardVO boardUpdateData(int no)
+   {
+	   BoardVO vo=new BoardVO(); // 이름 , 제목 , 내용 
+	   try
+	   {
+		   // 1. 연결
+		   getConnection();
+		   // 2. SQL문장 제작
+		   String sql="SELECT name,subject,content "
+				     +"FROM jspBoard "
+				     +"WHERE no=?";
+		   // 3. SQL문장을 오라클로 전송
+		   ps=conn.prepareStatement(sql);
+		   // 4. ?에 값을 채운다
+		   ps.setInt(1, no);
+		   // 5. 실행후 결과값 저장 요청 
+		   ResultSet rs=ps.executeQuery();
+		   // 6. 데이터 읽기 
+		   rs.next();
+		   vo.setName(rs.getString(1));
+		   vo.setSubject(rs.getString(2));
+		   vo.setContent(rs.getString(3));
+		   
+		   // 7. 메모리 해제 
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
    ////////////////////// => 비밀번호 검사 
    // 4-6 . 실제 수정 ==>  UPDATE 
+   public boolean boardUpdate(BoardVO vo)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   // 1. 연결 
+		   getConnection();
+		   // 2. SQL문장 
+		   String sql="SELECT pwd FROM jspBoard "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, vo.getNo());
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   
+		   if(db_pwd.equals(vo.getPwd()))
+		   {
+			   bCheck=true;
+			   // 실제 수정 
+			   sql="UPDATE jspBoard SET "
+				  +"name=?,subject=?,content=?,regdate=SYSDATE "
+				  +"WHERE no=?";
+			   ps=conn.prepareStatement(sql);
+			   // ?에 값을 채운다 
+			   ps.setString(1, vo.getName());
+			   ps.setString(2, vo.getSubject());
+			   ps.setString(3, vo.getContent());
+			   ps.setInt(4, vo.getNo());
+			   // 실행 
+			   ps.executeUpdate(); // commit포함
+		   } 
+		   else
+		   {
+			   bCheck=false;
+		   }
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return bCheck;
+   }
    // 4-7 . 삭제 ==> DELETE
    public boolean boardDelete(int no,String pwd)
    {
@@ -281,6 +364,45 @@ public class BoardDAO {
 		   disConnection();
 	   }
 	   return bCheck;
+   }
+   // 4-8. 검색 (영화(장르,영화명,출연진,등급) , 맛집(종류,이름,지역,평점) ....)
+   public List<BoardVO> boardFind(String fs,String ss)
+   {
+	   List<BoardVO> list=new ArrayList<BoardVO>();
+	   try
+	   {
+		   // 1. 연결 
+		   getConnection();
+		   // 2. SQL문장을 만든다 
+		   String sql="SELECT no,subject,name,regdate,hit "
+				     +"FROM jspBoard "
+				     +"WHERE "+fs+" LIKE '%'||?||'%'";
+		   // 컬럼명 , 테이블명 => ?를 사용하지 않는다 
+		   // setString(번호,fs) ==> name ==> 'name'
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, ss);
+		   // 3. 실행
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   BoardVO vo=new BoardVO();
+			   vo.setNo(rs.getInt(1));
+			   vo.setSubject(rs.getString(2));
+			   vo.setName(rs.getString(3));
+			   vo.setRegdate(rs.getDate(4));
+			   vo.setHit(rs.getInt(5));
+			   list.add(vo);
+		   }
+		   rs.close();
+	   }catch(Exception ex) 
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return list;
    }
    
 }

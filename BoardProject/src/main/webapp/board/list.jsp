@@ -91,14 +91,16 @@ h1{
     <table class="table">
       <tr>
        <td class="text-left">
+        <form method="post" action="find.jsp">
         Search:
         <select name="fs" class="input-sm">
           <option value="name">이름</option>
           <option value="subject">제목</option>
           <option value="content">내용</option>
         </select>
-        <input type=text size=15 class="input-sm">
-        <input type=button class="btn btn-sm btn-primary" value="검색">
+        <input type=text size=15 class="input-sm" name="ss">
+        <input type=submit class="btn btn-sm btn-primary" value="검색">
+        </form>
        </td>
        <td class="text-right">
          <a href="list.jsp?page=<%=curpage>1?curpage-1:curpage %>" class="btn btn-sm btn-danger">이전</a>

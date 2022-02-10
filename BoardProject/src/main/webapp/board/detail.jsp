@@ -54,8 +54,9 @@ h1{
          </td>
        </tr>
        <tr>
+         <%-- 게시물번호 (수정,삭제) , 페이지 --%>
          <td colspan="4" class="text-right">
-          <a href="#" class="btn btn-xs btn-success">수정</a>
+          <a href="update.jsp?no=<%=vo.getNo() %>" class="btn btn-xs btn-success">수정</a>
           <a href="delete.jsp?no=<%=vo.getNo() %>" class="btn btn-xs btn-info">삭제</a>
           <a href="list.jsp" class="btn btn-xs btn-danger">목록</a>
          </td>
