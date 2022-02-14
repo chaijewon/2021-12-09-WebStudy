@@ -70,6 +70,27 @@
     if(endPage>totalpage)
     	endPage=totalpage;
     
+    //  쿠키 데이터 읽기 
+    // 1. 쿠키 전체 
+    List<BooksVO> cList=new ArrayList<BooksVO>();
+    Cookie[] cookies=request.getCookies();
+    // 사이트 주소..
+    if(cookies!=null)// 쿠키가 존재하면 
+    {
+    	for(int i=cookies.length-1;i>=0;i--)
+    	{
+    		// 최신 방문부터 출력한다 => getName():키명 getValue():값
+    				// book1 book2  food1 food2...
+    		if(cookies[i].getName().startsWith("m"))
+    		{
+    			// cookies[i].setPath("/");
+    			String no=cookies[i].getValue();
+    			BooksVO vo=dao.booksDetailData(Integer.parseInt(no));
+    			cList.add(vo);
+    		}
+    	}
+    }
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -160,8 +181,45 @@
         </ul>
        </div>
     </div>
+    <%--
+          1. 자바 
+          2. 오라클 
+          3. HTML / CSS / JavaScript (일반,Ajax,Jquery)
+          4. JSP / Servlet / MVC
+     --%>
     <div class="row">
       <%-- 최신 본 책 목록 (cookie) --%>
+      <h3>최신 방문 책 목록</h3>
+      <table class="table">
+       <tr>
+        <td>
+          <a href="cookie_all.jsp" class="btn btn-sm btn-success">더보기</a>
+          <a href="cookie_delete.jsp" class="btn btn-sm btn-info">삭제</a>
+        </td>
+       </tr>
+      </table>
+      <hr>
+      <div>
+       <table class="table">
+        <tr>
+          <%
+          int k=0;
+          for(BooksVO vo:cList)
+          {
+        	  if(k>7) break;
+           %>
+            <td>
+            
+            <a href="detail.jsp?no=<%=vo.getNo()%>"><img src="<%=vo.getPoster() %>" 
+                alt="<%=vo.getTitle() %>" width=120 height=150></a></td>
+           <%
+            k++;
+          }
+         %>
+        </tr>
+       </table>
+       
+      </div>
     </div>
   </div>
   

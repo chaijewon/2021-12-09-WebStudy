@@ -150,10 +150,71 @@ public class BooksDAO {
    // 금: 프로젝트 메인 
    // 다음 주 : 로그인 / 회원 관리 / 목록 / 상세보기 / 장바구니 / 예매 / 추천 / 묻고 답하기
    // 업로드 / 다운로드 ,  댓글형 게시판 / 승인(결제) => 수료 40일 
-   
+   /*
+    *      maxIdle=10 => Connection을 10개 생성 
+    *    -----------------------------
+    *       new Connection()
+    *         100               false ==> 1개 사용 => 
+    *                                   getConnection() => true
+    *                                   disConnection() => false
+    *    -----------------------------
+    *       new Connection()
+    *         200               false
+    *    -----------------------------
+    *       new Connection()
+    *         300               false
+    *    -----------------------------
+    *       new Connection()
+    *         400               false
+    *    -----------------------------
+    */
    public BooksVO booksDetailData(int no)
    {
+	   /*
+	    *   NO         NUMBER         
+	TITLE      VARCHAR2(500)  
+	POSTER     VARCHAR2(260)  
+	CONTENT    VARCHAR2(4000) 
+	AUTHOR     VARCHAR2(50)   
+	PRICE      VARCHAR2(20)   
+	REGDATE    VARCHAR2(30)   
+	ISBN       VARCHAR2(20)   
+	TAGS       VARCHAR2(4000)
+	    */
 	   BooksVO vo=new BooksVO();
+	   try
+	   {
+		   // 미리 생성된 Connection의 주소를 읽어온다 
+		   // Connection만 관리 Connection POOL (관리 메모리 영역)
+		   getConnection();// 사용하지 않는 connection객체 얻기 
+		   // ==> JDBC 
+		   String sql="SELECT * FROM books "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   // 실행 요청 => 데이터를 오라클로부터 읽어 온다 
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setTitle(rs.getString(2));
+		   vo.setPoster(rs.getString(3));
+		   vo.setContent(rs.getString(4));
+		   vo.setAuthor(rs.getString(5));
+		   vo.setPrice(rs.getString(6));
+		   vo.setRegdate(rs.getString(7));
+		   vo.setIsbn(rs.getString(8));
+		   vo.setTags(rs.getString(9));
+		   rs.close();
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 반환 => Connection => 재사용
+		   disConnection();
+	   }
 	   return vo;
    }
 }
