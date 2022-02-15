@@ -16,6 +16,9 @@
     System.out.println("temp="+temp);
     String gu=temp.trim().substring(0,temp.trim().indexOf(" "));// 제거
     System.out.println("gu="+gu);
+    
+    String id=(String)session.getAttribute("id");
+    List<ReplyVO> rList=dao.replyRead(Integer.parseInt(no));
 %>
 <!DOCTYPE html>
 <html>
@@ -126,19 +129,64 @@ p{
         <%
            }
         %>
+        <tr>
+          <td colspan="2" class="text-right">
+           <a href="#" class="btn btn-xs btn-danger">찜하기</a>
+           <a href="#" class="btn btn-xs btn-success">예약하기</a>
+           <a href="javascript:history.back()" class="btn btn-xs btn-primary">목록</a>
+          </td>
+        </tr>
       </table>
       <div style="height: 20px"></div>
+      <table class="table">
+        <tr>
+          <td>
+            <%
+               for(ReplyVO rvo:rList)
+               {
+            %>
+                  <table class="table">
+                   <tr>
+                    <td class="text-left">◐<%=rvo.getName() %>(<%=rvo.getDbday() %>)</td>
+                    <td class="text-right">
+                      <%
+                         if(id.equals(rvo.getId()))
+                         {
+                      %>
+                           <a href="#" class="btn btn-xs btn-success">수정</a>
+                           <a href="#" class="btn btn-xs btn-info">삭제</a>
+                      <%
+                         }
+                      %>
+                    </td>
+                   </tr>
+                   <tr>
+                     <td colspan="2" class="text-left"
+                       valign="top">
+                       <pre style="white-space: pre-wrap;border:none;background-color:white"><%=rvo.getMsg() %></pre>
+                     </td>
+                   </tr>
+                  </table>
+            <%
+               }
+            %>
+          </td>
+        </tr>
+      </table>
       <%
-          String id=(String)session.getAttribute("id");
+          
           if(id!=null) //로그인이 되었다면 
           {
       %>
 		      <table class="table">
 		       <tr>
 		        <td>
-		          <textarea rows="4" cols="60" name="msg" style="float:left"></textarea>
-		          <button class="btn btn-sm btn-primary"
-		          style="float:left;height: 82px">댓글쓰기</button>
+		          <form method=post action="reply_insert.jsp">
+		           <input type=hidden name=fno value="<%=vo.getNo()%>">
+		           <textarea rows="4" cols="60" name="msg" style="float:left"></textarea>
+		           <button class="btn btn-sm btn-primary"
+		           style="float:left;height: 82px">댓글쓰기</button>
+		          </form>
 		        </td>
 		       </tr>
 		      </table>

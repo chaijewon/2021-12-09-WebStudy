@@ -270,6 +270,66 @@ public class FoodDAO {
    }
    // 댓글 
    // 1. 댓글쓰기 
+   public void replyInsert(ReplyVO vo)
+   {
+	   try
+	   {
+		   // LAST_INSERT_ID() 
+		   getConnection();
+		   String sql="INSERT INTO jspReply VALUES("
+				     +"jr_no_seq.nextval,?,?,?,?,SYSDATE)";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, vo.getFood_no());
+		   ps.setString(2, vo.getId());
+		   ps.setString(3, vo.getName());
+		   ps.setString(4, vo.getMsg());
+		   // 실행 
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
+   // 1-1. 댓글 데이터 읽기
+   public List<ReplyVO> replyRead(int fno)
+   {
+	   List<ReplyVO> list=new ArrayList<ReplyVO>();
+	   try
+	   {
+		   //1. 연결 
+		   getConnection();
+		   //2.SQL
+		   String sql="SELECT no,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+		             +"FROM jspReply "
+		             +"WHERE food_no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, fno);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   ReplyVO vo=new ReplyVO();
+			   vo.setNo(rs.getInt(1));
+			   vo.setName(rs.getString(3));
+			   vo.setId(rs.getString(2));
+			   vo.setMsg(rs.getString(4));
+			   vo.setDbday(rs.getString(5));
+			   list.add(vo);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return list;
+   }
    // 2. 댓글수정 
    // 3. 댓글삭제 
 }
