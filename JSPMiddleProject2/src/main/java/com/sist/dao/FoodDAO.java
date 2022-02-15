@@ -108,8 +108,166 @@ public class FoodDAO {
 	   return result;
    }
    // 카테고리 출력 
+   public List<CategoryVO> categoryListData()
+   {
+	   List<CategoryVO> list=new ArrayList<CategoryVO>();
+	   try
+	   {
+		   // 연결 (주소 얻기)
+		   getConnection();
+		   // SQL문장 제작 
+		   String sql="SELECT cno,title,subject,poster "
+				     +"FROM category";
+		   // 실행 => SQL문장을 오라클로 전송 
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   CategoryVO vo=new CategoryVO();
+			   vo.setCno(rs.getInt(1));
+			   vo.setTitle(rs.getString(2));
+			   vo.setSubject(rs.getString(3));
+			   vo.setPoster(rs.getString(4));
+			   
+			   list.add(vo); 
+		   }
+		   rs.close();
+		   /*
+		    *   웹 
+		    *   --
+		    *     목록 출력 
+		    *     상세 보기
+		    *     게시판 / 댓글 
+		    *     회원가입 
+		    *     로그인 
+		    *     -----------
+		    *     추천 / 예매(예약) / 장바구니  
+		    */
+	   }catch(Exception ex)
+	   {
+		   // 오류 처리 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 반환 
+		   disConnection();
+	   }
+	   return list;
+   }
+   // 카테고리 정보 읽기 (<div class="jumbotron">) 7일
+   public CategoryVO categoryInfoData(int cno)
+   {
+	   CategoryVO vo=new CategoryVO();
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT title,subject "
+				     +"FROM category "
+				     +"WHERE cno=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, cno);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setTitle(rs.getString(1));
+		   vo.setSubject(rs.getString(2));
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
    // 카테고리별 맛집 출력 
+   public List<FoodVO> categoryFoodListData(int cno)
+   {
+	   List<FoodVO> list=new ArrayList<FoodVO>();
+	   /*
+	    *   List    Map
+	    *   ----    ---- 웹 Map(키,값) => 키는 중복이 없다
+	    *    |        request,response,session.cookie,application 
+	    *   ArrayList
+	    *   Vector (자바의 정석=> 11장,12장) => 제네릭스 
+	    */
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT no,name,poster,address,tel,type,score "
+				     +"FROM foodhouse "
+				     +"WHERE cno=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, cno);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   FoodVO vo=new FoodVO();
+			   vo.setNo(rs.getInt(1));
+			   vo.setName(rs.getString(2));
+			   String poster=rs.getString(3);
+			   poster=poster.substring(0,poster.indexOf("^"));
+			   // ^ ^ ^ ^ ^
+			   vo.setPoster(poster);
+			   // 서울특별시 송파구 올림픽로35가길 9 B1 B35호 지번  서울시 송파구 신천동 11-4 B1 B35호
+			   String address=rs.getString(4);
+			   address=address.substring(0,address.lastIndexOf("지"));
+			   vo.setAddress(address.trim());
+			   vo.setTel(rs.getString(5));
+			   vo.setType(rs.getString(6));
+			   vo.setScore(rs.getDouble(7));
+			   list.add(vo);
+			   // ==> selectList(sql)
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();// 반환
+	   }
+	   return list;
+   }
    // 맛집 상세보기 
+   public FoodVO foodDetailData(int no)
+   {
+	   FoodVO vo=new FoodVO();
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT no,name,score,address,tel,"
+				     +"type,price,parking,menu,poster "
+				     +"FROM foodhouse "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setTel(rs.getString(5));
+		   vo.setType(rs.getString(6));
+		   vo.setScore(rs.getDouble(3));
+		   vo.setAddress(rs.getString(4));
+		   vo.setPrice(rs.getString(7));
+		   vo.setParking(rs.getString(8));
+		   vo.setMenu(rs.getString(9));
+		   vo.setPoster(rs.getString(10));
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return vo;
+   }
    // 댓글 
    // 1. 댓글쓰기 
    // 2. 댓글수정 
