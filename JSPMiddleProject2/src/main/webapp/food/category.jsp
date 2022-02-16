@@ -4,6 +4,7 @@
 <%
     FoodDAO dao=new FoodDAO();
     List<CategoryVO> list=dao.categoryListData();
+    
 %>
 <!DOCTYPE html>
 <html>

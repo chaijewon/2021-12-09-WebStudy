@@ -192,7 +192,7 @@
       <h3>최신 방문 책 목록</h3>
       <table class="table">
        <tr>
-        <td>
+        <td class="text-right">
           <a href="cookie_all.jsp" class="btn btn-sm btn-success">더보기</a>
           <a href="cookie_delete.jsp" class="btn btn-sm btn-info">삭제</a>
         </td>
@@ -200,24 +200,22 @@
       </table>
       <hr>
       <div>
-       <table class="table">
-        <tr>
+       
           <%
           int k=0;
           for(BooksVO vo:cList)
           {
         	  if(k>7) break;
            %>
-            <td>
+            
             
             <a href="detail.jsp?no=<%=vo.getNo()%>"><img src="<%=vo.getPoster() %>" 
-                alt="<%=vo.getTitle() %>" width=120 height=150></a></td>
+                alt="<%=vo.getTitle() %>" width=120 height=150></a>
            <%
             k++;
           }
          %>
-        </tr>
-       </table>
+      
        
       </div>
     </div>
