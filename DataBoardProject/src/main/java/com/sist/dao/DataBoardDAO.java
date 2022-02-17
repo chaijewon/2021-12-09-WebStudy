@@ -203,6 +203,236 @@ public class DataBoardDAO {
     	return vo;
     }
     // 답변 / 수정 / 삭제 
+    public void databoardReply(int pno,DataBoardVO vo)
+    {
+    	try
+    	{
+    		//1.conn의 주소를 얻어 온다 
+    		getConnection();
+    		//2.commit을 해제 
+    		conn.setAutoCommit(false);
+    		//3. => pno가 가지고 있는 그룹 정보를 읽어 온다 (SELECT)
+    		String sql="SELECT group_id,group_step,group_tab "
+    				  +"FROM databoard "
+    				  +"WHERE no=?";
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, pno);
+    		ResultSet rs=ps.executeQuery();
+    		rs.next();
+    		int gi=rs.getInt(1);
+    		int gs=rs.getInt(2);
+    		int gt=rs.getInt(3);
+    		rs.close();
+    		//4. => group_step을 한개 증가 (UPDATE) *** 답변형의 핵심 SQL
+    		sql="UPDATE databoard SET "
+    		   +"group_step=group_step+1 "
+    		   +"WHERE group_id=? AND group_step>?";
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, gi);
+    		ps.setInt(2, gs);
+    		ps.executeUpdate();//commit() => rollback()(X)
+    		/*
+    		 *    g_step ASC
+    		 *             g_id   g_step  g_tab
+    		 *    AAAAA      1       0      0
+    		 *    BBBBB      2       0      0
+    		 *     =>PPPP    2       1      1
+    		 *     =>KKKK    2       2      1
+    		 *     =>CCCC    2       3      1
+    		 *      =>DDDD   2       4      2
+    		 *       =>EEEE  2       5      3
+    		 *     
+    		 *     
+    		 */
+    		//5. => insert (INSERT)
+    		sql="INSERT INTO databoard VALUES(db_no_seq.nextval,"
+    		   +"?,?,?,?,SYSDATE,0,'',0,?,?,?,?,?)";
+    		ps=conn.prepareStatement(sql);
+    		ps.setString(1, vo.getName());
+    		ps.setString(2, vo.getSubject());
+    		ps.setString(3, vo.getContent());
+    		ps.setString(4, vo.getPwd());
+    		ps.setInt(5, gi);
+    		ps.setInt(6, gs+1);
+    		ps.setInt(7, gt+1);
+    		ps.setInt(8, pno);
+    		ps.setInt(9, 0);
+    		
+    		// 실행 요청 
+    		ps.executeUpdate();//commit()
+    		//6. => depth증가 (UPDATE)
+    		sql="UPDATE databoard SET "
+    		   +"depth=depth+1 "
+    		   +"WHERE no=?"; //pno
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, pno);
+    		ps.executeUpdate();//commit()
+    		//오라클의 단점은 비절차적 언어 => 동시에 처리 
+    		conn.commit();
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    		try
+    		{
+    			conn.rollback(); // 전체 취소 (SQL)
+    		}catch(Exception e){}
+    	}
+    	finally
+    	{
+    		try
+    		{
+    			conn.setAutoCommit(true);
+    		}catch(Exception e){}
+    		disConnection();
+    	}
+    }
+    public DataBoardVO databoardUpdateData(int no)
+    {
+    	DataBoardVO vo=new DataBoardVO();//게시물 한개에 대한 데이터
+    	try
+    	{
+    		getConnection();
+    		String sql="SELECT name,subject,content "
+    				  +"FROM databoard "
+    				  +"WHERE no=?";
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, no);
+    		ResultSet rs=ps.executeQuery();
+    		rs.next();
+    		vo.setName(rs.getString(1));
+    		vo.setSubject(rs.getString(2));
+    		vo.setContent(rs.getString(3));
+    		rs.close();
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		disConnection();
+    	}
+    	return vo;
+    }
+    
+    public boolean databoardUpdate(DataBoardVO vo)
+    {
+    	boolean bCheck=false;
+    	try
+    	{
+    		getConnection();
+    		//1. 비밀번호 비교 
+    		String sql="SELECT pwd FROM databoard "
+    				  +"WHERE no=?";
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, vo.getNo());
+    		ResultSet rs=ps.executeQuery();
+    		rs.next();
+    		String db_pwd=rs.getString(1);
+    		rs.close();
+    		if(db_pwd.equals(vo.getPwd()))
+    		{
+    			bCheck=true;
+    			//2. 실제 수정 
+    			// regdate=SYSDATE
+    			sql="UPDATE databoard SET "
+    			   +"name=?,subject=?,content=? "
+    			   +"WHERE no=?";
+    			ps=conn.prepareStatement(sql);
+    			ps.setString(1, vo.getName());
+    			ps.setString(2, vo.getSubject());
+    			ps.setString(3, vo.getContent());
+    			ps.setInt(4, vo.getNo());
+    			ps.executeUpdate();
+    		}
+    		
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		disConnection();
+    	}
+    	return bCheck;
+    }
+    // 삭제
+    public boolean databoardDelete(int no,String pwd)
+    {
+    	boolean bCheck=false;
+    	try
+    	{
+    		getConnection();
+    		//1. autocommit해제 
+    		conn.setAutoCommit(false);
+    		//2. SQL
+    		//2-1 비밀번호 체크 
+    		String sql="SELECT pwd,root,depth "
+    				  +"FROM databoard "
+    				  +"WHERE no=?";
+    		ps=conn.prepareStatement(sql);
+    		ps.setInt(1, no);
+    		ResultSet rs=ps.executeQuery();
+    		rs.next();
+    		String db_pwd=rs.getString(1);
+    		int root=rs.getInt(2);
+    		int depth=rs.getInt(3);
+    		rs.close();
+    		if(db_pwd.equals(pwd))
+    		{
+    			bCheck=true;
+    			if(depth==0)// 답변이 없는 상태 => 삭제
+    			{
+    				sql="DELETE FROM databoard "
+    				   +"WHERE no=?";
+    				ps=conn.prepareStatement(sql);
+    				ps.setInt(1, no);
+    				ps.executeUpdate();
+    				
+    				sql="UPDATE databoard SET "
+    				   +"depth=depth-1 "
+    				   +"WHERE no=?";
+    				ps=conn.prepareStatement(sql);
+    				ps.setInt(1, root);
+    				ps.executeUpdate();
+    			}
+    			else // 답변이 있는 상태 => 수정
+    			{
+    				sql="UPDATE databoard SET "
+    				   +"subject='관리자가 삭제한 게시물입니다',"
+    				   +"content='관리자가 삭제한 게시물입니다' "
+    				   +"WHERE no=?";
+    				ps=conn.prepareStatement(sql);
+    				ps.setInt(1,no);
+    				ps.executeUpdate();
+    			}
+    			// depth를 감소 
+    		}
+    		else
+    		{
+    			bCheck=false;
+    		}
+    		//2-2 depth => 0(단변X) , 0이상 (답변이 있는 상태)
+    		//              삭제          수정 
+    		//2-3 depth를 감소 
+    		conn.commit();
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    		try
+    		{
+    			conn.rollback();// SQL문장 전체를 취소 (수행이 못함)
+    		}catch(Exception e){}
+    	}
+    	finally
+    	{
+    		try
+    		{
+    			conn.setAutoCommit(true);
+    		}catch(Exception e){}
+    		disConnection();
+    	}
+    	return bCheck;
+    }
 }
 
 

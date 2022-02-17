@@ -145,7 +145,113 @@ public class DataBoardModel {
     		
     	}catch(Exception ex){}
     }
-    
+    // JSP한개 ==> 메소드한개를 매칭 
+    // 답변 폼 설정 => reply.jsp
+    public void databoardReply(HttpServletRequest request)
+    {
+    	// reply.jsp?no=${vo.no }&page=${page}
+    	String no=request.getParameter("no");
+    	String page=request.getParameter("page");
+    	System.out.println("no="+no);
+    	System.out.println("page="+page);
+    	// reply.jsp ==> 직접 전송 
+    	request.setAttribute("no", no);
+    	request.setAttribute("page", page);
+    	
+    }
+    // 답변 처리    => reply_ok.jsp
+    public void databoardReplyOk(HttpServletRequest request,
+    		HttpServletResponse response)
+    {
+         // 요청(답변) 처리 => 요청에 대한 데이터
+    	try
+    	{
+    	   request.setCharacterEncoding("UTF-8");
+    	   String name=request.getParameter("name");
+    	   String subject=request.getParameter("subject");
+    	   String content=request.getParameter("content");
+    	   String pwd=request.getParameter("pwd");
+    	   String pno=request.getParameter("pno");
+    	   String page=request.getParameter("page");
+    	   // 답변에 대한 번호가 아니다 ==> 답변대상 번호 (pno)
+    	   // 데이터를 모아서 DAO로 전송 => 오라클 추가 
+    	   DataBoardVO vo=new DataBoardVO();
+    	   vo.setName(name);
+    	   vo.setSubject(subject);
+    	   vo.setContent(content);
+    	   vo.setPwd(pwd);
+    	   
+    	   // 데이터베이스 연동 => 답변 SQL
+    	   DataBoardDAO dao=new DataBoardDAO();
+    	   dao.databoardReply(Integer.parseInt(pno), vo);
+    	   // 화면 이동 
+    	   response.sendRedirect("list.jsp?page="+page);
+    	   
+    	}catch(Exception ex){ex.printStackTrace();}
+    }
+    // 수정 폼 설정  => update.jsp
+    public void databoardUpdate(HttpServletRequest request)
+    {
+    	// JSP(request) => Model (request값을 채운다) => JSP(화면 출력)
+    	String no=request.getParameter("no");
+    	String page=request.getParameter("page");
+    	// => 이전에 입력된 게시물 내용을 포함해서 전송 
+    	DataBoardDAO dao=new DataBoardDAO();
+    	DataBoardVO vo=dao.databoardUpdateData(Integer.parseInt(no));
+    	
+    	// update.jsp로 데이터 전송 
+    	request.setAttribute("no", no);
+    	request.setAttribute("vo", vo);
+    	request.setAttribute("page", page);
+    }
+    // 수정 처리     => update_ok.jsp ==> detail.jsp
+    public void databoardUpdateOk(HttpServletRequest request,
+    		HttpServletResponse response)
+    {
+    	try
+    	{
+    		// 데이터 받기 (update.jsp에서 입력한 데이터)
+    		request.setCharacterEncoding("UTF-8");
+    		String name=request.getParameter("name");
+     	    String subject=request.getParameter("subject");
+     	    String content=request.getParameter("content");
+     	    String pwd=request.getParameter("pwd");
+     	    String no=request.getParameter("no");
+     	    String page=request.getParameter("page");
+     	    
+     	    DataBoardVO vo=new DataBoardVO();
+    	    vo.setName(name);
+    	    vo.setSubject(subject);
+    	    vo.setContent(content);
+    	    vo.setPwd(pwd);
+    	    vo.setNo(Integer.parseInt(no));
+    		// DAO연결
+    	    DataBoardDAO dao=new DataBoardDAO();
+    	    boolean bCheck=dao.databoardUpdate(vo);
+    		// 이동 => 자바스크립트를 이용할 수 없다 (X) 
+    	    request.setAttribute("bCheck", bCheck);
+    	    request.setAttribute("no", no);
+    	    request.setAttribute("page", page);
+    		// Spring => restful 
+    	}catch(Exception ex){}
+    }
+    // 자바의 단점 : request를 받을 수 없다 => JSP통해서 request를 받아 온다 
+    // request,response => JSP/Servlet 
+    // 삭제 폼 설정  => delete.jsp 
+    // 삭제 처리    => delete_ok.jsp ==> list.jsp
+    public void databoardDeleteOk(HttpServletRequest request)
+    {
+    	//1. request에 있는 데이터 받기
+    	String no=request.getParameter("no");
+    	String page=request.getParameter("page");
+    	String pwd=request.getParameter("pwd");
+    	//2. DAO연결 => 결과값 
+    	DataBoardDAO dao=new DataBoardDAO();
+    	boolean bCheck=dao.databoardDelete(Integer.parseInt(no), pwd);
+    	//3. delete_ok.jsp에 결과값 전송 
+    	request.setAttribute("bCheck", bCheck);
+    	request.setAttribute("page", page);
+    }
     
 }
 

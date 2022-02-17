@@ -89,9 +89,23 @@ h1{
        </tr>
        <tr>
          <td class="text-right" colspan="4">
-           <a href="#" class="btn btn-xs btn-danger">답변</a>
-           <a href="#" class="btn btn-xs btn-warning">수정</a>
-           <a href="#" class="btn btn-xs btn-info">삭제</a>
+           <%--
+                 detail.jsp ==> Model ==> reply.jsp 
+                   답변하기       (reply.jsp에 필요한 데이터를 전송)
+                 웹 => JSP 
+                       먼저 실행 => 자바 
+                       HTML에 데이터 출력 
+                       
+                 사용자 요청 ===> Controller ===== Model ==== Controller
+                                       HandlerMapping          ViewResolver
+                          ===> View(JSP)
+                 사용자 중심의 프로그램 
+                 -----------------
+                  결재 => 버튼 ...
+            --%>
+           <a href="reply.jsp?no=${vo.no }&page=${page}" class="btn btn-xs btn-danger">답변</a>
+           <a href="update.jsp?no=${vo.no }&page=${page}" class="btn btn-xs btn-warning">수정</a>
+           <a href="delete.jsp?no=${vo.no}&page=${page}" class="btn btn-xs btn-info">삭제</a>
            <a href="list.jsp?page=${page }" class="btn btn-xs btn-success">목록</a>
          </td>
        </tr>

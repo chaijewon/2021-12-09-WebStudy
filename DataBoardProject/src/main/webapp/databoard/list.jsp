@@ -67,7 +67,12 @@ h1{
 	            <%-- GET으로 두개이상 데이터 전송 
 	                 ?id=admin&pwd=1234&name=hong
 	             --%>
-	            <a href="detail.jsp?no=${vo.no}&page=${curpage}">${vo.subject }</a> &nbsp;
+	            <c:if test="${vo.subject=='관리자가 삭제한 게시물입니다' }">
+	              <span style="color:gray">${vo.subject }</span>
+	            </c:if>
+	            <c:if test="${vo.subject!='관리자가 삭제한 게시물입니다' }">
+	             <a href="detail.jsp?no=${vo.no}&page=${curpage}">${vo.subject }</a>
+	            </c:if> &nbsp;
 	             <c:if test="${today==vo.regdate }">
 	               <sup><img src="new.gif"></sup>
 	             </c:if>
