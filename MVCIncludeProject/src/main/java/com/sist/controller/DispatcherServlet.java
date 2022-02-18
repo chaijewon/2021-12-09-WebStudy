@@ -30,8 +30,9 @@ public class DispatcherServlet extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// XML에 등록 
 		modelList.add("com.sist.model.MainModel");
-		modelList.add("com.sist.model.BoardModel");
-		modelList.add("com.sist.model.MemberModel");
+		modelList.add("com.sist.model.BooksModel");
+		modelList.add("com.sist.model.FoodModel");
+		modelList.add("com.sist.model.MusicModel");
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,8 +70,7 @@ public class DispatcherServlet extends HttpServlet {
 		    			// 메소드실행 
 		    			//System.out.println(rm.value());
 		    			//System.out.println(m.getName());
-		    			// public String boardListData(HttpServletRequest request,HttpServletResponse response)
-		    			String jsp=(String)m.invoke(obj, request,response);
+		    			String jsp=(String)m.invoke(obj, request);
 		    			// 메소드 호출 (invoke) => 메소드이름을 몰라도 호출이 가능 
 		    			// return "redirect:list.do" => send
 		    			// _ok.jsp 
