@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Spring XML: 등록 (클래스,SQL등록) -->
+<!-- DispatcherServlet에 소스 코딩을 하면 안된다  -->
+<beans>
+  <bean class="com.sist.model.MainModel"/>
+  <bean class="com.sist.model.FoodModel"/>
+  <bean class="com.sist.model.MovieModel"/>
+  <bean class="com.sist.model.MusicModel"/>
+</beans>
