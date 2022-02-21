@@ -104,13 +104,69 @@ public class FoodDAO {
 		   // 주소값 얻기 
 		   conn=dbcp.getConnection();
 		   // SQL
+		   String sql="SELECT title,subject "
+				     +"FROM category "
+				     +"WHERE cno=?";
 		   // 오라클 전송 
+		   ps=conn.prepareStatement(sql);
 		   // ?에 값을 채운다
-		   // 실행후에 결과값 저장 
+		   ps.setInt(1, cno);
+		   // 실행후에 결과값 저장
+		   ResultSet rs=ps.executeQuery();
 		   // VO에 값을 채운다 
+		   rs.next();
+		   vo.setTitle(rs.getString(1));
+		   vo.setSubject(rs.getString(2));
+		   rs.close();
 	   }catch(Exception ex)
 	   {
 		   // 에러 확인 
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   // 반환 
+		   dbcp.disConnection(conn, ps);
+	   }
+	   return vo;
+   }
+   // 상세보기
+   public FoodVO foodDetailData(int no)
+   {
+	   FoodVO vo=new FoodVO();
+	   try
+	   {
+		   //1. 주소값을 얻어 온다 
+		   conn=dbcp.getConnection();
+		   //2. SQL 
+		   String sql="SELECT no,cno,name,score,address,tel,type,"
+				     +"price,parking,menu,time,poster "
+				     +"FROM foodhouse "
+				     +"WHERE no=?";
+		   //3. 전송 (SQL)
+		   ps=conn.prepareStatement(sql);
+		   //4. ?에 값을 채운다 
+		   ps.setInt(1, no);
+		   //5. 결과값 => vo
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setCno(rs.getInt(2));
+		   vo.setName(rs.getString(3));
+		   vo.setScore(rs.getDouble(4));
+		   vo.setAddress(rs.getString(5));
+		   vo.setTel(rs.getString(6));
+		   vo.setType(rs.getString(7));
+		   //MVC => 가장 쉬운 방법을 선택 
+		   vo.setPrice(rs.getString(8));
+		   vo.setParking(rs.getString(9));
+		   vo.setMenu(rs.getString(10));
+		   vo.setTime(rs.getString(11));
+		   vo.setPoster(rs.getString(12));
+		   System.out.println(vo.getName());
+		   rs.close();
+	   }catch(Exception ex)
+	   {
 		   ex.printStackTrace();
 	   }
 	   finally

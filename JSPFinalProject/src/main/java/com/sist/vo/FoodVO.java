@@ -12,6 +12,27 @@ public class FoodVO {
     private String price;
     private String parking;
     private String menu;
+    private String time;
+    private String addr1,addr2;
+    
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	public int getNo() {
 		return no;
 	}
