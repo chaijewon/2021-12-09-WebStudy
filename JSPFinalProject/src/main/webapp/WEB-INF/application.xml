@@ -14,4 +14,5 @@
 <beans>
   <bean class="com.sist.model.MainModel"/>
   <bean class="com.sist.model.FoodModel"/>
+  <bean class="com.sist.model.SeoulModel"/>
 </beans>
