@@ -18,6 +18,19 @@
 	<link rel="stylesheet" href="https://korean.visitseoul.net/humanframe/theme/visitseoul/assets/style/seoul_stay.css?20201209114337" /> <!-- 서울스테이 -->
 </head>
 <body>
-  ${html }
+  <div class="wrapper row3">
+  <div id="breadcrumb" class="clear"> 
+    <!-- ################################################################################################ -->
+    <ul>
+      <li>서울 날씨 정보</li>
+    </ul>
+    <!-- ################################################################################################ --> 
+   </div>
+  </div>
+  <div class="wrapper row3">
+   <main class="container clear">
+    ${html }
+    </main>
+   </div>
 </body>
 </html>

@@ -17,19 +17,27 @@
     </div>
     <div class="fl_right">
      <c:if test="${sessionScope.id==null }">
-      <ul class="inline">
-        <li>ID:<input type=text name=id size=15 class="input-sm"></li>
-        <li>PW:<input type=password name=pwd size=15 class="input-sm"></li>
-        <li><input type=button value="로그인" class="btn btn-lg btn-danger">
-        <!-- 로그인 -->
-      </ul>
+      <%--
+          login.do ==> DispatcherServlet(Controller)
+                            |위임(request) 
+                          Model(RequestMapping())
+          .do ==> Model
+       --%>
+      <form method="post" action="../member/login.do">
+	      <ul class="inline">
+	        <li>ID:<input type=text name=id size=15 class="input-sm"></li>
+	        <li>PW:<input type=password name=pwd size=15 class="input-sm"></li>
+	        <li><input type=submit value="로그인" class="btn btn-lg btn-danger"></li>
+	      </ul>
+      </form>
      </c:if>
      <c:if test="${sessionScope.id!=null }">
-      <ul class="inline">
-        <li>${sessionScope.name }님 (${sessionScope.admin==1?"관리자":"일반사용자" }) 로그인되었습니다!!</li>
-        <li><input type=button value="로그아웃" class="btn btn-lg btn-danger">
-        <!-- 로그인 -->
-      </ul>
+      <form method="post" action="../member/logout.do">
+       <ul class="inline">
+        <li>${sessionScope.name }(${sessionScope.admin==1?"관리자":"일반사용자" })님 로그인되었습니다!!</li>
+        <li><input type=submit value="로그아웃" class="btn btn-lg btn-danger"></li>
+       </ul>
+      </form>
      </c:if>
     </div>
     <!-- ################################################################################################ --> 
@@ -94,10 +102,10 @@
       </li>
       <li><a href="#">실시간 채팅</a></li>
       <c:if test="${sessionScope.id!=null }">
-       <c:if test="${sessionScope.admin==1 }">
+       <c:if test="${sessionScope.admin==0 }">
         <li><a href="#">마이페이지</a></li>
        </c:if>
-       <c:if test="${sessionScope.admin==0 }">
+       <c:if test="${sessionScope.admin==1 }">
         <li><a href="#">어드민페이지</a></li>
        </c:if>
       </c:if>

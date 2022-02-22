@@ -217,7 +217,9 @@ public class SeoulModel {
 	  {
 		  Document doc=Jsoup.connect("https://korean.visitseoul.net/weather").get();
 		  Element section=doc.selectFirst("section#content");
-		  String html=section.html();
+		  String temp=section.html();
+	      temp=temp.replace("src=\"", "src=\"https://korean.visitseoul.net");
+	      String html=temp;
 		  request.setAttribute("html", html);
 	  }catch(Exception ex){}
 	  request.setAttribute("main_jsp", "../seoul/weather.jsp");

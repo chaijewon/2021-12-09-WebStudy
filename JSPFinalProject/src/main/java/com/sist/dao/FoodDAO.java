@@ -20,7 +20,7 @@ public class FoodDAO {
 		   // 미리 생성된 Connection 객체를 얻어 온다 
 		   conn=dbcp.getConnection();
 		   String sql="SELECT cno,title,subject,poster "
-				     +"FROM category "
+				     +"FROM food_category "
 				     +"ORDER BY cno ASC";
 		   ps=conn.prepareStatement(sql);
 		   ResultSet rs=ps.executeQuery();
@@ -56,7 +56,7 @@ public class FoodDAO {
 		   conn=dbcp.getConnection();
 		   //2. SQL문장 
 		   String sql="SELECT no,cno,poster,name,score,tel,address,type "
-				     +"FROM foodhouse "
+				     +"FROM food_house "
 				     +"WHERE cno=? "
 				     +"ORDER BY no ASC";
 		   //3. 오라클 전송 
@@ -105,7 +105,7 @@ public class FoodDAO {
 		   conn=dbcp.getConnection();
 		   // SQL
 		   String sql="SELECT title,subject "
-				     +"FROM category "
+				     +"FROM food_category "
 				     +"WHERE cno=?";
 		   // 오라클 전송 
 		   ps=conn.prepareStatement(sql);
@@ -141,7 +141,7 @@ public class FoodDAO {
 		   //2. SQL 
 		   String sql="SELECT no,cno,name,score,address,tel,type,"
 				     +"price,parking,menu,time,poster "
-				     +"FROM foodhouse "
+				     +"FROM food_house "
 				     +"WHERE no=?";
 		   //3. 전송 (SQL)
 		   ps=conn.prepareStatement(sql);
