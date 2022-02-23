@@ -238,7 +238,45 @@ public class SeoulDAO {
 	   }
 	   return total;
    }
-   //1-2. 호텔 상세보기 
+   //1-2. 명소 상세보기
+   /*
+    *  NO                                        NOT NULL NUMBER
+     TITLE                                     NOT NULL VARCHAR2(200)
+     POSTER                                    NOT NULL VARCHAR2(500)
+     MSG                                       NOT NULL VARCHAR2(4000)
+     ADDRESS
+    */
+   public SeoulLocationVO locationDetail(int no)
+   {
+	   SeoulLocationVO vo=new SeoulLocationVO();
+	   try
+	   {
+		   conn=dbcp.getConnection();
+		   String sql="SELECT no,title,poster,msg,address "
+				     +"FROM seoul_location "
+				     +"WHERE no=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, no);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setTitle(rs.getString(2));
+		   vo.setPoster(rs.getString(3));
+		   vo.setMsg(rs.getString(4));
+		   String addr=rs.getString(5);
+		   addr=addr.substring(addr.indexOf(" ")+1);
+		   vo.setAddress(addr.trim());
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		  ex.printStackTrace();   
+	   }
+	   finally
+	   {
+		   dbcp.disConnection(conn, ps);
+	   }
+	   return vo;
+   }
    
 }
 

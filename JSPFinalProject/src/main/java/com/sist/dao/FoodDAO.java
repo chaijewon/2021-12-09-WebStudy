@@ -3,6 +3,7 @@ import java.util.*;
 
 import com.sist.vo.CategoryVO;
 import com.sist.vo.FoodVO;
+import com.sist.vo.SeoulLocationVO;
 
 import java.sql.*;
 public class FoodDAO {
@@ -176,6 +177,79 @@ public class FoodDAO {
 	   }
 	   return vo;
    }
+   // 지역별 찾기 (동,구) ==> 
+   public List<FoodVO> foodLocationFindData(String ss,int page)
+   {
+	   List<FoodVO> list=new ArrayList<FoodVO>();
+	   try
+	   {
+		   conn=dbcp.getConnection();
+		   //SQL
+		   String sql="SELECT no,poster,name,num "
+				     +"FROM (SELECT no,poster,name,rownum as num "
+				     +"FROM (SELECT no,poster,name "
+				     +"FROM food_location WHERE address LIKE '%'||?||'%' "
+				     +"ORDER BY 1)) "
+				     +"WHERE num BETWEEN ? AND ?";
+		   ps=conn.prepareStatement(sql);
+		   int rowSize=12;
+		   int start=(rowSize*page)-(rowSize-1);
+		   int end=rowSize*page;
+		   
+		   ps.setString(1, ss);
+		   ps.setInt(2, start);
+		   ps.setInt(3, end);
+		   
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   FoodVO vo=new FoodVO();
+			   vo.setNo(rs.getInt(1));
+			   String poster=rs.getString(2);
+			   poster=poster.substring(0,poster.indexOf("^"));
+			   vo.setPoster(poster);
+			   vo.setName(rs.getString(3));
+			   
+			   list.add(vo);
+		   }
+		   rs.close();
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		  dbcp.disConnection(conn, ps); 
+	   }
+	   return list;
+   }
+   
+   public int foodLoactionFindTotalPage(String ss)
+   {
+	   int total=0;
+	   try
+	   {
+		   conn=dbcp.getConnection();
+		   String sql="SELECT CEIL(COUNT(*)/12.0) FROM food_location "
+				     +"WHERE address LIKE '%'||?||'%'";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, ss);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   total=rs.getInt(1);
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		  ex.printStackTrace();   
+	   }
+	   finally
+	   {
+		   dbcp.disConnection(conn, ps);
+	   }
+	   return total;
+   }
+   
 }
 
 

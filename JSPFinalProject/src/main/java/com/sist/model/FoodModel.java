@@ -43,7 +43,7 @@ public class FoodModel {
 	  cookie.setMaxAge(60*60*24); // 24시간 => 초단위로 저장 
 	  // 3. 클라이언트 브라우저로 전송 
 	  response.addCookie(cookie);
-	  // sendRedirect ==> 링크없이 바로 화면이동 
+	  // sendRedirect ==> 링크없이 바로 화면이동 _ok.jsp
 	  return "redirect:../food/food_detail.do?no="+no;
 	  		
   }
@@ -70,8 +70,49 @@ public class FoodModel {
 	  request.setAttribute("main_jsp", "../food/food_detail.jsp");
 	  return "../main/main.jsp";
   }
+  // http://localhost/JSPFinalProject/food/location.do
+  // 기존에 만들어진 화면(request(X)=> redirect) / 새로운 화면(request)=>forward 
+  @RequestMapping("food/location.do")
+  public String food_location(HttpServletRequest request,
+		 HttpServletResponse response)
+  {
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");//post처리 방식 
+		  // get => server.xml => 63 <Connector URIEncoding="">
+		  // window 자동 처리 (10) 
+		  // web.xml => post
+	  }catch(Exception ex){}
+	  //1.검색어 
+	  String ss=request.getParameter("ss"); //searchString
+	  if(ss==null)
+		  ss="강남";
+	  //2.페이지 
+	  String page=request.getParameter("page");
+	  if(page==null)
+		  page="1";
+	  
+	  int curpage=Integer.parseInt(page);
+	  //1. page에 해당되는 데이터 읽기 => List
+	  FoodDAO dao=new FoodDAO();
+	  List<FoodVO> list=dao.foodLocationFindData(ss, curpage);
+	  //2. 총페이지 읽기 
+	  int totalpage=dao.foodLoactionFindTotalPage(ss);
+	  //3. 출력에 필요한 데이터를 location.jsp로 전송 
+	  // jsp(링크) => Model(RequestMapping설정) => DAO => Model 
+	  // Model=> request.setAttribute => 데이터를 전송 
+	  // request에 있는 데이터를 jsp에서 출력 
+	  // JSP로 출력 데이터 전송 
+	  request.setAttribute("list", list);
+	  request.setAttribute("curpage", curpage);
+	  request.setAttribute("totalpage", totalpage);
+	  request.setAttribute("ss", ss);
+	  request.setAttribute("size", list.size());
+	  request.setAttribute("main_jsp", "../food/location.jsp");
+	  return "../main/main.jsp";
+  }
   
-  
+ 
 }
 
 

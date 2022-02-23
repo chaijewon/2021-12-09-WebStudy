@@ -225,6 +225,32 @@ public class SeoulModel {
 	  request.setAttribute("main_jsp", "../seoul/weather.jsp");
 	  return "../main/main.jsp";
   }
+  // 상세보기 => 명소 => 내용 => 지도 => 인근 맛집 , 인근 자연 , 인근 호텔 
+  // JSP(링크) => Model ==> DAO ==> Model => JSP
+  /*
+   *   JSP(View) => 화면 출력만 한다 
+   *   Model => 요청을 받아서 처리후에 결과값 보내기
+   *   DAO => 오라클 연결 
+   *   Controller => Model의 메소드 호출 ==> invoke()
+   */
+  @RequestMapping("seoul/location_detail.do")
+  public String location_detail(HttpServletRequest request,
+		  HttpServletResponse response)
+  {
+	  // 데이터 받기 
+	  String no=request.getParameter("no");
+	  // no => 데이터 읽기 (DAO)
+	  SeoulDAO dao=new SeoulDAO();
+	  SeoulLocationVO vo=dao.locationDetail(Integer.parseInt(no));
+	  // vo=> 구 
+	  
+	  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
+	  // 인근 호텔 , 인근 자연 , 인근 맛집 
+	  request.setAttribute("vo", vo);
+	  request.setAttribute("main_jsp", "../seoul/location_detail.jsp");
+	  return "../main/main.jsp";
+  }
+  
 }
 
 
