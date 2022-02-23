@@ -39,6 +39,7 @@ public class FoodModel {
 	  String no=request.getParameter("no");
 	  // 1. 쿠키생성 
 	  Cookie cookie=new Cookie("f"+no, no);
+	  cookie.setPath("/");
 	  // 2. 저장 기간 설정 
 	  cookie.setMaxAge(60*60*24); // 24시간 => 초단위로 저장 
 	  // 3. 클라이언트 브라우저로 전송 
@@ -55,9 +56,15 @@ public class FoodModel {
 	  // 화면 변경 ==> main_jsp 
 	  //1.  사용자가 보내준 데이터 출력 
 	  String no=request.getParameter("no");
+	  String type=request.getParameter("type");
+	  String table_name="";
+	  if(type==null)
+		  table_name="food_house";
+	  else
+		  table_name="food_location";
 	  //2. 처리 => 오라클 => 데이터 얻기 ==> View(JSP)로 전송 => request에 있는 내용 출력 
 	  FoodDAO dao=new FoodDAO();
-	  FoodVO vo=dao.foodDetailData(Integer.parseInt(no));
+	  FoodVO vo=dao.foodDetailData(Integer.parseInt(no),table_name);
 	  String address=vo.getAddress();
 	  String addr1=address.substring(0,address.lastIndexOf("지"));
 	  vo.setAddr1(addr1.trim());

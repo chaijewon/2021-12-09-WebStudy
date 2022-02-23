@@ -33,10 +33,10 @@
             <c:forEach var="vo" items="${list }" varStatus="s">
              <c:choose>
               <c:when test="${s.index%4==0}">
-               <li class="one_quarter first"><a href="#"><img src="${vo.poster }" title="${vo.title }"></a></li>
+               <li class="one_quarter first"><a href="../seoul/nature_detail.do?no=${vo.no }"><img src="${vo.poster }" title="${vo.title }"></a></li>
               </c:when>
               <c:otherwise>
-               <li class="one_quarter"><a href="#"><img src="${vo.poster }" title="${vo.title }"></a></li>
+               <li class="one_quarter"><a href="../seoul/nature_detail.do?no=${vo.no }"><img src="${vo.poster }" title="${vo.title }"></a></li>
               </c:otherwise>
              </c:choose>
             </c:forEach>

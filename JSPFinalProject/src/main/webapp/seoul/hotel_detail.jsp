@@ -12,7 +12,7 @@
   <div id="breadcrumb" class="clear"> 
     <!-- ################################################################################################ -->
     <ul>
-      <li>${vo.title } 상세보기</li>
+      <li>${vo.name } 상세보기</li>
     </ul>
     <!-- ################################################################################################ --> 
   </div>
@@ -22,7 +22,7 @@
 <!-- ################################################################################################ -->
  <div class="wrapper row3">
   <main class="container clear">
-    <h1 class="text-center">${vo.title }</h1>
+    <h1 class="text-center">${vo.name }</h1>
     <table class="table">
       <tr>
         <td>
@@ -30,7 +30,7 @@
         </td>
       </tr>
       <tr>
-        <td>${vo.msg }</td>
+        <td>${vo.score }</td>
       </tr>
       <tr>
         <td>${vo.address }</td>
@@ -69,7 +69,7 @@
 		
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.title}</div>'
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${vo.name}</div>'
 		        });
 		        infowindow.open(map, marker);
 		
@@ -105,10 +105,3 @@
  </div>
 </body>
 </html>
-
-
-
-
-
-
-

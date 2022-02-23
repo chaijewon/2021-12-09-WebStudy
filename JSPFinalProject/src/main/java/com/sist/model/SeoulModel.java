@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element;
 
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
+import com.sist.vo.FoodVO;
 import com.sist.vo.SeoulHotelVO;
 import com.sist.vo.SeoulLocationVO;
 import com.sist.vo.SeoulNatureVO;
@@ -243,11 +244,70 @@ public class SeoulModel {
 	  SeoulDAO dao=new SeoulDAO();
 	  SeoulLocationVO vo=dao.locationDetail(Integer.parseInt(no));
 	  // vo=> 구 
-	  
+	  String address=vo.getAddress();
+	  String addr1=address.trim().substring(address.indexOf(" "));
+	  String addr2=addr1.trim().substring(0,addr1.trim().indexOf(" "));
+	  System.out.println("address="+address);
+	  System.out.println("addr1="+addr1.trim());
+	  System.out.println("addr1="+addr2.trim());
+	  //서울 강남구 영동대로 513 (삼성동, 코엑스)
+	  List<FoodVO> list=dao.locationFoodData(addr2);
 	  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
 	  // 인근 호텔 , 인근 자연 , 인근 맛집 
+	  request.setAttribute("list", list);
 	  request.setAttribute("vo", vo);
 	  request.setAttribute("main_jsp", "../seoul/location_detail.jsp");
+	  return "../main/main.jsp";
+  }
+  
+  @RequestMapping("seoul/nature_detail.do")
+  public String nature_detail(HttpServletRequest request,
+		  HttpServletResponse response)
+  {
+	       // 데이터 받기 
+		  String no=request.getParameter("no");
+		  // no => 데이터 읽기 (DAO)
+		  SeoulDAO dao=new SeoulDAO();
+		  SeoulNatureVO vo=dao.natureDetail(Integer.parseInt(no));
+		  // vo=> 구 
+		  String address=vo.getAddress();
+		  String addr1=address.trim().substring(address.indexOf(" "));
+		  String addr2=addr1.trim().substring(0,addr1.trim().indexOf(" "));
+		  System.out.println("address="+address);
+		  System.out.println("addr1="+addr1.trim());
+		  System.out.println("addr1="+addr2.trim());
+		  //서울 강남구 영동대로 513 (삼성동, 코엑스)
+		  List<FoodVO> list=dao.locationFoodData(addr2);
+		  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
+		  // 인근 호텔 , 인근 자연 , 인근 맛집 
+		  request.setAttribute("list", list);
+		  request.setAttribute("vo", vo);
+	  request.setAttribute("main_jsp", "../seoul/nature_detail.jsp");
+	  return "../main/main.jsp";
+  }
+  @RequestMapping("seoul/hotel_detail.do")
+  public String hotel_detail(HttpServletRequest request,
+		   HttpServletResponse response)
+  {
+	// 데이터 받기 
+	  String no=request.getParameter("no");
+	  // no => 데이터 읽기 (DAO)
+	  SeoulDAO dao=new SeoulDAO();
+	  SeoulHotelVO vo=dao.hotelDetail(Integer.parseInt(no));
+	  // vo=> 구 
+	  String address=vo.getAddress();
+	  String addr1=address.trim().substring(address.indexOf(" "));
+	  String addr2=addr1.trim().substring(0,addr1.trim().indexOf(" "));
+	  System.out.println("address="+address);
+	  System.out.println("addr1="+addr1.trim());
+	  System.out.println("addr1="+addr2.trim());
+	  //서울 강남구 영동대로 513 (삼성동, 코엑스)
+	  List<FoodVO> list=dao.locationFoodData(addr2);
+	  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
+	  // 인근 호텔 , 인근 자연 , 인근 맛집 
+	  request.setAttribute("list", list);
+	  request.setAttribute("vo", vo);
+	  request.setAttribute("main_jsp", "../seoul/hotel_detail.jsp");
 	  return "../main/main.jsp";
   }
   
