@@ -157,6 +157,7 @@ public class DispatcherServlet extends HttpServlet {
 						 *       --------- invoke()
 						 */
 						String jsp=(String)m.invoke(obj, request,response);
+						// foodAllData(req,res)
 						//obj(객체), request,response(매개변수) 
 						if(jsp.startsWith("redirect"))
 						{

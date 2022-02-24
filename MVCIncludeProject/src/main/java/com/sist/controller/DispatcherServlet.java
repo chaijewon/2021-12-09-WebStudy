@@ -5,13 +5,22 @@ import java.lang.reflect.Method;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import java.util.*;
 import com.sist.model.*;
+import java.net.*;
 /*
  *   list.do
  *   join.do
@@ -28,11 +37,28 @@ public class DispatcherServlet extends HttpServlet {
     // 모델을 등록 
 	List<String> modelList=new ArrayList<String>();
 	public void init(ServletConfig config) throws ServletException {
-		// XML에 등록 
-		modelList.add("com.sist.model.MainModel");
-		modelList.add("com.sist.model.BooksModel");
-		modelList.add("com.sist.model.FoodModel");
-		modelList.add("com.sist.model.MusicModel");
+		try 
+		{
+			  URL url = this.getClass().getClassLoader().getResource(".");
+			  File file = new File(url.toURI());
+			  String path=file.getPath();
+			  path=path.replace("\\", File.separator);
+			  path=path.substring(0,path.lastIndexOf(File.separator));
+			  
+			  System.out.println(path+File.separator+"command.xml");
+			  DocumentBuilderFactory dbf=DocumentBuilderFactory.newDefaultInstance();
+			  DocumentBuilder db=dbf.newDocumentBuilder();
+			  Document doc=db.parse(new File(path+File.separator+"command.xml"));
+			  Element beans=doc.getDocumentElement();
+			  NodeList list=beans.getElementsByTagName("bean");
+			  for(int i=0;i<list.getLength();i++)
+			  {
+				  Element bean=(Element)list.item(i);
+				  String clsName=bean.getAttribute("class");
+				  System.out.println(clsName);
+				  modelList.add(clsName);
+			  }
+		}catch(Exception ex){ex.printStackTrace();}
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

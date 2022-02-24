@@ -9,6 +9,7 @@
        strPage="1";
     // 현재페이지 지정 
     int curpage=Integer.parseInt(strPage);
+    // => request.setAttribute() => ${}
     // 현재페이지에 해당되는 데이터 얻기
     BoardDAO dao=new BoardDAO();
     List<BoardVO> list=dao.boardListData(curpage);

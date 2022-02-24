@@ -133,9 +133,11 @@
       <div class="inline">
 	     <c:forEach var="vo" items="${cList }" varStatus="s">
 	      <c:if test="${s.index<9 }">
-	       <img class="radius-10" src="${vo.poster }" style="width:100px;height:100px"
-	        title="${vo.name }"
-	       >
+	       <a href="../food/food_detail.do?no=${vo.no }">
+	        <img class="radius-10" src="${vo.poster }" style="width:100px;height:100px"
+	         title="${vo.name }"
+	        >
+	       </a>
 	      </c:if>
 	     </c:forEach>
 	    </div>
