@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#btn').click(function(){
+		//alert("연결")
+		new daum.Postcode({
+			oncomplete:function(data)
+			{
+				$('#post').val(data.zonecode)
+				$('#addr').val(data.address)
+			}
+		}).open();
+	});
+})
+</script>
+</head>
+<body>
+  <input type=button value=search id=btn>
+  <br>
+  <input type=text size=10 id=post><br>
+  <input type=text size=30 id=addr>
+</body>
+</html>

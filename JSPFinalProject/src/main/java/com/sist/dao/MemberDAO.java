@@ -1,5 +1,8 @@
 package com.sist.dao;
 import java.util.*;
+
+import com.sist.vo.MemberVO;
+
 import java.sql.*;
 public class MemberDAO {
    private Connection conn;
@@ -59,5 +62,65 @@ public class MemberDAO {
 	   }
 	   return result;
    }
+   // 아이디중복체크
+   public int memberIdcheck(String id)
+   {
+	   int count=0;
+	   try
+	   {
+		   conn=dbcp.getConnection();
+		   String sql="SELECT COUNT(*) FROM project_member "
+				     +"WHERE id=?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, id);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   count=rs.getInt(1);
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   dbcp.disConnection(conn, ps);
+	   }
+	   return count;
+   }
+   // 회원가입 
+   public void memberJoin(MemberVO vo)
+   {
+	   try
+	   {
+		   conn=dbcp.getConnection();
+		   String sql="INSERT INTO porject_member VALUES(?,?,?,?,?,"
+				     +"?,?,?,?,?,?,'n')";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, vo.getId());
+		   ps.setString(2, vo.getPwd());
+		   ps.setString(3, vo.getName());
+		   ps.setString(4, vo.getSex());
+		   ps.setString(5, vo.getBirthday());
+		   ps.setString(6, vo.getEmail());
+		   ps.setString(7, vo.getPost());
+		   ps.setString(8, vo.getAddr1());
+		   ps.setString(9, vo.getAddr2());
+		   ps.setString(10, vo.getTel());
+		   ps.setString(11, vo.getContent());
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   dbcp.disConnection(conn, ps);
+	   }
+   }
    
 }
+
+
+
+
+
