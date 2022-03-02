@@ -28,15 +28,15 @@ public class MemberModel {
 	   String id=request.getParameter("id");
 	   String pwd=request.getParameter("pwd");
 	   MemberDAO dao=new MemberDAO();
-	   String result=dao.isLogin(id, pwd);
-	   request.setAttribute("result", result);//id,pwd,ok
-	   if(!(result.equals("NOID")||result.equals("NOPWD")))
+	   MemberVO vo=dao.isLogin(id, pwd);
+	   request.setAttribute("result", vo.getMsg());//id,pwd,ok
+	   if(vo.getMsg().equals("OK"))
 	   {
 		   HttpSession session=request.getSession();
-		   StringTokenizer st=new StringTokenizer(result,"|");
+		   
 		   session.setAttribute("id", id);
-		   session.setAttribute("name", st.nextToken());
-		   session.setAttribute("admin", Integer.parseInt(st.nextToken()));
+		   session.setAttribute("name", vo.getName());
+		   session.setAttribute("admin", vo.getAdmin());
 	   }
 	   return "../member/login.jsp";
    }
@@ -111,6 +111,7 @@ public class MemberModel {
 	   vo.setTel(tel1+"-"+tel2);
 	   MemberDAO dao=new MemberDAO();
 	   //메소드 (INSERT)
+	   dao.memberJoin(vo);
 	   return "redirect:../main/main.do";
    }
 }

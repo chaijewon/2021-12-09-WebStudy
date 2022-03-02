@@ -2,8 +2,16 @@ package com.sist.vo;
 
 public class MemberVO {
     private String id,pwd,name,sex,birthday,email,post,addr1,
-            addr2,tel,content,admin;
+            addr2,tel,content,admin,msg;
     
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
 	public String getAdmin() {
 		return admin;
 	}

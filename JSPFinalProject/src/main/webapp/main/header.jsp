@@ -34,7 +34,7 @@
      <c:if test="${sessionScope.id!=null }">
       <form method="post" action="../member/logout.do">
        <ul class="inline">
-        <li>${sessionScope.name }(${sessionScope.admin==1?"관리자":"일반사용자" })님 로그인되었습니다!!</li>
+        <li>${sessionScope.name }(${sessionScope.admin=="y"?"관리자":"일반사용자" })님 로그인되었습니다!!</li>
         <li><input type=submit value="로그아웃" class="btn btn-lg btn-danger"></li>
        </ul>
       </form>
@@ -102,10 +102,10 @@
       </li>
       <li><a href="#">실시간 채팅</a></li>
       <c:if test="${sessionScope.id!=null }">
-       <c:if test="${sessionScope.admin==0 }">
+       <c:if test="${sessionScope.admin=='n' }">
         <li><a href="#">마이페이지</a></li>
        </c:if>
-       <c:if test="${sessionScope.admin==1 }">
+       <c:if test="${sessionScope.admin=='y' }">
         <li><a href="#">어드민페이지</a></li>
        </c:if>
       </c:if>
