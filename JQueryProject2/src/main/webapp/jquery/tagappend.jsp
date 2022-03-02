@@ -11,14 +11,35 @@
 let fileIndex=0
 $(function(){
 	$('#addBtn').click(function(){
-		$('.user-table > tbody').append('<tr id="m"'+(fileIndex)+'>'
+		$('.user-table > tbody').append('<tr id="m'+(fileIndex)+'">'
 				+'<td width=20%>File:'+(fileIndex+1)+'</td>'
 				+'<td width=80%><input type=file size=20></td>'
 				+'</tr>')
 		fileIndex++;
 	})
 	$('#removeBtn').click(function(){
+		   //alert("qqq")
+		  if(fileIndex>0)
+		  {
+		   $("#m"+(fileIndex-1)).remove();
+		   fileIndex--;
+		  }
 		
+	})
+	let bCheck=true;
+	$('.btn-success').click(function(){
+		if(bCheck==true)
+		{
+		   $('#ck').prop('checked',true);
+		   bCheck=false;
+		   $('.btn-success').val("취소");
+		}
+		else
+		{
+			$('#ck').prop('checked',false);
+			bCheck=true;
+			$('.btn-success').val("체크");
+		}
 	})
 })
 </script>
@@ -52,6 +73,18 @@ h1{
      <tbody>
      
      </tbody>
+    </table>
+    <table class=table>
+      <tr>
+       <td>
+        <input type=button value="체크" class="btn btn-sm btn-success">
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <input type=checkbox value="OK" id=ck>OK
+       </td>
+      </tr>
     </table>
    </div>
   </div>
