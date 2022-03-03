@@ -61,8 +61,8 @@
         </c:if>
         <c:if test="${sessionScope.id!=null }">
          <ul>
-          <li><a href="../member/join.do">회원수정</a></li>
-          <li><a href="../member/idfind.do">회원탈퇴</a></li>
+          <li><a href="../member/join_update.do">회원수정</a></li>
+          <li><a href="../member/join_delete.do">회원탈퇴</a></li>
          </ul>
         </c:if>
       </li>
@@ -100,7 +100,7 @@
           <li><a href="pages/sidebar-left.html">자료실</a></li>
         </ul>
       </li>
-      <li><a href="#">실시간 채팅</a></li>
+      <li><a href="../chat/chat.do">실시간 채팅</a></li>
       <c:if test="${sessionScope.id!=null }">
        <c:if test="${sessionScope.admin=='n' }">
         <li><a href="#">마이페이지</a></li>

@@ -16,4 +16,6 @@
   <bean class="com.sist.model.FoodModel"/>
   <bean class="com.sist.model.SeoulModel"/>
   <bean class="com.sist.model.MemberModel"/>
+  <bean class="com.sist.model.ChatModel"/>
+  <bean class="com.sist.model.ReplyModel"/>
 </beans>
