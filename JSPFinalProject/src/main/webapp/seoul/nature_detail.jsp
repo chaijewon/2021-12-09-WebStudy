@@ -6,6 +6,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){
+	$('.ups').hide();//table => 닫기 => 더보기 
+	$('.updates').click(function(){ // span => 수정버튼 클릭 
+		$('.ups').hide(); // 수정창 닫기 
+		let no=$(this).attr("data-no");
+		if(i==0)
+		{
+			$('#m'+no).show();
+			i=1;
+			$(this).text("취소");
+		}
+		else
+		{
+			$('#m'+no).hide();
+			i=0;
+			$(this).text("수정");
+		}
+	})
+});
+</script>
 </head>
 <body>
   <div class="wrapper row3">
@@ -101,6 +124,62 @@
        </c:forEach>
       </ul>
     </div>
+    <div id="comments">
+        <h2>리뷰(댓글)</h2>
+        <ul>
+         <c:forEach var="rvo" items="${rList }">
+	          <li>
+	            <article>
+	              <header>
+	                <figure class="avatar">
+	                 <c:if test="${sessionScope.id==rvo.id}">
+	                   <span class="btn btn-xs btn-success updates" data-no="${rvo.no }" style="color:black">수정</span>
+	                   <a href="../reply/reply_delete.do?no=${rvo.no }&rno=${rvo.rno}&tp=4" class="btn btn-xs btn-warning" style="color:black">삭제</a>
+	                 </c:if>
+	                </figure>
+	                <address>
+	                By <a href="#">${rvo.name}(${rvo.dbday })</a>
+	                </address>
+	              </header>
+	              <div class="comcont">
+	                <p><pre style="white-space:pre-wrap;background-color:white;border:none">${rvo.msg }</pre></p>
+	              </div>
+	            </article>
+	            <table class="table ups" id="m${rvo.no }" style="display:none">
+	             <tr>
+	               <td>
+	                 <form method=post action="../reply/reply_update.do">
+	                     <input type="hidden" name=rno value="${vo.no }">
+	                     <input type=hidden name=no value="${rvo.no}">
+	                     <input type=hidden name=tp value="4">
+		                 <textarea rows="5" name="msg" cols="48" style="float:left">${rvo.msg }</textarea>
+		                  <input type=submit value="댓글수정" class="btn btn-primary"
+		                  style="height: 30px">
+	                 </form>
+	               </td>
+	             </tr>
+	           </table>
+	          </li>
+	         
+          </c:forEach>
+          </ul>
+        </div>
+        <c:if test="${sessionScope.id!=null }"><%--로그인이 된 상태 --%>
+	        <table class="table">
+	             <tr>
+	               <td>
+	                 <form method=post action="../reply/reply_insert.do">
+	                     <input type="hidden" name=rno value="${vo.no }">
+	                     <input type=hidden name="type" value="4">
+		                 <textarea rows="5" name="msg" cols="48" style="float:left"></textarea>
+		                  <input type=submit value="댓글쓰기" class="btn btn-primary"
+		                  style="height: 105px">
+	                 </form>
+	               </td>
+	             </tr>
+	           </table>
+        </c:if>
+	</div>
   </main>
  </div>
 </body>

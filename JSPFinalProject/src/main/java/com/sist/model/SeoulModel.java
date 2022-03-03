@@ -12,6 +12,7 @@ import org.jsoup.nodes.Element;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
 import com.sist.vo.FoodVO;
+import com.sist.vo.ReplyVO;
 import com.sist.vo.SeoulHotelVO;
 import com.sist.vo.SeoulLocationVO;
 import com.sist.vo.SeoulNatureVO;
@@ -240,6 +241,7 @@ public class SeoulModel {
   {
 	  // 데이터 받기 
 	  String no=request.getParameter("no");
+	  
 	  // no => 데이터 읽기 (DAO)
 	  SeoulDAO dao=new SeoulDAO();
 	  SeoulLocationVO vo=dao.locationDetail(Integer.parseInt(no));
@@ -254,6 +256,10 @@ public class SeoulModel {
 	  List<FoodVO> list=dao.locationFoodData(addr2);
 	  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
 	  // 인근 호텔 , 인근 자연 , 인근 맛집 
+	  ReplyDAO rDao=new ReplyDAO();
+	  List<ReplyVO> rlist=rDao.replyListData(Integer.parseInt(no), 2);
+	  request.setAttribute("rList",rlist);
+	  
 	  request.setAttribute("list", list);
 	  request.setAttribute("vo", vo);
 	  request.setAttribute("main_jsp", "../seoul/location_detail.jsp");
@@ -280,6 +286,9 @@ public class SeoulModel {
 		  List<FoodVO> list=dao.locationFoodData(addr2);
 		  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
 		  // 인근 호텔 , 인근 자연 , 인근 맛집 
+		  ReplyDAO rDao=new ReplyDAO();
+		  List<ReplyVO> rlist=rDao.replyListData(Integer.parseInt(no), 4);
+		  request.setAttribute("rList",rlist);
 		  request.setAttribute("list", list);
 		  request.setAttribute("vo", vo);
 	  request.setAttribute("main_jsp", "../seoul/nature_detail.jsp");
@@ -305,6 +314,9 @@ public class SeoulModel {
 	  List<FoodVO> list=dao.locationFoodData(addr2);
 	  // => 읽어온 데이터를 location_detail.jsp로 전송 (request.setAttribute())
 	  // 인근 호텔 , 인근 자연 , 인근 맛집 
+	  ReplyDAO rDao=new ReplyDAO();
+	  List<ReplyVO> rlist=rDao.replyListData(Integer.parseInt(no), 3);
+	  request.setAttribute("rList",rlist);
 	  request.setAttribute("list", list);
 	  request.setAttribute("vo", vo);
 	  request.setAttribute("main_jsp", "../seoul/hotel_detail.jsp");

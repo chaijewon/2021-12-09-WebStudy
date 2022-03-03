@@ -73,6 +73,9 @@ public class FoodModel {
 	  // food_detail.jsp로 vo를 전송 
 	  request.setAttribute("vo", vo);
 	  // 댓글 (X)
+	  ReplyDAO rDao=new ReplyDAO();
+	  List<ReplyVO> list=rDao.replyListData(Integer.parseInt(no), 1);
+	  request.setAttribute("rList",list);
 	  //3. 자바/JSP분리해서 사용 = 확장성 , 재사용이 편리하다 
 	  request.setAttribute("main_jsp", "../food/food_detail.jsp");
 	  return "../main/main.jsp";
