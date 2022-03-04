@@ -37,22 +37,26 @@ public class ReplyModel {
 	   String s="";
 	   if(Integer.parseInt(type)==1)
 	   {
-		   s="food/food";
+		   s="food/food_";
 	   }
 	   else if(Integer.parseInt(type)==2)
 	   {
-		   s="seoul/location";
+		   s="seoul/location_";
 	   }
 	   else if(Integer.parseInt(type)==3)
 	   {
-		   s="seoul/hotel";
+		   s="seoul/hotel_";
 	   }
 	   else if(Integer.parseInt(type)==4)
 	   {
-		   s="seoul/nature";
+		   s="seoul/nature_";
+	   }
+	   else if(Integer.parseInt(type)==5)
+	   {
+		   s="freeboard/";
 	   }
 		   
-	   return "redirect:../"+s+"_detail.do?no="+rno; 
+	   return "redirect:../"+s+"detail.do?no="+rno; 
   }
   // annotation=if  => invoke()
   @RequestMapping("reply/reply_delete.do")
@@ -69,22 +73,25 @@ public class ReplyModel {
 	   String s="";
 	   if(Integer.parseInt(type)==1)
 	   {
-		   s="food/food";
+		   s="food/food_";
 	   }
 	   else if(Integer.parseInt(type)==2)
 	   {
-		   s="seoul/location";
+		   s="seoul/location_";
 	   }
 	   else if(Integer.parseInt(type)==3)
 	   {
-		   s="seoul/hotel";
+		   s="seoul/hotel_";
 	   }
 	   else if(Integer.parseInt(type)==4)
 	   {
-		   s="seoul/nature";
+		   s="seoul/nature_";
 	   }
-		   
-	   return "redirect:../"+s+"_detail.do?no="+rno;  
+	   else if(Integer.parseInt(type)==5)
+	   {
+		   s="freeboard/";
+	   }
+	   return "redirect:../"+s+"detail.do?no="+rno;  
   }
   
   @RequestMapping("reply/reply_update.do")
@@ -106,22 +113,26 @@ public class ReplyModel {
 	   String s="";
 	   if(Integer.parseInt(type)==1)
 	   {
-		   s="food/food";
+		   s="food/food_";
 	   }
 	   else if(Integer.parseInt(type)==2)
 	   {
-		   s="seoul/location";
+		   s="seoul/location_";
 	   }
 	   else if(Integer.parseInt(type)==3)
 	   {
-		   s="seoul/hotel";
+		   s="seoul/hotel_";
 	   }
 	   else if(Integer.parseInt(type)==4)
 	   {
-		   s="seoul/nature";
+		   s="seoul/nature_";
+	   }
+	   else if(Integer.parseInt(type)==5)
+	   {
+		   s="freeboard/";
 	   }
 		   
-	   return "redirect:../"+s+"_detail.do?no="+rno; 
+	   return "redirect:../"+s+"detail.do?no="+rno; 
   }
 }
 

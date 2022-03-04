@@ -89,9 +89,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <select id="boardTotalPage" resultType="int">
    SELECT CEIL(COUNT(*)/10.0) FROM project_freeboard
   </select>
+  <!-- 조회수 증가 
+       id는 명칭 => 숫자가 앞에 오면 안된다 (문자로 시작) 
+       = UNIQUE (중복이 없는 데이터)
+       update , insert , delete => resultType이 존재하지 않는다
+           => parameterType만 존재 (한개의 데이터형만 지정이 가능) 
+       = void 
+  -->
+  <!-- 중복을 방지  -->
+  <sql id="where-no">
+   WHERE no=#{no}
+  </sql>
+  
+  <update id="boardHitIncrement" parameterType="int">
+    UPDATE project_freeboard SET
+    hit=hit+1
+    <include refid="where-no"/>
+    <!-- 여러개 (VO,Map:Vo에 없는 변수일 경우) -->
+  </update>
   <!-- 내용 보기 -->
+  <select id="boardDetailData" resultType="BoardVO" parameterType="int">
+    SELECT no,name,subject,content,regdate,hit 
+    FROM project_freeboard
+    <include refid="where-no"/>
+  </select>
+  <!-- 비밀번호 읽기 -->
+  <select id="boardGetPassword" resultType="string" parameterType="int">
+    SELECT pwd 
+    FROM project_freeboard
+    <include refid="where-no"/>
+  </select>
   <!-- 수정 -->
+  <update id="boardUpdate" parameterType="BoardVO">
+    UPDATE project_freeboard SET
+    name=#{name},subject=#{subject},content=#{content}
+    <include refid="where-no"/>
+  </update>
   <!-- 삭제 -->
+  <delete id="boardDelete" parameterType="int">
+    DELETE FROM project_freeboard
+    <include refid="where-no"/>
+  </delete>
+  <!-- 
+       CURD (SELECT,INSERT,UPDATE,DELETE)
+       JOIN 사용법 , SubQuery 사용법 ==> 찜하기 , 예매하기 
+       동적 쿼리 (검색)
+   -->
   <!-- 댓글 -->
 </mapper>
 
