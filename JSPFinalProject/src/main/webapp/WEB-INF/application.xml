@@ -18,4 +18,5 @@
   <bean class="com.sist.model.MemberModel"/>
   <bean class="com.sist.model.ChatModel"/>
   <bean class="com.sist.model.ReplyModel"/>
+  <bean class="com.sist.model.FreeBoardModel"/>
 </beans>

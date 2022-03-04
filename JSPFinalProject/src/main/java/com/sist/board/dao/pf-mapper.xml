@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- PreparedStatement,ResultSet 
+     namespace : package 
+-->
+<mapper namespace="com.sist.board.dao.pf-mapper">
+ <!-- 
+    (cache-ref | cache | resultMap* | parameterMap* | sql* | insert* | update* | delete* | select*)+ 
+      , 순서로 코딩 , | 순서가 없다    
+    resultMap*  == ResultSet과 관련 
+                   VO에 있는 변수 = 컬럼명이 일치가 되는 설정하지 않는다 
+                   class MemberVO
+                   {
+                      private int mno;
+                      private String name;
+                      private String sex;
+                   }
+                   컬럼명 = no , fname , sex
+                   <resultMap type="MemberVO">
+                      <result property="mno" column="no">
+                        vo.setMno(rs.getInt("no"))
+                      <result property="name" column="fname">
+                        vo.setName(rs.getString("fname"))
+                      <result property="sex" column="sex">
+                        vo.setSex(rs.getString("sex"))
+                   </resultMap>
+    parameterMap* == Procedure에 매개변수를 지정 
+    sql*          == 중복된 SQL문장을 저장 = 재사용 
+    insert* INSERT
+    update* UPDATE
+    delete* DELETE
+    select* SELECT
+ -->
+  <!-- 목록 출력 -->
+  <!-- 
+        ? 대신 사용 
+       #{start} , #{end} => 일반데이터 
+         ===============
+         첨부해야 되는 데이터터 여러개인 경우 
+         1.VO #{name} => getName()
+         2.Map = VO에 없는 변수를 이용할때 #{start(키)}
+           map.put("start",1) => #{start} => map.get("start") => 1
+           map.put("end",10)  => #{end} => map.get("end") => 10
+       ${컬럼명,테이블명}
+       
+       resultType ==== 저장 변수를 지정 
+       while(rs.next())
+       {
+          BoardVO vo=new BoardVO();
+          vo.setNo()
+       }
+       parameterType == ?에 값을 채운다 
+   -->
+  <select id="boardListData" resultType="BoardVO" parameterType="hashmap">
+   SELECT no,subject,name,regdate,hit,num
+   FROM (SELECT no,subject,name,regdate,hit,rownum as num 
+   FROM (SELECT /*+ INDEX_DESC(project_freeboard pf_no_pk)*/no,subject,name,regdate,hit 
+   FROM project_freeboard))
+   WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- 게시물 추가 
+     resultType : 리턴형
+     ParameterType : 매개변수 
+  -->
+  <insert id="boardInsert" parameterType="BoardVO">
+   <selectKey keyProperty="no" resultType="int" order="BEFORE">
+     SELECT NVL(MAX(no)+1,1) as no FROM project_freeboard
+     <!-- Sequence -->
+   </selectKey>
+   <!-- 
+      #{name}, = vo.getName()
+      #{subject}, = vo.getSubject()
+      #{content}, = vo.getContent()
+      #{pwd},     = vo.getPwd()
+    -->
+   INSERT INTO project_freeboard VALUES(
+     #{no},
+     #{name},
+     #{subject},
+     #{content},
+     #{pwd},
+     SYSDATE,
+     0
+   )
+  </insert>
+  <!-- 총페이지 -->
+  <select id="boardTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/10.0) FROM project_freeboard
+  </select>
+  <!-- 내용 보기 -->
+  <!-- 수정 -->
+  <!-- 삭제 -->
+  <!-- 댓글 -->
+</mapper>
+
+
+
+
+
+
+
+
+

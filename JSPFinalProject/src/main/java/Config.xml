@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+    <!-- 
+       typeAlias* => VO마다 등록 
+       packages 
+     -->
+    <typeAlias type="com.sist.board.dao.BoardVO" alias="BoardVO"/><!-- VO등록 -->
+  </typeAliases>
+  <environments default="development">
+    <!--  (environment)+  -->
+    <environment id="development">
+      <!-- (transactionManager,dataSource) -->
+      <transactionManager type="JDBC"/>
+      <!-- COMMIT/ROLLBACK처리 (AutoCommit) -->
+      <dataSource type="POOLED"> <!--  데이터베이스 정보 저장 -->
+        <!-- 
+               POOLED (DBCP=미리 Connection을 만들고 관리), UNPOOLED(일반JDBC=연결,닫기)
+               maxActive=8 , maxIdle=8
+         -->
+         <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+         <property name="url" value="jdbc:oracle:thin:@211.63.89.131:1521:XE"/>
+         <property name="username" value="hr"/>
+         <property name="password" value="happy"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <!-- SQL을 저장 -->
+  <mappers><!-- (mapper*, package*) -->
+    <mapper resource="com/sist/board/dao/pf-mapper.xml"/>
+  </mappers>
+</configuration>
+<!-- 
+    XML에는 태그를 사용하는 순서가 존재 
+    ? = 필요시에 사용한다 (필수로 사용하는 태그 아니다)
+    + = 여러번 사용이 가능 (1번이상 사용)
+    * = 여러번 사용이 가능 (0번이상 사용)
+    | = 선택 (th|td)*
+    default = 반드시 한번만 사용
+     properties? : properties파일을 읽어 오는 역할 
+                   = 데이터베이스 정보 (드라이버명 , URL , UserName,Password)
+     settings? : CACHE = 이전에 수행된 SQL 재사용이 가능 
+     **typeAliases? : VO를 등록 
+     **environments? : 환경 설정 (데이터베이스)
+     **mappers? : SQL문장을 저장한 XML을 읽어 온다 
+    (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, 
+     objectWrapperFactory?, 
+     reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)
+     
+     configuration : 오라클 연결 (Connection 관련) => 한개만 필요 
+     mapper : PreparedStatement, ResultSet => SQL,VO (재사용 = 테이블마다 1개 설정)
+ -->
+<!-- 
+     DTD = Maybatis에서 사용해야 되는 태그,속성명이 정의되어 있다  
+     스키마 : 스프링
+ -->
+<!-- 
+     XML (HTML 고정태그) => 사용자 정의 태그 
+     MyBatis(google) => XML태그와 속성을 제공 => MyBatis에서만 사용이 가능 
+     XML 
+      1) XML의 형식 
+      2) XML의 문법 
+      3) XML의 파싱 (XML,HTML,JSON => 데이터 읽기 (파싱)
+                            ===== React,Vue,Ajax
+                                            ===== JavaScript AND XML
+              == 언어 (자바,C#..) , 자바스크립트  
+      == XML (Spring , MyBatis , React , Vue , Kotlin)
+              ====== 유지보수(XML) =====   ===
+                                 JS
+                                 JSX => JS+XML
+      1. 형식
+         <?xml version="1.0" encoding="UTF-8"?> XML의 시작점 
+         <최상위 태그> 루트 태그가 반드시 존재 (계층형 구조(트리형태 : 루트는 한개 필요하다))
+           
+         </최상위 태그>
+         == 시멘텍 태그 이용 (찾기 편하다) => <embed> = <video> HTML5
+         예) <fn> = <file_name>
+      2. 문법 (엄격하다) = XML이 틀리면 자바에 파싱을 할 수 없다 
+         태그 / 속성을 만드는 방법 
+         1) 태그
+            = 알파벳이나 한글로 시작한다 (대소문자를 구분한다)
+              <a>!=<A>
+            = 숫자사용이 가능 (앞에 사용금지) 
+              <1a>(X) <a1>(O) <name1>(O)
+            = 특수문자 사용이 가능 ( _ , - , .)
+                               === 두개이상의 단어가 연결  file_name, file_size
+            = 키워드는 사용 할 수 없다 (xml) 
+         2) 문법
+            = 대소문자 구분을 한다 
+            = 루트 태그는 한개만 사용 
+              <a>
+              </a>
+              <b>
+              </b> (X)
+              
+              <a> 루트 태그 
+               <b></b>
+              </a>
+            = 여는 태그와 닫는 태그가 동일
+              <a>
+               <br> (X)  = <br/>
+              </a> 
+            = 닫는 순서가 명확해야 된다 
+              <a><b><c></c></a></b> (X)
+              <a><b><c></c></b></a> (O)
+            = 속성은 반드시 값을 일력시에 ""를 사용한다 
+            XML로 만들어진 태그 
+              <jsp:include> <c:forEach var="vo"> <c:if> ...
+              
+        3) Google,springopensource => XML (정의된 문서 = DTD)       
+ -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
