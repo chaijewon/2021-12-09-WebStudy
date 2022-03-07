@@ -6,9 +6,12 @@ import java.util.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
+
+import com.sist.jjim.dao.*;
 public class FoodModel {
   @RequestMapping("food/category_list.do")
   public String food_category_list(HttpServletRequest request,
@@ -22,6 +25,8 @@ public class FoodModel {
 	  List<FoodVO> list=dao.categoryFoodListData(Integer.parseInt(cno));
 	  // 카테고리 정보 
 	  CategoryVO vo=dao.categoryInfoData(Integer.parseInt(cno));
+	  
+	 
 	  // 화면에 출력할 데이터 전송 
 	  request.setAttribute("list", list);
 	  request.setAttribute("vo", vo);
@@ -77,6 +82,18 @@ public class FoodModel {
 	  List<ReplyVO> list=rDao.replyListData(Integer.parseInt(no), 1);
 	  request.setAttribute("rList",list);
 	  //3. 자바/JSP분리해서 사용 = 확장성 , 재사용이 편리하다 
+      JjimVO jvo=new JjimVO();
+	  HttpSession session=request.getSession();
+	  String id=(String)session.getAttribute("id");
+	  jvo.setFno(Integer.parseInt(no));
+	  jvo.setId(id);
+	  int count=0;
+	  if(id==null)
+		  count=0;
+	  else
+		  count=JjimDAO.jjimCountData(jvo);
+	  //int count=JjimDAO.jjimCountData(jvo);
+	  request.setAttribute("count", count);
 	  request.setAttribute("main_jsp", "../food/food_detail.jsp");
 	  return "../main/main.jsp";
   }

@@ -9,6 +9,7 @@
        packages 
      -->
     <typeAlias type="com.sist.board.dao.BoardVO" alias="BoardVO"/><!-- VO등록 -->
+    <typeAlias type="com.sist.jjim.dao.JjimVO" alias="JjimVO"/>
   </typeAliases>
   <environments default="development">
     <!--  (environment)+  -->
@@ -31,6 +32,7 @@
   <!-- SQL을 저장 -->
   <mappers><!-- (mapper*, package*) -->
     <mapper resource="com/sist/board/dao/pf-mapper.xml"/>
+    <mapper resource="com/sist/jjim/dao/jjim-mapper.xml"/>
   </mappers>
 </configuration>
 <!-- 

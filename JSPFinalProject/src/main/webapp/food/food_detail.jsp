@@ -102,8 +102,15 @@ $(function(){
 	  </c:if>
 	  <tr>
 	    <td colspan="2" class="text-right">
-	     <a href="#" class="btn btn-xs btn-danger">찜하기</a>
-	     <a href="#" class="btn btn-xs btn-success">예약하기</a>
+	     <c:if test="${sessionScope.id!=null }"><%-- 로그인시에만  --%>
+	      <c:if test="${count==0 }">
+	       <a href="../jjim/jjim_insert.do?fno=${vo.no }" class="btn btn-xs btn-danger">찜하기</a>
+	      </c:if>
+	      <c:if test="${count!=0 }">
+	       <span class="btn btn-xs btn-default">찜하기</span>
+	      </c:if>
+	      <a href="#" class="btn btn-xs btn-success">예약하기</a>
+	     </c:if>
 	     <a href="javascript:history.back()" class="btn btn-xs btn-primary">목록</a>
 	    </td>
 	  </tr>

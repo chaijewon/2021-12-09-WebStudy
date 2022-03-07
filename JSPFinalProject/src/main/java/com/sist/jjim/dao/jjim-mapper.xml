@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.jjim.dao.jjim-mapper">
+ <!-- 찜 등록  -->
+ <insert id="jjimInsert" parameterType="JjimVO">
+  <selectKey keyProperty="no" resultType="int" order="BEFORE">
+    SELECT NVL(MAX(no)+1,1) as no FROM jjim
+  </selectKey>
+  INSERT INTO jjim VALUES(#{no},#{id},#{fno})
+ </insert>
+ <!-- 찜 목록  -->
+ <select id="jjimListData" parameterType="string" resultType="JjimVO">
+   SELECT /*+ INDEX_DESC(jjim jjim_no_pk)*/ no,id,fno,
+          (SELECT name FROM food_house WHERE no=jjim.fno) as name,
+          (SELECT poster FROM food_house WHERE no=jjim.fno) as poster
+   FROM jjim 
+   WHERE id=#{id}
+ </select>
+ <!-- 찜 대상  -->
+ <select id="jjimCountData" parameterType="JjimVO" resultType="int">
+   SELECT COUNT(*) 
+   FROM jjim
+   WHERE id=#{id} AND fno=#{fno}
+ </select>
+ <!-- 찜 삭제  -->
+ <delete id="jjimDelete" parameterType="int">
+  DELETE FROM jjim
+  WHERE no=#{no}
+ </delete>
+</mapper>
