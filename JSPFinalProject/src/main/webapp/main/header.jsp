@@ -70,7 +70,7 @@
         <ul>
           <li><a href="../food/location.do">지역별 맛집찾기</a></li>
           <c:if test="${sessionScope.id!=null }">
-            <li><a href="../food/reserve.do">맛집예약</a></li>
+            <li><a href="../reserve/reserve.do">맛집예약</a></li>
             <li><a href="../food/recommand.do">맛집추천</a></li>
           </c:if>
         </ul>

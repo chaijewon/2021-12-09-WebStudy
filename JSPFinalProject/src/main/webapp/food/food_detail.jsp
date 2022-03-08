@@ -109,7 +109,7 @@ $(function(){
 	      <c:if test="${count!=0 }">
 	       <span class="btn btn-xs btn-default">찜하기</span>
 	      </c:if>
-	      <a href="#" class="btn btn-xs btn-success">예약하기</a>
+	      <a href="../reserve/reserve.do" class="btn btn-xs btn-success">예약하기</a>
 	     </c:if>
 	     <a href="javascript:history.back()" class="btn btn-xs btn-primary">목록</a>
 	    </td>

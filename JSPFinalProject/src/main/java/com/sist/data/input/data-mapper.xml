@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.data.input.data-mapper">
+  <!-- days (시간)-->
+  <insert id="daysInsert" parameterType="DaysVO">
+    <selectKey keyProperty="rno" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(rno)+1,1) as rno FROM days
+    </selectKey>
+    INSERT INTO days VALUES(#{rno},#{rday},#{rtime})
+  </insert>
+  <!-- food_house (날짜) -->
+  <update id="foodHouseUpdate" parameterType="com.sist.vo.FoodVO">
+    UPDATE food_house SET
+    reserve_days=#{reserve_days}
+    WHERE no=#{no}
+  </update>
+</mapper>

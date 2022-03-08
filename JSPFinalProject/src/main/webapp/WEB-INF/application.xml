@@ -20,4 +20,5 @@
   <bean class="com.sist.model.ReplyModel"/>
   <bean class="com.sist.model.FreeBoardModel"/>
   <bean class="com.sist.model.JjimModel"/>
+  <bean class="com.sist.model.ReserveModel"/>
 </beans>
