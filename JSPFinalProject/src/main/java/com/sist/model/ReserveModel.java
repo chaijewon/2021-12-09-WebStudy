@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
+import com.sist.data.input.*;
 public class ReserveModel {
   @RequestMapping("reserve/reserve.do")
   public String reserve_page(HttpServletRequest request,
@@ -36,6 +37,7 @@ public class ReserveModel {
   public String reserve_reserve_day(HttpServletRequest request,
 		  HttpServletResponse response)
   {
+	  String days=request.getParameter("days");
 	  Date date=new Date();
 	  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-M-d");
 	  String today=sdf.format(date);
@@ -58,6 +60,21 @@ public class ReserveModel {
 	  request.setAttribute("lastday", lastday);
 	  String[] strWeek= {"일","월","화","수","목","금","토"};
 	  request.setAttribute("strWeek", strWeek);
+	  
+	  // 예약 가능한 날짜 처리 
+	  int[] rdays=new int[32];
+	  st=new StringTokenizer(days,",");
+	  
+	  while(st.hasMoreTokens())
+	  {
+		  DaysVO vo=ReserveDAO.reserveDays(Integer.parseInt(st.nextToken()));
+		  if(vo.getRday()>=day)
+		  {
+		    rdays[vo.getRno()]=vo.getRday();
+		  }
+	  }
+	  
+	  request.setAttribute("rdays", rdays);
 	  return "../reserve/reserve_day.jsp";
   }
 }

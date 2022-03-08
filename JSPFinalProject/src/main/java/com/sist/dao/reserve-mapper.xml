@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.dao.reserve-mapper">
   <select id="foodListData" resultType="FoodVO">
-   SELECT /*+ INDEX_ASC(food_house fh_no_pk)*/ no,name,poster,tel 
+   SELECT /*+ INDEX_ASC(food_house fh_no_pk)*/ no,name,poster,tel,reserve_days 
    FROM food_house
+  </select>
+  <select id="reserveInfoDay" resultType="DaysVO" parameterType="int">
+    SELECT * FROM days
+    WHERE rno=#{rno}
   </select>
 </mapper>
