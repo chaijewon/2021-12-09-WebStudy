@@ -12,6 +12,7 @@
     <typeAlias type="com.sist.jjim.dao.JjimVO" alias="JjimVO"/>
     <typeAlias type="com.sist.data.input.DaysVO" alias="DaysVO"/>
     <typeAlias type="com.sist.data.input.TimesVO" alias="TimesVO"/>
+    <typeAlias type="com.sist.vo.FoodVO" alias="FoodVO"/>
   </typeAliases>
   <environments default="development">
     <!--  (environment)+  -->
@@ -36,6 +37,7 @@
     <mapper resource="com/sist/board/dao/pf-mapper.xml"/>
     <mapper resource="com/sist/jjim/dao/jjim-mapper.xml"/>
     <mapper resource="com/sist/data/input/data-mapper.xml"/>
+    <mapper resource="com/sist/dao/reserve-mapper.xml"/>
   </mappers>
 </configuration>
 <!-- 
