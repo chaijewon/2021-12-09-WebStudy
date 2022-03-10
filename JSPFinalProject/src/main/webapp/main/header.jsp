@@ -80,7 +80,7 @@
           <li><a href="pages/gallery.html">레시피목록</a></li>
           <li><a href="pages/full-width.html">쉐프목록</a></li>
           <c:if test="${sessionScope.id!=null }">
-           <li><a href="pages/sidebar-left.html">레시피스토어</a></li>
+           <li><a href="../cart/goods_list.do">레시피스토어</a></li>
            <li><a href="pages/sidebar-left.html">레시피만들기</a></li>
           </c:if>
         </ul>
@@ -106,7 +106,7 @@
         <li><a href="../main/mypage.do">마이페이지</a></li>
        </c:if>
        <c:if test="${sessionScope.admin=='y' }">
-        <li><a href="#">어드민페이지</a></li>
+        <li><a href="../main/adminpage.do">어드민페이지</a></li>
        </c:if>
       </c:if>
     </ul>

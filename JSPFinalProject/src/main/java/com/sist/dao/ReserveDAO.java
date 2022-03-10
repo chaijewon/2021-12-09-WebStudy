@@ -228,6 +228,37 @@ public class ReserveDAO {
 	  }
 	  return list;
   }
+  /*
+   * <update id="adminOk" parameterType="int">
+   UPDATE reserve SET
+   ok=1
+   WHERE no=#{no}
+  </update>
+   */
+  public static void reserveAdminOk(int no)
+  {
+	  
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  session.selectList("adminOk",no);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  try
+		  {
+			  if(session!=null)
+				  session.close();// 반환 => disConnection()
+			  // Spring => 자동으로 변환 
+		  }catch(Exception ex) {}
+		  
+	  }
+	  
+  }
 }
 
 

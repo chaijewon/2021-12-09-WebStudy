@@ -10,9 +10,30 @@ import java.util.*;
 	 REGDATE                                            DATE
  */
 public class CartVO {
-	private int cart_id,product_id,amount,ischeck,issale;
+	private int cart_id,product_id,amont,ischeck,issale;
     private String id;
     private Date regdate;
+    private String poster,title;
+    private int price;
+    
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public int getCart_id() {
 		return cart_id;
 	}
@@ -25,11 +46,12 @@ public class CartVO {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
-	public int getAmount() {
-		return amount;
+	
+	public int getAmont() {
+		return amont;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setAmont(int amont) {
+		this.amont = amont;
 	}
 	public int getIscheck() {
 		return ischeck;

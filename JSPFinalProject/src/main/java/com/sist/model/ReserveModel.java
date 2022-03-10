@@ -143,6 +143,15 @@ public class ReserveModel {
 	  ReserveDAO.reserveInsert(vo);
 	  return "redirect:../main/mypage.do";
   }
+  @RequestMapping("reserve/adminok.do")
+  public String reserve_admin_ok(HttpServletRequest request,
+		  HttpServletResponse response)
+  {
+	  String no=request.getParameter("no");
+	  //DAO연결 
+	  ReserveDAO.reserveAdminOk(Integer.parseInt(no));
+	  return "redirect:../main/adminpage.do";
+  }
   
 }
 

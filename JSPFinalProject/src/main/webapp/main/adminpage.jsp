@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,28 +60,41 @@
     </c:forEach>
    </table>
    <h2 class="sectiontitle">구매내역</h2>
-   <h2 class="sectiontitle">찜목록</h2>
    <table class="table">
-    <tr class="success">
+    <tr class="into">
       <th class="text-center" style="color:black">번호</th>
       <th class="text-center"></th>
-      <th class="text-center" style="color:black">업체명</th>
+      <th class="text-center" style="color:black">상품명</th>
+      <th class="text-center" style="color:black">금액</th>
+      <th class="text-center" style="color:black">수량</th>
+      <th class="text-center" style="color:black">총금액</th>
+      <th class="text-center" style="color:black">구매일</th>
       <th class="text-center" style="color:black">비고</th>
     </tr>
-    <c:forEach var="jvo" items="${list }">
+    <c:forEach var="vo" items="${cList }">
       <tr>
-       <td class="text-center">${jvo.no }</td>
-       <td class="text-center">
-        <img src="${jvo.poster }" style="width:30px;height:30px">
-       </td>
-       <td class="text-center">${jvo.name }</td>
-       <td class="text-center">
-         <a href="../jjim/jjim_delete.do?no=${jvo.no }" class="btn btn-sm btn-primary">취소</a>
-       </td>
+        <td class="text-center">${vo.cart_id }</td>
+        <td class="text-center">
+          <img src="${vo.poster }" style="width:30px;height:30px">
+        </td>
+        <td>${vo.title }</td>
+        <td class="text-center">${vo.price }</td>
+        <td class="text-center">${vo.amont }</td>
+        <td class="text-center">${vo.price*vo.amont }</td>
+        <td class="text-center">
+         <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
+        </td>
+        <td class="text-center">
+         <c:if test="${vo.ischeck==0 }">
+           <a href="../cart/cart_adminOk.do?no=${vo.cart_id }" class="btn btn-sm btn-danger">승인대기</a>
+         </c:if>
+         <c:if test="${vo.ischeck!=0 }">
+           <span class="btn btn-sm btn-warning">승인완료</span>
+         </c:if>
+        </td>
       </tr>
     </c:forEach>
    </table>
-   </main>
   </div>
 </body>
 </html>

@@ -23,4 +23,9 @@
     SELECT time FROM times 
     WHERE tno=#{tno}
   </select>
+  <update id="adminOk" parameterType="int">
+   UPDATE reserve SET
+   ok=1
+   WHERE no=#{no}
+  </update>
 </mapper>

@@ -8,4 +8,75 @@
   INSERT INTO goods VALUES(#{product_id},#{product_price},
     #{product_name},#{product_poster})
  </insert>
+ <select id="goodsListData" resultType="com.sist.cart.GoodsVO" 
+   parameterType="hashmap">
+   SELECT product_id,product_name,product_poster,num
+   FROM (SELECT product_id,product_name,product_poster,rownum as num 
+   FROM (SELECT /*+ INDEX_ASC(goods goods_pi_pk) */ product_id,product_name,product_poster 
+   FROM goods))
+   WHERE num BETWEEN #{start} AND #{end}
+ </select>
+ <select id="goodsTotalPage" resultType="int">
+  SELECT CEIL(COUNT(*)/12.0) FROM goods
+ </select>
+ <select id="goodsDetailData" resultType="com.sist.cart.GoodsVO" parameterType="int">
+   SELECT product_id,product_name,product_poster,product_price
+   FROM goods
+   WHERE product_id=#{product_id}
+ </select>
+ <!-- 
+     CART_ID                                   NOT NULL NUMBER
+	 PRODUCT_ID                                         NUMBER
+	 AMONT                                              NUMBER
+	 ISCHECK                                            NUMBER
+	 ISSALE                                             NUMBER
+	 ID                                                 VARCHAR2(20)
+	 REGDATE                                            DATE
+  -->
+ <insert id="cartInsert" parameterType="com.sist.cart.CartVO">
+   INSERT INTO cart VALUES((SELECT NVL(MAX(cart_id)+1,1) FROM cart),
+     #{product_id},
+     #{amont},
+     0,
+     0,
+     #{id},
+     SYSDATE
+   )
+ </insert>
+ <select id="cartMypageData" resultType="com.sist.cart.CartVO" parameterType="string">
+   SELECT cart_id,
+          (SELECT product_name FROM goods WHERE product_id=cart.product_id) as title,
+          (SELECT product_poster FROM goods WHERE product_id=cart.product_id) as poster,
+          (SELECT product_price FROM goods WHERE product_id=cart.product_id) as price,
+          amont,regdate,issale,ischeck
+   FROM cart
+   WHERE id=#{id}
+   ORDER BY cart_id DESC
+ </select>
+ <select id="cartAdminpageData" resultType="com.sist.cart.CartVO">
+   SELECT cart_id,
+          (SELECT product_name FROM goods WHERE product_id=cart.product_id) as title,
+          (SELECT product_poster FROM goods WHERE product_id=cart.product_id) as poster,
+          (SELECT product_price FROM goods WHERE product_id=cart.product_id) as price,
+          amont,regdate,id,issale,ischeck
+   FROM cart
+   ORDER BY cart_id DESC
+ </select>
+ <update id="cartAdminOk" parameterType="int">
+   UPDATE cart SET
+   ischeck=1
+   WHERE cart_id=#{cart_id}
+ </update>
+ <delete id="cartDelete" parameterType="int">
+  DELETE FROM cart
+  WHERE cart_id=#{cart_id}
+ </delete>
 </mapper>
+
+
+
+
+
+
+
+
