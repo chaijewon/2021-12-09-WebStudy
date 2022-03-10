@@ -2,6 +2,7 @@ package com.sist.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
 
@@ -77,6 +78,72 @@ public class ReserveModel {
 	  request.setAttribute("rdays", rdays);
 	  return "../reserve/reserve_day.jsp";
   }
+  @RequestMapping("reserve/reserve_time.do")
+  public String reserve_time(HttpServletRequest request,
+		  HttpServletResponse response)
+  {
+	  
+	  String day=request.getParameter("day");
+	  //DAO연동 
+	  String rtime=ReserveDAO.reserveDaysGetTime(Integer.parseInt(day));
+	  // rtime="2,5,6,7,8,11,14"
+	  List<String> list=new ArrayList<String>();
+	  StringTokenizer st=new StringTokenizer(rtime,",");
+	  while(st.hasMoreTokens())
+	  {
+		  String time=ReserveDAO.reserveTimeData(Integer.parseInt(st.nextToken()));
+		  // 10:30
+		  list.add(time);
+	  }
+	  request.setAttribute("list", list);
+	  return "../reserve/reserve_time.jsp";
+  }
+  @RequestMapping("reserve/reserve_inwon.do")
+  public String reserve_inwon(HttpServletRequest request,
+		  HttpServletResponse response)
+  {
+	  return "../reserve/reserve_inwon.jsp";
+  }
+  @RequestMapping("reserve/reserve_ok.do")
+  public String reserve_reserve_ok(HttpServletRequest request,
+		  HttpServletResponse response)
+  {
+	  /*
+	   *     <input type=hidden name="fno" value="" id="fno_data">
+             <input type=hidden name="day" value="" id="day_data">
+             <input type=hidden name="time" value="" id="time_data">
+             <input type=hidden name="inwon" value="" id="inwon_data">
+             NO (자동 증가)
+            ID (session)
+            FNO  =
+            DAY  =
+            TIME =
+            INWON =
+            REGDATE (SYSDATE) 
+            OK = 0
+	   */
+	  try
+	  {
+		  request.setCharacterEncoding("UTF-8");
+	  }catch(Exception ex) {}
+	  String fno=request.getParameter("fno");
+	  String day=request.getParameter("day");
+	  String time=request.getParameter("time");
+	  String inwon=request.getParameter("inwon");
+	  HttpSession session=request.getSession();
+	  String id=(String)session.getAttribute("id");
+	  
+	  ReserveVO vo=new ReserveVO();
+	  vo.setFno(Integer.parseInt(fno));
+	  vo.setId(id);
+	  vo.setDay(day);
+	  vo.setTime(time);
+	  vo.setInwon(inwon);
+	  //DAO => insert 요청 
+	  ReserveDAO.reserveInsert(vo);
+	  return "redirect:../main/mypage.do";
+  }
+  
 }
 
 

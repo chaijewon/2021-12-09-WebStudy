@@ -14,4 +14,13 @@
     reserve_days=#{reserve_days}
     WHERE no=#{no}
   </update>
+  <!-- 해당 날짜의 시간  -->
+  <select id="reserveDaysGetTime" resultType="string" parameterType="int">
+    SELECT rtime FROM days
+    WHERE rday=#{rday}
+  </select>
+  <select id="reserveTimeData" resultType="string" parameterType="int">
+    SELECT time FROM times 
+    WHERE tno=#{tno}
+  </select>
 </mapper>

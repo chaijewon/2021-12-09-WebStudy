@@ -61,8 +61,45 @@ $(function(){
           </td>
          </tr>
          <tr>
-           <td>
+           <td class="text-left">
             맛집명:<span id="reserve_name"></span>
+           </td>
+         </tr>
+         <tr>
+           <td class="text-left">
+            예약:<span id="reserve_day"></span>
+           </td>
+         </tr>
+         <tr>
+           <td class="text-left">
+            시간:<span id="reserve_time"></span>
+           </td>
+         </tr>
+         <tr>
+           <td class="text-left">
+            인원:<span id="reserve_inwon"></span>
+           </td>
+         </tr>
+         <%--
+            NO (자동 증가)
+            ID (session)
+            FNO  =
+            DAY  =
+            TIME =
+            INWON =
+            REGDATE (SYSDATE) 
+            OK = 0(예약대기) , 1(예약완료 => 예약정보 => 메일)
+                             -------------------------- admin
+          --%>
+         <tr id="reserve_btn" style="display:none">
+           <td class="text-center">
+            <form method=post action="../reserve/reserve_ok.do">
+             <input type=hidden name="fno" value="" id="fno_data">
+             <input type=hidden name="day" value="" id="day_data">
+             <input type=hidden name="time" value="" id="time_data">
+             <input type=hidden name="inwon" value="" id="inwon_data">
+             <input type=submit value="예약하기" class="btn btn-sm btn-primary">
+            </form>
            </td>
          </tr>
         </table>
@@ -78,7 +115,7 @@ $(function(){
        <td class="text-center" width="20%" valign="top">
          <div>인원정보</div>
          <div id="food_inwon">
-         
+          
          </div>
        </td>
      </tr>

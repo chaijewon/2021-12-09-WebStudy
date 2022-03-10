@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,41 @@
   <div class="wrapper row3">
    <main class="container clear">
    <h2 class="sectiontitle">예약목록</h2>
+   <table class="table">
+    <tr class="danger">
+     <th class="text-center" style="color:black">번호</th>
+     <th class="text-center"></th>
+     <th class="text-center" style="color:black">업체명</th>
+     <th class="text-center" style="color:black">예약일</th>
+     <th class="text-center" style="color:black">예약시간</th>
+     <th class="text-center" style="color:black">인원</th>
+     <th class="text-center" style="color:black">등록일</th>
+     <th class="text-center" style="color:black">비고</th>
+    </tr>
+    <c:forEach var="vo" items="${rList }">
+      <tr>
+        <td class="text-center">${vo.no }</td>
+        <td class="text-center">
+         <img src="${vo.poster }" style="width:30px;height:30px">
+        </td>
+        <td class="text-center">${vo.name }</td>
+        <td class="text-center">${vo.day }</td>
+        <td class="text-center">${vo.time }</td>
+        <td class="text-center">${vo.inwon }</td>
+        <td class="text-center">
+         <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
+        </td>
+        <td class="text-center">
+          <c:if test="${vo.ok==0 }">
+           <span class="btn btn-sm btn-warning">예약대기</span>
+          </c:if>
+          <c:if test="${vo.ok==1 }">
+           <a href="javascript:alert('메일을 확인하세요')" class="btn btn-sm btn-danger">예약완료</a>
+          </c:if>
+        </td>
+      </tr>
+    </c:forEach>
+   </table>
    <h2 class="sectiontitle">구매내역</h2>
    <h2 class="sectiontitle">찜목록</h2>
    <table class="table">

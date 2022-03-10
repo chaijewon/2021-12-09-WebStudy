@@ -9,4 +9,49 @@
     SELECT * FROM days
     WHERE rno=#{rno}
   </select>
+  <insert id="reserveInsert" parameterType="com.sist.data.input.ReserveVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM reserve
+    </selectKey>
+    INSERT INTO reserve VALUES(
+     #{no},
+     #{id},
+     #{fno},
+     #{day},
+     #{time},
+     #{inwon},
+     SYSDATE,
+     0
+    )
+  </insert>
+  <!-- 
+    SELECT no,id,(SELECT name FROM food_house WHERE no=reserve.no) as name,
+           (SELECT poster FROM food_house WHERE no=reserve.no) as poster,
+           day,time,inwon,regdate,ok
+    FROM reserve 
+    WHERE id='shim'
+    ORDER BY no DESC
+   -->
+  <select id="reserveMyData" resultType="com.sist.data.input.ReserveVO" 
+    parameterType="string">
+    SELECT no,id,(SELECT name FROM food_house WHERE no=reserve.no) as name,
+           (SELECT poster FROM food_house WHERE no=reserve.no) as poster,
+           day,time,inwon,regdate,ok
+    FROM reserve 
+    WHERE id=#{id}
+    ORDER BY no DESC
+  </select>
+  <select id="reserveAdminData" resultType="com.sist.data.input.ReserveVO" 
+    parameterType="string">
+    SELECT no,id,(SELECT name FROM food_house WHERE no=reserve.no) as name,
+           (SELECT poster FROM food_house WHERE no=reserve.no) as poster,
+           day,time,inwon,regdate,ok
+    FROM reserve 
+    ORDER BY no DESC
+  </select>
 </mapper>
+
+
+
+
+

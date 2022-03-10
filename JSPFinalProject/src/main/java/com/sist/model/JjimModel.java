@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.sist.controller.RequestMapping;
+import com.sist.dao.ReserveDAO;
+import com.sist.data.input.ReserveVO;
+
 import java.util.*;
 import com.sist.jjim.dao.*;
 public class JjimModel {
@@ -40,6 +43,23 @@ public class JjimModel {
 		  poster=poster.substring(0,poster.indexOf("^"));
 		  vo.setPoster(poster);
 	  }
+	  
+	  List<ReserveVO> rList=ReserveDAO.reserveMyData(id);
+	  if(rList!=null)
+	  {
+		  for(ReserveVO vo:rList)
+		  {
+			  
+			  String poster=vo.getPoster();
+			  if(poster!=null)
+			  {
+			   poster=poster.substring(0,poster.indexOf("^"));
+			   vo.setPoster(poster);
+			  }
+		  }
+	  }
+	  
+	  request.setAttribute("rList", rList);
 	  request.setAttribute("list", list);
 	  request.setAttribute("main_jsp", "../main/mypage.jsp");
 	  return "../main/main.jsp";

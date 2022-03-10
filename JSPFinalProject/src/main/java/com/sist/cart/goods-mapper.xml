@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.cart.goods-mapper">
+ <insert id="goodsInsert" parameterType="GoodsVO">
+  <selectKey keyProperty="product_id" resultType="int" order="BEFORE">
+   SELECT NVL(MAX(product_id)+1,1) as product_id FROM goods
+  </selectKey>
+  INSERT INTO goods VALUES(#{product_id},#{product_price},
+    #{product_name},#{product_poster})
+ </insert>
+</mapper>
