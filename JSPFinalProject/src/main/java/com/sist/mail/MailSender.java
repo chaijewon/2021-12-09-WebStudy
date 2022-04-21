@@ -34,53 +34,9 @@ public class MailSender {
 		              message.addRecipient(Message.RecipientType.TO, new InternetAddress("vcandjava@nate.com")); // 메일 제목 
 		              message.setSubject(id+"님 예약 내역입니다!!"); // 메일 내용
 		              
-		              String html="<html>\r\n"
-		              		+ "<head>\r\n"
-		              		+ "<meta charset=\"UTF-8\">\r\n"
-		              		+ "<title>Insert title here</title>\r\n"
-		              		+ "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">\r\n"
-		              		+ "<style type=\"text/css\">\r\n"
-		              		+ ".row{\r\n"
-		              		+ "  margin: 0px auto;\r\n"
-		              		+ "  width:350px;\r\n"
-		              		+ "}\r\n"
-		              		+ "</style>\r\n"
-		              		+ "</head>\r\n"
-		              		+ "<body>\r\n"
-		              		+ "  <div class=\"container\">\r\n"
-		              		+ "   <div class=\"row\">\r\n"
-		              		+ "    <table class=\"table\">\r\n"
-		              		+ "      <tr>\r\n"
-		              		+ "        <td class=\"text-center\" rowspan=\"5\">\r\n"
-		              		+ "         <img src=\"\" sytle=\"width:100%\">\r\n"
-		              		+ "        </td>\r\n"
-		              		+ "        <tr>\r\n"
-		              		+ "          <td colspan=\"2\"></td>\r\n"
-		              		+ "        </tr>\r\n"
-		              		+ "      </tr>\r\n"
-		              		+ "      <tr>\r\n"
-		              		+ "        <th width=25%>예약번호</th>\r\n"
-		              		+ "        <td width=75%>1</td>\r\n"
-		              		+ "      </tr>\r\n"
-		              		+ "      <tr>\r\n"
-		              		+ "        <th width=25%>예약일</th>\r\n"
-		              		+ "        <td width=75%>2022-03-10</td>\r\n"
-		              		+ "      </tr>\r\n"
-		              		+ "      <tr>\r\n"
-		              		+ "        <th width=25%>예약시간</th>\r\n"
-		              		+ "        <td width=75%>10:30</td>\r\n"
-		              		+ "      </tr>\r\n"
-		              		+ "      <tr>\r\n"
-		              		+ "        <th width=25%>예약인원</th>\r\n"
-		              		+ "        <td width=75%>5</td>\r\n"
-		              		+ "      </tr>\r\n"
-		              		+ "    </table>\r\n"
-		              		+ "   </div>\r\n"
-		              		+ "  </div>\r\n"
-		              		+ "</body>\r\n"
-		              		+ "</html>";
+		              String html="<p>예약일:2022-03-10</p>";
 		              		     
-		              message.setContent(html,"text/html"); // send the message 
+		              message.setContent(html,"text/html;charset=UTF-8"); // send the message 
 		              Transport.send(message); 
 		              System.out.println("Success Message Send"); 
 		         } catch (MessagingException e) 
